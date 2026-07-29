@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Notre Famille V38 — Dan Moussa</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Noto+Sans+Ethiopic:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--fond:#FBF6EC;--carte:#fff;--ligne:#E6DAC4;--vert:#155E4B;--or:#D89A2B;--henne:#8C3B22;--txt:#2A2318;--doux:#8A7A5F;--r:16px}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'DM Sans','Noto Sans Ethiopic','Noto Naskh Arabic',sans-serif;background:var(--fond);color:var(--txt);font-size:15px}
+body.nuit{--fond:#171208;--carte:#241C0E;--ligne:#3A2F1B;--txt:#F1E6CE;--doux:#B5A585}
+h1,h2,h3{font-family:'Unbounded',sans-serif;letter-spacing:-.02em}
+#app{max-width:520px;margin:0 auto;min-height:100dvh;display:flex;flex-direction:column}
+header{background:var(--vert);color:#fff;padding:16px 18px 12px;position:sticky;top:0;z-index:20}
+header h1{font-size:19px}header h1 span{color:var(--or)}
+header .sal{font-size:12.5px;opacity:.9;margin-top:3px}
+.natte{height:8px;background:repeating-linear-gradient(90deg,var(--or) 0 14px,var(--henne) 14px 28px,#2E3A87 28px 42px,#fff 42px 44px)}
+.topbar{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.topbar select,.topbar button{border:none;border-radius:9px;padding:7px 10px;font-size:12.5px;font-family:inherit;background:rgba(255,255,255,.16);color:#fff;cursor:pointer}
+.topbar select option{color:#222}
+main{flex:1;padding:14px 16px 92px}
+.ecr{display:none}.ecr.on{display:block;animation:f .25s}
+@keyframes f{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+.carte{background:var(--carte);border:1.5px solid var(--ligne);border-radius:var(--r);padding:14px;margin-bottom:12px}
+.sect{display:flex;justify-content:space-between;align-items:baseline;margin:14px 0 8px}
+.sect h2{font-size:15px}
+.hint{font-size:12.5px;color:var(--doux);line-height:1.5}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.s1{background:var(--carte);border:1.5px solid var(--ligne);border-radius:12px;padding:10px 4px;text-align:center}
+.s1 b{font-size:19px;display:block;color:var(--vert)}
+body.nuit .s1 b{color:var(--or)}
+.s1 small{font-size:10px;color:var(--doux)}
+input,select,textarea{font-family:inherit;font-size:14px;border:1.5px solid var(--ligne);border-radius:11px;padding:10px 12px;background:var(--carte);color:var(--txt);width:100%}
+.btn{border:none;border-radius:11px;padding:11px 15px;font-weight:700;font-size:13.5px;cursor:pointer;font-family:inherit}
+.btn.p{background:var(--vert);color:#fff}.btn.o{background:var(--or);color:#3A2A08}
+.btn.g{background:none;border:1.5px solid var(--ligne);color:var(--txt)}
+.btn.small{padding:7px 11px;font-size:12px;border-radius:9px}
+.frow{display:flex;gap:8px;margin-top:8px}.frow>*{flex:1}
+.lb{font-size:11.5px;font-weight:700;color:var(--doux);display:block;margin:9px 0 4px}
+.membre{display:flex;gap:11px;align-items:center;background:var(--carte);border:1.5px solid var(--ligne);border-radius:13px;padding:10px 12px;margin-bottom:8px;cursor:pointer}
+.membre .av{width:44px;height:44px;border-radius:50%;background:var(--fond);display:grid;place-items:center;font-size:22px;border:2px solid var(--or);flex-shrink:0}
+.membre b{font-size:14px}.membre small{display:block;color:var(--doux);font-size:11.5px}
+.gen{font-size:10px;font-weight:700;background:var(--vert);color:#fff;border-radius:6px;padding:2px 7px;margin-inline-start:auto}
+.arbre ul{list-style:none;padding-inline-start:20px;border-inline-start:2px dashed var(--ligne);margin-inline-start:9px}
+.noeud{display:flex;align-items:center;gap:8px;padding:6px 0;cursor:pointer}
+.noeud .pli{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--ligne);background:var(--carte);font-size:11px;display:grid;place-items:center;flex-shrink:0;color:var(--txt)}
+.noeud .nm{font-size:13.5px;font-weight:600}
+.noeud .nm small{color:var(--doux);font-weight:400}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.chip{border:1.5px solid var(--ligne);background:var(--carte);border-radius:15px;padding:5px 11px;font-size:12px;cursor:pointer;color:var(--doux);font-family:inherit}
+.chip.on{background:var(--vert);color:#fff;border-color:var(--vert)}
+.frise{border-inline-start:3px solid var(--or);padding-inline-start:14px}
+.ev{position:relative;padding:8px 0}
+.ev b{font-size:13.5px}.ev small{color:var(--doux);display:block;font-size:11.5px}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;background:var(--carte);border-top:1.5px solid var(--ligne);display:flex;padding:8px 4px 12px;z-index:30}
+nav button{flex:1;border:none;background:none;font-size:19px;color:var(--doux);display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;font-family:inherit}
+nav button small{font-size:9.5px;font-weight:700}
+nav button.on{color:var(--vert)}body.nuit nav button.on{color:var(--or)}
+#fiche{position:fixed;inset:0;z-index:60;display:none}#fiche.on{display:block}
+#fiche .fd{position:absolute;inset:0;background:rgba(15,10,3,.6)}
+#fiche .pan{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;max-height:86dvh;overflow-y:auto;background:var(--fond);border-radius:22px 22px 0 0;padding:18px 20px 26px}
+.toast{position:fixed;bottom:86px;left:50%;transform:translateX(-50%);background:var(--vert);color:#fff;padding:10px 17px;border-radius:13px;font-size:13px;opacity:0;transition:.25s;z-index:80;pointer-events:none;max-width:88vw;text-align:center}
+.toast.show{opacity:1}
+.livre .m1{padding:9px 0;border-bottom:1.5px dashed var(--ligne);font-size:13.5px}
+.livre .m1:last-child{border:none}.livre small{color:var(--doux)}
+.reactF{border:none;background:var(--fond);border-radius:11px;padding:2px 9px;font-size:12px;cursor:pointer;margin-top:5px;color:var(--txt);font-family:inherit}
+.diasp{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.d1{background:var(--carte);border:1.5px solid var(--ligne);border-radius:12px;padding:10px 4px;text-align:center}
+.d1 b{font-size:20px;display:block}.d1 small{font-size:10.5px;color:var(--doux);display:block}
+.ringF{width:86px;height:86px;border-radius:50%;position:relative;display:grid;place-items:center;flex-shrink:0}
+.ringF i{position:absolute;inset:0;border-radius:50%;background:conic-gradient(var(--or) var(--deg,0deg),var(--ligne) 0)}
+.ringF b{position:relative;background:var(--fond);width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font-size:13px}
+.ldrF{display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1.5px dashed var(--ligne);font-size:13.5px}
+.ldrF:last-child{border:none}.ldrF span:last-child{margin-inline-start:auto;color:var(--doux);font-size:12px}
+.diapo{text-align:center;padding:22px 10px}.diapo .av{font-size:64px}
+.confF{position:fixed;top:-12px;font-size:17px;z-index:95;animation:chF 2.3s linear forwards;pointer-events:none}
+@keyframes chF{to{transform:translateY(105vh) rotate(540deg);opacity:.2}}
+html[dir=rtl] .gen,html[dir=rtl] .ldrF span:last-child{margin-inline-start:auto}
+
+/* ── V36 : Studio + modernisation ── */
+header{background:linear-gradient(135deg,var(--vert) 0%,#0E4739 60%,#123F33 100%)}
+header h1{font-size:20px;font-weight:900}
+.carte{box-shadow:0 1px 2px rgba(42,35,24,.04);transition:transform .12s}
+.btn{transition:transform .1s,filter .15s}.btn:active{transform:scale(.96)}
+.btn.p{box-shadow:0 2px 0 rgba(0,0,0,.12)}
+.membre{transition:transform .12s,border-color .15s}
+.membre:active{transform:scale(.985);border-color:var(--or)}
+.s1 b{font-variant-numeric:tabular-nums}
+.stHead{display:flex;gap:13px;align-items:center;background:linear-gradient(135deg,var(--vert),#0E4739);color:#fff;border:none}
+.stHead b{font-family:'Unbounded',sans-serif;font-size:14.5px}
+.stHead .hint{color:rgba(255,255,255,.78);margin-top:2px}
+.sgt{font-size:10.5px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--or);margin:16px 3px 8px}
+.tuiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tuile{background:var(--carte);border:1.5px solid var(--ligne);border-radius:15px;padding:13px 6px 11px;
+ display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;font-family:inherit;
+ color:var(--txt);transition:transform .12s,border-color .15s}
+.tuile:active{transform:scale(.95);border-color:var(--or)}
+.tuile i{font-size:23px;font-style:normal;line-height:1}
+.tuile b{font-size:10.5px;font-weight:700;text-align:center;line-height:1.25;color:var(--doux)}
+.lienB{font-family:ui-monospace,monospace;font-size:11.5px;word-break:break-all;background:var(--fond);
+ border-radius:10px;padding:9px;margin-bottom:9px;border:1.5px dashed var(--ligne)}
+.bar{height:9px;background:var(--fond);border:1.5px solid var(--ligne);border-radius:7px;overflow:hidden;margin:7px 0 3px}
+.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--or),#EFC069)}
+.lgn{display:flex;gap:11px;align-items:center}
+.ck{width:29px;height:29px;flex-shrink:0;border-radius:50%;border:2px solid var(--ligne);background:var(--carte);
+ color:#fff;font-weight:700;cursor:pointer;font-family:inherit;font-size:13px}
+.ck.ok{background:var(--vert);border-color:var(--vert)}
+.grilleM{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.mc{aspect-ratio:1;background:var(--vert);color:var(--or);border-radius:12px;display:grid;place-items:center;
+ font-size:25px;cursor:pointer;user-select:none;transition:transform .12s}
+.mc:active{transform:scale(.94)}
+.clav{display:flex;flex-wrap:wrap;gap:5px;margin-top:11px;justify-content:center}
+.tch{width:32px;height:36px;border:1.5px solid var(--ligne);background:var(--carte);border-radius:9px;
+ font-weight:700;cursor:pointer;font-family:inherit;color:var(--txt);font-size:13px}
+.tch:disabled{opacity:.3}
+.wrp{background:linear-gradient(135deg,var(--vert),#0E4739);color:#fff;border-radius:16px;padding:15px;
+ margin-bottom:9px;text-align:center}
+.wrp b{font-size:34px;display:block;color:var(--or);font-family:'Unbounded',sans-serif;line-height:1.1}
+.wrp span{font-size:12px;opacity:.85}
+
+/* ── V38 : lot I + ambiance africaine ── */
+.hongE{display:flex;gap:11px;align-items:center;background:linear-gradient(135deg,#8C1B1B,#B33327);
+ color:#FFE9C7;border-radius:14px;padding:11px 13px;margin-bottom:7px}
+.hongE b{color:#FFD98A;font-size:14px}.hongE small{display:block;font-size:11.5px;opacity:.85}
+.hongE p{font-size:12.5px;margin-top:3px;font-style:italic}
+.hongS{font-size:26px;flex:none}
+.arbreB{background:linear-gradient(160deg,#1B6B54,#0E4739);color:#fff;border-radius:18px;
+ padding:20px 16px;text-align:center;margin-bottom:9px}
+.arbreE{font-size:52px;line-height:1;margin-bottom:6px;animation:pousse 2.6s ease-in-out infinite}
+@keyframes pousse{0%,100%{transform:scale(1)}50%{transform:scale(1.09)}}
+.arbreB b{display:block;color:var(--or);font-size:15px}
+.arbreB small{font-size:12px;opacity:.85}
+.cadG{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.cadB{width:42px;height:42px;border-radius:12px;border:1.5px solid var(--ligne);background:var(--carte);
+ font-size:21px;cursor:pointer;transition:transform .12s}
+.cadB.on{border-color:var(--or);background:#FDF3DF;transform:scale(1.08)}
+.cadV{font-size:28px;flex:none}
+.cnt{color:var(--or);font-size:19px;margin-left:6px}
+.nasabB{background:linear-gradient(135deg,#0E4739,#155E4B);color:#FBF6EC;border-radius:14px;
+ padding:17px 15px;font-family:Georgia,serif;font-size:16px;line-height:1.7;text-align:center;margin:9px 0}
+.regB{background:var(--carte);border:1.5px solid var(--ligne);border-radius:14px;padding:11px 13px;margin-top:9px}
+.regL{padding:6px 0;border-bottom:1px dashed var(--ligne)}
+.regL b{font-size:13.5px}.regL small{display:block;font-size:11.5px;color:var(--doux)}
+.tourOn{border-color:var(--or);background:#FDF3DF}
+body.nuit .tourOn{background:#2A2A1C}
+.parrG{display:flex;gap:9px;justify-content:center;margin-bottom:9px}
+.parrC{width:46px;height:46px;border-radius:50%;border:2px dashed var(--ligne);display:grid;place-items:center;
+ font-size:19px;color:var(--doux)}
+.parrC.on{border-style:solid;border-color:var(--or);background:var(--or);color:#fff}
+/* ── ambiance ── */
+.splash{position:fixed;inset:0;z-index:99999;background:#0E4739;display:flex;flex-direction:column;
+ justify-content:space-between;transition:opacity .5s}
+.splash.off{opacity:0}
+.spB{display:flex;height:26px;overflow:hidden}
+.spB i{flex:1;height:100%}
+.spB i:nth-child(4n+1){background:#D89A2B}.spB i:nth-child(4n+2){background:#8C3B22}
+.spB i:nth-child(4n+3){background:#2E3A87}.spB i:nth-child(4n){background:#FBF6EC}
+.spT i{animation:tisse .9s ease-out both}.spBt i{animation:tisse .9s ease-out both reverse}
+@keyframes tisse{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+.spC{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:20px}
+.spLogo{font-size:64px;color:#D89A2B;animation:entre .8s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes entre{from{transform:scale(.3) rotate(-40deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
+.spN{color:#FBF6EC;font-size:23px;font-weight:800;letter-spacing:-.4px;animation:monte .7s .3s both;
+ font-family:'Unbounded',Georgia,sans-serif;text-align:center}
+.spS{color:#9CBFB2;font-size:13px;text-align:center;animation:monte .7s .5s both;max-width:280px}
+@keyframes monte{from{transform:translateY(14px);opacity:0}to{transform:translateY(0);opacity:1}}
+.spPts{display:flex;gap:7px;margin-top:14px}
+.spPts b{width:8px;height:8px;border-radius:50%;background:#D89A2B;animation:sautr 1s infinite}
+.spPts b:nth-child(2){animation-delay:.15s}.spPts b:nth-child(3){animation-delay:.3s}
+@keyframes sautr{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(-7px);opacity:1}}
+.ripple{position:absolute;border-radius:50%;background:rgba(216,154,43,.42);width:14px;height:14px;
+ margin:-7px 0 0 -7px;pointer-events:none;animation:onde .5s ease-out forwards}
+@keyframes onde{to{transform:scale(13);opacity:0}}
+button,.tuile,.membre,.carte{position:relative;overflow:hidden}
+.tk{background:linear-gradient(90deg,#155E4B,#1B6B54);color:#FBF6EC;border-radius:11px;
+ overflow:hidden;margin-bottom:11px;height:32px;display:flex;align-items:center;
+ border-left:4px solid var(--or)}
+.tkR{display:flex;white-space:nowrap;animation:defile 26s linear infinite}
+.tkR span{padding:0 22px;font-size:12.5px;font-weight:600}
+@keyframes defile{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+nav button:nth-child(6){animation:pulse 2.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.13)}}
+@media(prefers-reduced-motion:reduce){.spT i,.spBt i,.spLogo,.spN,.spS,.spPts b,.tkR,
+ .arbreE,nav button:nth-child(6),.ripple{animation:none!important}}
+
+/* ── V37 : lot H ── */
+.avL{width:40px;height:40px;flex-shrink:0;border-radius:50%;background:var(--fond);display:grid;
+ place-items:center;font-size:20px;border:2px solid var(--or)}
+.grilleB{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.bg{background:var(--carte);border:1.5px solid var(--ligne);border-radius:14px;padding:12px 8px;text-align:center;opacity:.5}
+.bg.on{opacity:1;border-color:var(--or);box-shadow:0 2px 8px rgba(216,154,43,.16)}
+.bg i{display:block;font-size:26px;font-style:normal;margin-bottom:4px}
+.bg b{display:block;font-size:11.5px;color:var(--vert)}
+.bg small{font-size:9.5px;color:var(--doux)}
+body.nuit .bg b{color:var(--or)}
+body.aine{font-size:18px}
+body.aine .hint{font-size:15px}
+body.aine .membre b,body.aine .carte b{font-size:17px}
+body.aine .tuile b{font-size:12.5px}
+body.aine nav button small{font-size:11px}
+body.aine .s1 b{font-size:23px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="app">
+<header>
+  <h1>🌳 <span data-i18n="appTitre">Notre Famille</span> <small style="font-size:10px;opacity:.7">V38</small></h1>
+  <div class="sal" id="sal" data-i18n="sal">–</div>
+  <div class="topbar">
+    <select id="lang" onchange="setLang(this.value)"></select>
+    <button onclick="basculerNuit()">🌙</button>
+    <button onclick="basculerSon()" id="bSon">🔊</button>
+    <button onclick="exporter()">📤</button>
+    <button onclick="document.getElementById('impF').click()">📥</button>
+    <input type="file" id="impF" accept=".json" style="display:none" onchange="importer(this)">
+  </div>
+</header>
+<div class="natte"></div>
+<main>
+
+<section class="ecr on" id="e0"><div id="ticker" class="tk"></div>
+  <div class="carte" style="background:var(--vert);color:#fff;border:none">
+    <div style="font-size:12px;opacity:.85">📜 <span data-i18n="tprov">–</span></div>
+    <p id="proverbe" style="margin-top:6px;font-size:14px;line-height:1.5">–</p>
+  </div>
+  <div class="carte" style="display:flex;gap:12px;align-items:center">
+    <div style="font-size:28px">🔥</div>
+    <div style="flex:1"><b style="font-size:13.5px"><span data-i18n="serie">–</span> : <span id="stF">1</span> <span data-i18n="jr">j</span></b>
+    <p class="hint" data-i18n="serieH">–</p></div>
+    <button class="btn o small" id="ckF" onclick="ckFam()" data-i18n="saluer">–</button>
+  </div>
+  <div class="stats" id="stats"></div>
+  <div class="sect"><h2 data-i18n="anniv">–</h2></div>
+  <div id="annivs"></div>
+  <div class="sect"><h2 data-i18n="frise">–</h2></div>
+  <div class="carte frise" id="frise"></div>
+  <div class="sect"><h2 data-i18n="diasp">–</h2></div>
+  <div class="diasp" id="diasp"></div>
+  <div class="carte" style="display:flex;gap:14px;align-items:center;margin-top:12px">
+    <div class="ringF" id="ringC"><i></i><b id="ringCT">0%</b></div>
+    <div><b style="font-size:13.5px" data-i18n="fiches">–</b><p class="hint" data-i18n="fichesH">–</p></div>
+  </div>
+  <div class="sect"><h2 data-i18n="evt">–</h2></div>
+  <div class="carte livre" id="evts"></div>
+  <div class="frow">
+    <button class="btn o" onclick="evt('n')" data-i18n="naiss">–</button>
+    <button class="btn g" onclick="evt('m')" data-i18n="mari">–</button>
+  </div>
+</section>
+
+<section class="ecr" id="e1">
+  <input id="q" oninput="rendreMembres()" data-ph="searchPH">
+  <div class="chips" id="chGen"></div>
+  <div class="chips" id="chPays"></div>
+  <div id="liste"></div>
+</section>
+
+<section class="ecr" id="e2">
+  <p class="hint" style="margin-bottom:8px" data-i18n="arbreH">–</p>
+  <div class="carte arbre" id="arbre"></div>
+</section>
+
+<section class="ecr" id="e3">
+  <div class="carte">
+    <h2 style="font-size:15px" data-i18n="lien">–</h2>
+    <div class="frow"><select id="lA"></select><select id="lB"></select></div>
+    <button class="btn p" style="margin-top:10px;width:100%" onclick="calcLien()" data-i18n="calc">–</button>
+    <p class="hint" id="lienRes" style="margin-top:10px"></p>
+  </div>
+  <div class="carte">
+    <h2 style="font-size:15px" data-i18n="myst">–</h2>
+    <p class="hint" id="mystI" style="margin:8px 0">–</p>
+    <div class="frow"><select id="mystS"></select>
+    <button class="btn p small" onclick="deviner()" data-i18n="deviner">–</button></div>
+  </div>
+  <div class="carte">
+    <h2 style="font-size:15px" data-i18n="quiz">–</h2>
+    <p class="hint" style="margin:6px 0"><span data-i18n="score">–</span> : <b id="qS">0</b> · <span data-i18n="srie">–</span> : <b id="qSer">0</b> 🔥</p>
+    <p id="quizQ" class="hint" style="margin:8px 0">–</p>
+    <div id="quizR"></div>
+  </div>
+  <div class="carte">
+    <h2 style="font-size:15px" data-i18n="diapo">–</h2>
+    <p class="hint" data-i18n="diapoH">–</p>
+    <button class="btn o small" style="margin-top:8px" onclick="diapo()" data-i18n="lancer">–</button>
+  </div>
+  <div class="carte livre">
+    <h2 style="font-size:15px" data-i18n="livre">–</h2>
+    <div id="livre"></div>
+    <div class="frow"><input id="lMsg" data-ph="msgPH"><button class="btn p small" onclick="signer()" data-i18n="signer">–</button></div>
+  </div>
+  <div class="carte">
+    <h2 style="font-size:15px" data-i18n="gard">–</h2>
+    <div id="gardiens" style="margin-top:8px"></div>
+    <p class="hint" style="margin-top:6px" data-i18n="gardH">–</p>
+  </div>
+</section>
+
+<section class="ecr" id="e4">
+  <div class="carte">
+    <h2 style="font-size:15px" data-i18n="ajout">–</h2>
+    <label class="lb" data-i18n="fNom">–</label><input id="aNom" data-ph="phNom">
+    <div class="frow">
+      <div><label class="lb" data-i18n="fGenre">–</label><select id="aG"></select></div>
+      <div><label class="lb" data-i18n="fAn">–</label><input id="aAn" type="number" placeholder="1995"></div>
+    </div>
+    <div class="frow">
+      <div><label class="lb" data-i18n="fVille">–</label><input id="aVille" data-ph="fVille"></div>
+      <div><label class="lb" data-i18n="fPays">–</label><input id="aPays" data-ph="fPays"></div>
+    </div>
+    <label class="lb" data-i18n="fParent">–</label><select id="aParent"></select>
+    <button class="btn p" style="width:100%;margin-top:12px" onclick="ajouter()" data-i18n="ajBtn">–</button>
+  </div>
+</section>
+
+
+<section class="ecr" id="e5">
+  <div class="carte stHead">
+    <div style="font-size:26px">✦</div>
+    <div><b data-i18n="studioT">–</b><p class="hint" data-i18n="studioH">–</p></div>
+  </div>
+  <div id="studioZ"></div>
+</section>
+</main>
+<nav>
+  <button class="on" onclick="ecran(0,this)">🏠<small data-i18n="n0">–</small></button>
+  <button onclick="ecran(1,this)">👥<small data-i18n="n1">–</small></button>
+  <button onclick="ecran(2,this)">🌳<small data-i18n="n2">–</small></button>
+  <button onclick="ecran(3,this)">🧩<small data-i18n="n3">–</small></button>
+  <button onclick="ecran(4,this)">➕<small data-i18n="n4">–</small></button>
+  <button onclick="ecran(5,this)">✦<small data-i18n="n5">–</small></button>
+</nav>
+<div id="fiche"><div class="fd" onclick="fermer()"></div><div class="pan" id="fbody"></div></div>
+<div class="toast" id="toast"></div>
+</div>
+<script>
+const DICT={"fr": {"sal": "Sannu da zuwa ! Bienvenue dans la famille Dan Moussa.", "n0": "Accueil", "n1": "Membres", "n2": "Arbre", "n3": "Jeux+", "n4": "Ajouter", "tprov": "Proverbe haoussa du jour", "prov1": "La fraternité se cultive à pied — rends visite aux tiens.", "prov2": "Une seule main ne peut soulever le toit.", "prov3": "La vérité vaut plus que l'argent.", "prov4": "La naissance est le remède de la mort — la lignée continue.", "mb": "membres", "viv": "vivants", "gen": "générations", "pays": "pays", "anniv": "🎂 Anniversaires du mois", "fete": "fête ses {n} ans ce mois-ci 🎉", "aucanniv": "Aucun anniversaire ce mois-ci.", "frise": "🕰️ Frise de la famille", "nait": "naît à", "evt": "📯 Derniers événements", "naiss": "👶 Annoncer une naissance", "mari": "💍 Annoncer un mariage", "evtQ1": "Nom du nouveau-né ?", "evtQ2": "Qui se marie ?", "evtN": "👶 Naissance de", "evtM": "💍 Mariage de", "evtOK": "📯 Événement annoncé à toute la famille !", "serie": "Série de visite", "serieH": "Reviens chaque jour saluer la famille — 7 j = 🏅 Gardien de la lignée", "saluer": "🤲 Sannu !", "dejasalue": "Déjà salué aujourd'hui — à demain !", "salueOK": "🔥 Série : {n} jours. La famille te salue !", "searchPH": "🔎 Chercher un membre, une ville…", "tousG": "Toutes générations", "tousP": "🌍 Tous pays", "aucun": "Personne ne correspond 🔎", "arbreH": "Touche ▸ pour déplier une branche, un nom pour ouvrir la fiche.", "lien": "🔗 Calculateur de lien de parenté", "calc": "Calculer le lien", "meme": "C'est la même personne 😄", "lienDesc": "{B} descend de {A} ({n} génération(s) plus bas)", "lienFrere": "Frères / sœurs (même parent : {C})", "lienOncle": "Oncle-tante ↔ neveu-nièce, via {C}", "lienCous": "Cousins ({n}ᵉ degré), ancêtre commun : {C}", "quiz": "🎯 Quiz « Qui est qui ? »", "score": "Score", "srie": "Série", "quizQ": "Qui est né(e) en {a} à {v} ?", "bravo": "✅ +10 pts ! Série {n} 🔥", "rate": "❌ Raté — la série repart à zéro", "myst": "🕵🏾 Membre mystère du jour", "ind1": "Indice 1 : génération G{g}.", "ind2": "Indice 2 : vit à {v}.", "ind3": "Indice 3 : né(e) en {a}.", "deviner": "Deviner", "trouve": "🎉 Bravo, c'était bien {N} !", "encore": "❌ Non… voici un autre indice", "perdu": "😅 Dommage ! Réponse : {N}", "demain": "Nouveau mystère demain !", "diapo": "🎞️ Mode présentation", "diapoH": "Fais défiler toute la famille pour les réunions.", "lancer": "▶ Lancer le diaporama", "stop": "⏹ Arrêter", "gene": "Génération", "livre": "📖 Livre d'or familial", "msgPH": "Ton message à la famille…", "signer": "Signer", "signOK": "📖 Message ajouté au livre d'or", "videM": "Écris d'abord ton message ✍️", "amin": "🤲 Amin", "gard": "🏆 Gardiens de la mémoire", "gardH": "Chaque ajout, message ou fiche complétée compte !", "contribs": "contribution(s)", "diasp": "🌍 Notre diaspora", "mbs": "membre(s)", "fiches": "📋 Fiches complètes", "fichesH": "Objectif famille : ville + pays + année pour chaque membre.", "ajout": "➕ Ajouter un membre", "fNom": "Nom complet", "fGenre": "Genre", "fH": "👨🏾 Homme", "fF": "👩🏾 Femme", "fAn": "Année de naissance", "fVille": "Ville", "fPays": "Pays", "fParent": "Parent (père/mère dans l'arbre)", "ajBtn": "Ajouter à la lignée", "ajOK": "🌱 {N} rejoint la lignée — génération {g}", "nomOb": "Le nom est obligatoire ✍️", "lignee": "🧬 Sa lignée jusqu'au fondateur", "enfants": "👶 Enfants", "aucunE": "Aucun enregistré", "modif": "✏️ Modifier", "waBtn": "📲 WhatsApp", "nuitT": "Thème changé 🌙", "sonOn": "🔊 Sons activés", "sonOff": "🔇 Sons coupés", "langOK": "Français ✓", "edNom": "Nom :", "edVille": "Ville :", "edOK": "✏️ Fiche mise à jour", "retImp": "Impossible : ce membre a des descendants dans l'arbre.", "retQ": "Retirer ce membre de l'arbre ?", "retOK": "🗑️ Membre retiré", "waTxt": "Rejoins l'arbre familial !", "expOK": "📤 Sauvegarde JSON téléchargée", "impOK": "📥 Famille importée :", "impBad": "Fichier invalide", "phNom": "Ex : Ibrahim Dan Moussa", "g1": "fiches complétées", "g2": "photos ajoutées", "toi": "Toi", "jr": "j", "n5": "Studio", "studioT": "Studio de la famille", "studioH": "38 outils pour faire vivre la famille", "sg1": "Partager", "sg2": "Mémoire", "sg3": "Jeux", "sg4": "Fierté", "sg5": "Organiser", "tInvit": "Inviter", "tWa": "WhatsApp", "tCarte": "Carte famille", "tCapsule": "Capsules", "tHommage": "Hommages", "tDico": "Dictionnaire", "tVF": "Vrai ou Faux", "tMemo": "Memory", "tPendu": "Le pendu", "tSondage": "Sondage", "tDefi": "Défi hebdo", "tRetro": "Notre Rétro", "tLong": "Longévité", "tPrenoms": "Les prénoms", "tPyram": "Générations", "tCaisse": "Caisse", "tReunion": "Réunion", "tTaches": "Qui fait quoi", "tAnnonce": "Annonces", "tAmbiance": "Ambiance", "hInvit": "Le lien et le QR code de l'application", "hWa": "Envoyer l'application au groupe familial", "hCarte": "Une image à partager avec fierté", "hCapsule": "Un message scellé jusqu'à une date future", "hHommage": "Honorer ceux qui nous ont quittés", "hDico": "Les mots que seule la famille comprend", "hVF": "Une affirmation par jour, vraie ou fausse", "hMemo": "Retrouve les paires de la famille", "hPendu": "Devine un prénom, 6 essais", "hSondage": "Une question, la famille vote", "hDefi": "5 missions, remises à zéro chaque lundi", "hRetro": "Le bilan de la famille cette année", "hLong": "Les plus longues vies de la famille", "hPrenoms": "Les prénoms qui traversent les générations", "hPyram": "Combien de membres à chaque étage", "hCaisse": "Suivre les cotisations de la famille", "hReunion": "Deux dates, la famille choisit", "hTaches": "Répartir les responsabilités", "hAnnonce": "Naissances, réussites, bonnes nouvelles", "hAmbiance": "Sons, vibrations et célébrations", "sRetour": "Studio", "sAjouter": "Ajouter", "sTitre": "Titre", "sMsg": "Message", "sDate": "Date", "sSceller": "Sceller", "sScelle": "Scellée jusqu'au jour J", "sMot": "Mot ou surnom", "sSens": "Ce que ça veut dire", "sVrai": "VRAI", "sFaux": "FAUX", "sBravo": "Bravo !", "sRate": "Raté !", "sRejouer": "Rejouer", "sQui": "Qui ?", "sMontant": "Montant", "sPour": "Pour quoi ?", "sTotal": "Total en caisse", "sVoter": "Voter", "sCloturer": "Clôturer", "sLancer": "Lancer", "sTache": "La tâche", "sPublier": "Publier", "sTel": "Télécharger", "sCopier": "Copier le lien", "sCopie": "Lien copié", "sSons": "Sons", "sVibr": "Vibrations", "sConf": "Confettis", "sTester": "Tester la fête", "sVide": "Rien pour l'instant", "sRempli": "Remplis les champs", "sSem": "cette semaine", "sAns": "ans", "sFois": "fois", "sMembres": "membres", "sGenN": "Génération", "sg6": "Découvrir", "tEvent": "Éventail", "hEvent": "Tes ancêtres dessinés en demi-cercle", "tLignee": "Ma lignée", "hLignee": "Le chemin qui te relie au fondateur", "tSaluer2": "Qui saluer", "hSaluer2": "Chaque jour, une personne à appeler", "sAppeler": "Envoyer un message", "sFait": "C'est fait", "tQuest": "Questions aux anciens", "hQuest": "Six questions à poser avant qu'il soit trop tard", "q1": "Quel est ton plus ancien souvenir ?", "q2": "Comment s'est passé le mariage de tes parents ?", "q3": "Quel métier faisait ton père ?", "q4": "D'où vient notre nom de famille ?", "q5": "Quel est le plus long voyage que tu aies fait ?", "q6": "Quel conseil laisses-tu aux petits-enfants ?", "sRepondre": "La réponse de l'ancien", "tBadges": "Badges", "hBadges": "Ce que la famille a déjà accompli", "b1": "Premier pas", "b2": "Arbre vivant", "b3": "Grande famille", "b4": "Cinq générations", "b5": "Diaspora", "b6": "Gardien des mots", "b7": "Cœur fidèle", "b8": "Organisateur", "sDebloque": "Débloqué", "sBloque": "À débloquer", "tRappel": "Rappels", "hRappel": "Ne plus jamais oublier un anniversaire", "sActiver": "Activer les rappels", "sActive": "Rappels activés", "sMois": "Ce mois-ci", "tAine": "Mode Aîné", "hAine": "Texte plus gros pour les yeux fatigués", "tCousins": "Ma génération", "hCousins": "Les membres nés autour de la même année", "sChoisir": "Choisis une personne", "sAucunC": "Personne trouvée", "sg7": "Traditions", "tHong": "Enveloppe de fête", "hHong": "Offrir une bénédiction pour une fête", "sOccasion": "L'occasion", "sBenediction": "La bénédiction", "sDest": "Pour qui ?", "sEnvoyer": "Envoyer", "tArbre": "L'arbre collectif", "hArbre": "Il grandit à chaque geste de la famille", "sNiveau": "Niveau", "sGestes": "gestes accomplis", "tCuis": "Cuisine de famille", "hCuis": "Les plats transmis de mère en fille", "sPlat": "Le plat", "sGardienR": "Qui le prépare le mieux", "sSecret": "Le secret", "tCadeau": "Cadeaux", "hCadeau": "Offrir un petit signe d'affection", "tFete": "Fêtes", "hFete": "Le compte à rebours des grandes dates", "f1": "Aïd el-Fitr", "f2": "Aïd el-Kebir", "f3": "Mawlid", "f4": "Ramadan", "f5": "Réunion de famille", "f6": "Nouvel an", "sJours": "jours", "sPasse": "passé", "tNasab": "Mon nasab", "hNasab": "Ton nom complet, de père en père", "tRegistre": "Registre", "hRegistre": "Le document officiel de la famille", "sImprimer": "Télécharger le registre", "tMatin": "Carte du matin", "hMatin": "Une image à envoyer chaque matin", "tTontine": "Tontine", "hTontine": "Chacun son tour de recevoir", "sTour": "C'est son tour", "sSuivant": "Au suivant", "tParrain": "Parrainage", "hParrain": "Invite trois personnes, débloque une récompense", "sInvite": "J'ai invité quelqu'un", "sObjectif": "Objectif"}, "en": {"sal": "Sannu da zuwa! Welcome to the Dan Moussa family.", "n0": "Home", "n1": "Members", "n2": "Tree", "n3": "Games+", "n4": "Add", "tprov": "Hausa proverb of the day", "prov1": "Brotherhood is grown on foot — visit your people.", "prov2": "One hand cannot lift the roof.", "prov3": "Truth is worth more than money.", "prov4": "Birth is the remedy for death — the lineage goes on.", "mb": "members", "viv": "living", "gen": "generations", "pays": "countries", "anniv": "🎂 Birthdays this month", "fete": "turns {n} this month 🎉", "aucanniv": "No birthdays this month.", "frise": "🕰️ Family timeline", "nait": "born in", "evt": "📯 Latest events", "naiss": "👶 Announce a birth", "mari": "💍 Announce a wedding", "evtQ1": "Name of the newborn?", "evtQ2": "Who is getting married?", "evtN": "👶 Birth of", "evtM": "💍 Wedding of", "evtOK": "📯 Event announced to the whole family!", "serie": "Visit streak", "serieH": "Come greet the family every day — 7 days = 🏅 Keeper of the lineage", "saluer": "🤲 Hello!", "dejasalue": "Already greeted today — see you tomorrow!", "salueOK": "🔥 Streak: {n} days. The family greets you!", "searchPH": "🔎 Search a member, a city…", "tousG": "All generations", "tousP": "🌍 All countries", "aucun": "No one matches 🔎", "arbreH": "Tap ▸ to unfold a branch, a name to open the profile.", "lien": "🔗 Kinship calculator", "calc": "Compute the link", "meme": "That's the same person 😄", "lienDesc": "{B} descends from {A} ({n} generation(s) below)", "lienFrere": "Siblings (same parent: {C})", "lienOncle": "Uncle-aunt ↔ nephew-niece, via {C}", "lienCous": "Cousins ({n} degree), common ancestor: {C}", "quiz": "🎯 \"Who is who?\" quiz", "score": "Score", "srie": "Streak", "quizQ": "Who was born in {a} in {v}?", "bravo": "✅ +10 pts! Streak {n} 🔥", "rate": "❌ Missed — streak resets", "myst": "🕵🏾 Mystery member of the day", "ind1": "Clue 1: generation G{g}.", "ind2": "Clue 2: lives in {v}.", "ind3": "Clue 3: born in {a}.", "deviner": "Guess", "trouve": "🎉 Well done, it was {N}!", "encore": "❌ No… here is another clue", "perdu": "😅 Too bad! Answer: {N}", "demain": "New mystery tomorrow!", "diapo": "🎞️ Presentation mode", "diapoH": "Scroll through the whole family for reunions.", "lancer": "▶ Start slideshow", "stop": "⏹ Stop", "gene": "Generation", "livre": "📖 Family guestbook", "msgPH": "Your message to the family…", "signer": "Sign", "signOK": "📖 Message added to the guestbook", "videM": "Write your message first ✍️", "amin": "🤲 Amin", "gard": "🏆 Keepers of memory", "gardH": "Every addition, message or completed profile counts!", "contribs": "contribution(s)", "diasp": "🌍 Our diaspora", "mbs": "member(s)", "fiches": "📋 Complete profiles", "fichesH": "Family goal: city + country + year for everyone.", "ajout": "➕ Add a member", "fNom": "Full name", "fGenre": "Gender", "fH": "👨🏾 Male", "fF": "👩🏾 Female", "fAn": "Year of birth", "fVille": "City", "fPays": "Country", "fParent": "Parent (father/mother in the tree)", "ajBtn": "Add to the lineage", "ajOK": "🌱 {N} joins the lineage — generation {g}", "nomOb": "Name is required ✍️", "lignee": "🧬 Lineage to the founder", "enfants": "👶 Children", "aucunE": "None recorded", "modif": "✏️ Edit", "waBtn": "📲 WhatsApp", "nuitT": "Theme switched 🌙", "sonOn": "🔊 Sounds on", "sonOff": "🔇 Sounds off", "langOK": "English ✓", "edNom": "Name:", "edVille": "City:", "edOK": "✏️ Profile updated", "retImp": "Impossible: this member has descendants in the tree.", "retQ": "Remove this member from the tree?", "retOK": "🗑️ Member removed", "waTxt": "Join the family tree!", "expOK": "📤 JSON backup downloaded", "impOK": "📥 Family imported:", "impBad": "Invalid file", "phNom": "E.g.: Ibrahim Dan Moussa", "g1": "profiles completed", "g2": "photos added", "toi": "You", "jr": "d", "n5": "Studio", "studioT": "Family Studio", "studioH": "38 tools to bring the family alive", "sg1": "Share", "sg2": "Memory", "sg3": "Games", "sg4": "Pride", "sg5": "Organize", "tInvit": "Invite", "tWa": "WhatsApp", "tCarte": "Family card", "tCapsule": "Time capsules", "tHommage": "Tributes", "tDico": "Dictionary", "tVF": "True or False", "tMemo": "Memory game", "tPendu": "Hangman", "tSondage": "Poll", "tDefi": "Weekly challenge", "tRetro": "Our Rewind", "tLong": "Longevity", "tPrenoms": "First names", "tPyram": "Generations", "tCaisse": "Family fund", "tReunion": "Gathering", "tTaches": "Who does what", "tAnnonce": "Announcements", "tAmbiance": "Ambience", "hInvit": "The app link and QR code", "hWa": "Send the app to the family group", "hCarte": "An image to share proudly", "hCapsule": "A message sealed until a future date", "hHommage": "Honour those who left us", "hDico": "Words only the family understands", "hVF": "One statement a day, true or false", "hMemo": "Find the family pairs", "hPendu": "Guess a name, 6 tries", "hSondage": "One question, the family votes", "hDefi": "5 missions, reset every Monday", "hRetro": "The family's year in review", "hLong": "The longest lives in the family", "hPrenoms": "Names passed down the generations", "hPyram": "How many members at each level", "hCaisse": "Track the family contributions", "hReunion": "Two dates, the family chooses", "hTaches": "Share out the responsibilities", "hAnnonce": "Births, successes, good news", "hAmbiance": "Sounds, vibration and celebration", "sRetour": "Studio", "sAjouter": "Add", "sTitre": "Title", "sMsg": "Message", "sDate": "Date", "sSceller": "Seal", "sScelle": "Sealed until the day", "sMot": "Word or nickname", "sSens": "What it means", "sVrai": "TRUE", "sFaux": "FALSE", "sBravo": "Well done!", "sRate": "Missed!", "sRejouer": "Play again", "sQui": "Who?", "sMontant": "Amount", "sPour": "What for?", "sTotal": "Fund total", "sVoter": "Vote", "sCloturer": "Close", "sLancer": "Launch", "sTache": "The task", "sPublier": "Publish", "sTel": "Download", "sCopier": "Copy the link", "sCopie": "Link copied", "sSons": "Sounds", "sVibr": "Vibration", "sConf": "Confetti", "sTester": "Test the celebration", "sVide": "Nothing yet", "sRempli": "Fill in the fields", "sSem": "this week", "sAns": "years", "sFois": "times", "sMembres": "members", "sGenN": "Generation", "sg6": "Discover", "tEvent": "Fan chart", "hEvent": "Your ancestors drawn in a half circle", "tLignee": "My line", "hLignee": "The path linking you to the founder", "tSaluer2": "Who to greet", "hSaluer2": "One person to call each day", "sAppeler": "Send a message", "sFait": "Done", "tQuest": "Ask the elders", "hQuest": "Six questions to ask before it is too late", "q1": "What is your earliest memory?", "q2": "How was your parents' wedding?", "q3": "What work did your father do?", "q4": "Where does our family name come from?", "q5": "What is the longest journey you made?", "q6": "What advice do you leave the grandchildren?", "sRepondre": "The elder's answer", "tBadges": "Badges", "hBadges": "What the family has achieved", "b1": "First step", "b2": "Living tree", "b3": "Big family", "b4": "Five generations", "b5": "Diaspora", "b6": "Keeper of words", "b7": "Faithful heart", "b8": "Organizer", "sDebloque": "Unlocked", "sBloque": "To unlock", "tRappel": "Reminders", "hRappel": "Never forget a birthday again", "sActiver": "Turn on reminders", "sActive": "Reminders on", "sMois": "This month", "tAine": "Elder mode", "hAine": "Bigger text for tired eyes", "tCousins": "My generation", "hCousins": "Members born around the same year", "sChoisir": "Choose a person", "sAucunC": "Nobody found", "sg7": "Traditions", "tHong": "Gift envelope", "hHong": "Offer a blessing for a celebration", "sOccasion": "The occasion", "sBenediction": "The blessing", "sDest": "For whom?", "sEnvoyer": "Send", "tArbre": "The shared tree", "hArbre": "It grows with every family action", "sNiveau": "Level", "sGestes": "actions done", "tCuis": "Family kitchen", "hCuis": "Dishes passed from mother to daughter", "sPlat": "The dish", "sGardienR": "Who makes it best", "sSecret": "The secret", "tCadeau": "Gifts", "hCadeau": "Send a small token of affection", "tFete": "Celebrations", "hFete": "Countdown to the big dates", "f1": "Eid al-Fitr", "f2": "Eid al-Adha", "f3": "Mawlid", "f4": "Ramadan", "f5": "Family gathering", "f6": "New year", "sJours": "days", "sPasse": "passed", "tNasab": "My nasab", "hNasab": "Your full name, father by father", "tRegistre": "Register", "hRegistre": "The family's official document", "sImprimer": "Download the register", "tMatin": "Morning card", "hMatin": "An image to send every morning", "tTontine": "Rotating fund", "hTontine": "Each in turn receives", "sTour": "Their turn", "sSuivant": "Next one", "tParrain": "Sponsorship", "hParrain": "Invite three people, unlock a reward", "sInvite": "I invited someone", "sObjectif": "Goal"}, "ha": {"sal": "Sannu da zuwa cikin iyalin Dan Moussa!", "n0": "Gida", "n1": "Iyali", "n2": "Itace", "n3": "Wasa+", "n4": "Ƙara", "tprov": "Karin maganar yau", "prov1": "Zumunta a ƙafa take — ziyarci naka.", "prov2": "Hannu ɗaya ba ya ɗaukar jinka.", "prov3": "Gaskiya ta fi kwabo.", "prov4": "Haihuwa maganin mutuwa — zuriya na ci gaba.", "mb": "yan uwa", "viv": "masu rai", "gen": "zamani", "pays": "ƙasashe", "anniv": "🎂 Ranakun haihuwa na wata", "fete": "zai cika shekara {n} a wannan wata 🎉", "aucanniv": "Babu ranar haihuwa a wannan wata.", "frise": "🕰️ Tarihin iyali", "nait": "an haife shi a", "evt": "📯 Sabbin abubuwa", "naiss": "👶 Sanar da haihuwa", "mari": "💍 Sanar da aure", "evtQ1": "Sunan jariri?", "evtQ2": "Wanene zai yi aure?", "evtN": "👶 Haihuwar", "evtM": "💍 Auren", "evtOK": "📯 An sanar da dukan iyali!", "serie": "Jerin ziyara", "serieH": "Ka dawo kowace rana — kwana 7 = 🏅 Mai gadin zuriya", "saluer": "🤲 Sannu!", "dejasalue": "An riga an gaisa yau — sai gobe!", "salueOK": "🔥 Jerin: kwana {n}. Iyali na gaishe ka!", "searchPH": "🔎 Nemo ɗan uwa ko gari…", "tousG": "Duk zamani", "tousP": "🌍 Duk ƙasashe", "aucun": "Ba a sami kowa ba 🔎", "arbreH": "Danna ▸ don buɗe reshe, suna don buɗe bayani.", "lien": "🔗 Lissafin dangantaka", "calc": "Lissafa dangantaka", "meme": "Mutum ɗaya ne 😄", "lienDesc": "{B} ya fito daga {A} (zamani {n} ƙasa)", "lienFrere": "Yan uwa (iyaye ɗaya: {C})", "lienOncle": "Kawu-goggo ↔ ɗan wa, ta {C}", "lienCous": "Yan uwan juna (mataki {n}), kakan gama gari: {C}", "quiz": "🎯 Wasan « Wanene? »", "score": "Maki", "srie": "Jerin", "quizQ": "Wanene aka haifa a {a} a {v}?", "bravo": "✅ Maki +10! Jerin {n} 🔥", "rate": "❌ Kuskure — jerin ya koma sifili", "myst": "🕵🏾 Ɓoyayyen ɗan uwa na yau", "ind1": "Alama 1: zamani G{g}.", "ind2": "Alama 2: yana zaune a {v}.", "ind3": "Alama 3: an haife shi a {a}.", "deviner": "Yi hasashe", "trouve": "🎉 Madalla, {N} ne!", "encore": "❌ A'a… ga wata alama", "perdu": "😅 Kaico! Amsa: {N}", "demain": "Sabon asiri gobe!", "diapo": "🎞️ Yanayin gabatarwa", "diapoH": "Duba dukan iyali don taro.", "lancer": "▶ Fara nunin", "stop": "⏹ Tsaya", "gene": "Zamani", "livre": "📖 Littafin iyali", "msgPH": "Saƙonka ga iyali…", "signer": "Sa hannu", "signOK": "📖 An ƙara saƙo", "videM": "Rubuta saƙo tukuna ✍️", "amin": "🤲 Amin", "gard": "🏆 Masu gadin tarihi", "gardH": "Kowace gudummawa tana ƙidaya!", "contribs": "gudummawa", "diasp": "🌍 Yaduwar iyalinmu", "mbs": "ɗan uwa", "fiches": "📋 Cikakkun bayanai", "fichesH": "Burin iyali: gari + ƙasa + shekara ga kowa.", "ajout": "➕ Ƙara ɗan uwa", "fNom": "Cikakken suna", "fGenre": "Jinsi", "fH": "👨🏾 Namiji", "fF": "👩🏾 Mace", "fAn": "Shekarar haihuwa", "fVille": "Gari", "fPays": "Ƙasa", "fParent": "Iyaye (a cikin itace)", "ajBtn": "Ƙara cikin zuriya", "ajOK": "🌱 {N} ya shiga zuriya — zamani {g}", "nomOb": "Ana buƙatar suna ✍️", "lignee": "🧬 Zuriyarsa har zuwa kaka", "enfants": "👶 Yara", "aucunE": "Babu rajista", "modif": "✏️ Gyara", "waBtn": "📲 WhatsApp", "nuitT": "An sauya launi 🌙", "sonOn": "🔊 Sauti a kunne", "sonOff": "🔇 An kashe sauti", "langOK": "Hausa ✓", "edNom": "Suna:", "edVille": "Gari:", "edOK": "✏️ An sabunta bayani", "retImp": "Ba zai yiwu ba: yana da zuriya a itacen.", "retQ": "A cire wannan ɗan uwa?", "retOK": "🗑️ An cire shi", "waTxt": "Shiga itacen iyali!", "expOK": "📤 An sauke ajiyar JSON", "impOK": "📥 An shigo da iyali:", "impBad": "Fayil mara inganci", "phNom": "Misali: Ibrahim Dan Moussa", "g1": "bayanai cikakku", "g2": "hotuna da aka ƙara", "toi": "Kai", "jr": "k", "n5": "Studiyo", "studioT": "Studiyon Iyali", "studioH": "Kayan aiki 38 don rayar da iyali", "sg1": "Rabawa", "sg2": "Tunawa", "sg3": "Wasanni", "sg4": "Alfahari", "sg5": "Tsarawa", "tInvit": "Gayyata", "tWa": "WhatsApp", "tCarte": "Katin iyali", "tCapsule": "Kwalayen lokaci", "tHommage": "Girmamawa", "tDico": "Ƙamus", "tVF": "Gaskiya ko Ƙarya", "tMemo": "Wasan tunawa", "tPendu": "Wasan sunaye", "tSondage": "Zaɓe", "tDefi": "Ƙalubalen mako", "tRetro": "Taƙaitawar shekara", "tLong": "Tsawon rai", "tPrenoms": "Sunayenmu", "tPyram": "Tsararraki", "tCaisse": "Asusun iyali", "tReunion": "Taro", "tTaches": "Wa ke yin me", "tAnnonce": "Sanarwa", "tAmbiance": "Yanayi", "hInvit": "Hanyar haɗi da lambar QR", "hWa": "Aika manhajar zuwa rukunin iyali", "hCarte": "Hoto don rabawa da alfahari", "hCapsule": "Saƙon da aka rufe har zuwa wata rana", "hHommage": "Girmama waɗanda suka bar mu", "hDico": "Kalmomin da iyali kaɗai ke gane", "hVF": "Magana ɗaya kowace rana", "hMemo": "Nemo ma'auratan iyali", "hPendu": "Zaci suna, gwaji 6", "hSondage": "Tambaya ɗaya, iyali su zaɓa", "hDefi": "Ayyuka 5, sabuntawa kowace Litinin", "hRetro": "Taƙaitawar iyali bana", "hLong": "Mafi tsawon rai a iyali", "hPrenoms": "Sunayen da suke wucewa tsararraki", "hPyram": "Mutane nawa a kowane mataki", "hCaisse": "Bin diddigin gudummawar iyali", "hReunion": "Kwanaki biyu, iyali su zaɓa", "hTaches": "Raba nauyi", "hAnnonce": "Haihuwa, nasara, labari mai daɗi", "hAmbiance": "Sauti, girgiza da murna", "sRetour": "Studiyo", "sAjouter": "Ƙara", "sTitre": "Take", "sMsg": "Saƙo", "sDate": "Kwanan wata", "sSceller": "Rufe", "sScelle": "An rufe har ranar", "sMot": "Kalma ko laƙabi", "sSens": "Ma'anarsa", "sVrai": "GASKIYA", "sFaux": "ƘARYA", "sBravo": "Madalla!", "sRate": "Kuskure!", "sRejouer": "Sake wasa", "sQui": "Wane ne?", "sMontant": "Adadi", "sPour": "Don me?", "sTotal": "Jimillar asusu", "sVoter": "Zaɓa", "sCloturer": "Rufe", "sLancer": "Fara", "sTache": "Aikin", "sPublier": "Buga", "sTel": "Sauke", "sCopier": "Kwafi hanyar", "sCopie": "An kwafi hanyar", "sSons": "Sauti", "sVibr": "Girgiza", "sConf": "Confetti", "sTester": "Gwada murna", "sVide": "Babu kome tukuna", "sRempli": "Cika filayen", "sSem": "wannan makon", "sAns": "shekaru", "sFois": "sau", "sMembres": "mutane", "sGenN": "Tsara", "sg6": "Ganowa", "tEvent": "Fanka", "hEvent": "Kakanninka a rabin da'ira", "tLignee": "Zuriyata", "hLignee": "Hanyar da ta haɗa ka da wanda ya kafa", "tSaluer2": "Wa za a gaisa", "hSaluer2": "Kowace rana, mutum guda a kira", "sAppeler": "Aika saƙo", "sFait": "An gama", "tQuest": "Tambayoyi ga dattawa", "hQuest": "Tambayoyi shida kafin lokaci ya kure", "q1": "Menene tunawarka mafi tsufa?", "q2": "Yaya bikin iyayenka ya kasance?", "q3": "Wane aiki mahaifinka ke yi?", "q4": "Daga ina sunan iyalinmu ya fito?", "q5": "Wace tafiya ce mafi tsawo da ka yi?", "q6": "Wace shawara ka bar wa jikoki?", "sRepondre": "Amsar dattijo", "tBadges": "Lambobin yabo", "hBadges": "Abin da iyali suka riga suka cim ma", "b1": "Mataki na farko", "b2": "Bishiya mai rai", "b3": "Babban iyali", "b4": "Tsararraki biyar", "b5": "Ƙasashen waje", "b6": "Mai tsare kalmomi", "b7": "Zuciya mai aminci", "b8": "Mai tsarawa", "sDebloque": "An buɗe", "sBloque": "Za a buɗe", "tRappel": "Tunatarwa", "hRappel": "Kada ka sake mantawa da ranar haihuwa", "sActiver": "Kunna tunatarwa", "sActive": "An kunna tunatarwa", "sMois": "Wannan watan", "tAine": "Yanayin dattijo", "hAine": "Rubutu mafi girma ga idanu masu gajiya", "tCousins": "Tsararrakina", "hCousins": "Waɗanda aka haifa kusan shekara ɗaya", "sChoisir": "Zaɓi mutum", "sAucunC": "Ba a sami kowa ba", "sg7": "Al'adu", "tHong": "Ambulan biki", "hHong": "Ba da albarka don biki", "sOccasion": "Lokacin", "sBenediction": "Albarkar", "sDest": "Ga wa?", "sEnvoyer": "Aika", "tArbre": "Bishiyar haɗin kai", "hArbre": "Yana girma da kowane aikin iyali", "sNiveau": "Mataki", "sGestes": "ayyukan da aka yi", "tCuis": "Girkin iyali", "hCuis": "Abincin da ake mikawa daga uwa zuwa 'ya", "sPlat": "Abincin", "sGardienR": "Wa ya fi shirya shi", "sSecret": "Sirrin", "tCadeau": "Kyaututtuka", "hCadeau": "Aika ƙaramar alamar soyayya", "tFete": "Bukukuwa", "hFete": "Ƙidayar kwanaki zuwa manyan ranaku", "f1": "Sallar Ƙarama", "f2": "Sallar Layya", "f3": "Maulidi", "f4": "Azumi", "f5": "Taron iyali", "f6": "Sabuwar shekara", "sJours": "kwanaki", "sPasse": "ya wuce", "tNasab": "Nasabata", "hNasab": "Cikakken sunanka, uba bayan uba", "tRegistre": "Rajista", "hRegistre": "Takardar hukuma ta iyali", "sImprimer": "Sauke rajistar", "tMatin": "Katin safiya", "hMatin": "Hoto don aikawa kowace safiya", "tTontine": "Adashe", "hTontine": "Kowa da nasa lokacin karɓa", "sTour": "Lokacinsa ne", "sSuivant": "Na gaba", "tParrain": "Gayyata uku", "hParrain": "Gayyaci mutum uku, buɗe lada", "sInvite": "Na gayyaci wani", "sObjectif": "Manufa"}, "ar": {"sal": "أهلاً بكم في عائلة دان موسى", "n0": "الرئيسية", "n1": "الأعضاء", "n2": "الشجرة", "n3": "ألعاب+", "n4": "إضافة", "tprov": "مثل هاوسا اليوم", "prov1": "الأخوة تُزرع بالزيارة — زُر أهلك.", "prov2": "يد واحدة لا ترفع السقف.", "prov3": "الحقيقة أغلى من المال.", "prov4": "الميلاد دواء الموت — النسل مستمر.", "mb": "أعضاء", "viv": "أحياء", "gen": "أجيال", "pays": "دول", "anniv": "🎂 أعياد ميلاد الشهر", "fete": "يُتم {n} سنة هذا الشهر 🎉", "aucanniv": "لا أعياد ميلاد هذا الشهر.", "frise": "🕰️ الخط الزمني للعائلة", "nait": "وُلد في", "evt": "📯 آخر الأحداث", "naiss": "👶 إعلان ولادة", "mari": "💍 إعلان زواج", "evtQ1": "اسم المولود؟", "evtQ2": "من سيتزوج؟", "evtN": "👶 ولادة", "evtM": "💍 زواج", "evtOK": "📯 تم إبلاغ كل العائلة!", "serie": "سلسلة الزيارات", "serieH": "عُد كل يوم لتحية العائلة — 7 أيام = 🏅 حارس النسل", "saluer": "🤲 سلام!", "dejasalue": "سلّمت اليوم — إلى الغد!", "salueOK": "🔥 السلسلة: {n} أيام. العائلة تحييك!", "searchPH": "🔎 ابحث عن عضو أو مدينة…", "tousG": "كل الأجيال", "tousP": "🌍 كل الدول", "aucun": "لا نتائج 🔎", "arbreH": "المس ▸ لفتح فرع، والاسم لفتح البطاقة.", "lien": "🔗 حاسبة صلة القرابة", "calc": "احسب الصلة", "meme": "إنه نفس الشخص 😄", "lienDesc": "{B} من نسل {A} ({n} جيل أدنى)", "lienFrere": "إخوة (نفس الوالد: {C})", "lienOncle": "عم/عمة ↔ ابن أخ، عبر {C}", "lienCous": "أبناء عمومة (درجة {n})، الجد المشترك: {C}", "quiz": "🎯 لعبة « من هو؟ »", "score": "النقاط", "srie": "السلسلة", "quizQ": "من وُلد سنة {a} في {v}؟", "bravo": "✅ ‎+10 نقاط! سلسلة {n} 🔥", "rate": "❌ خطأ — تعود السلسلة للصفر", "myst": "🕵🏾 العضو الغامض اليوم", "ind1": "دليل 1: الجيل G{g}.", "ind2": "دليل 2: يعيش في {v}.", "ind3": "دليل 3: وُلد سنة {a}.", "deviner": "خمّن", "trouve": "🎉 أحسنت، إنه {N}!", "encore": "❌ لا… إليك دليلاً آخر", "perdu": "😅 للأسف! الجواب: {N}", "demain": "لغز جديد غداً!", "diapo": "🎞️ وضع العرض", "diapoH": "اعرض كل العائلة في اللقاءات.", "lancer": "▶ ابدأ العرض", "stop": "⏹ إيقاف", "gene": "الجيل", "livre": "📖 سجل العائلة", "msgPH": "رسالتك إلى العائلة…", "signer": "وقّع", "signOK": "📖 أُضيفت الرسالة", "videM": "اكتب رسالتك أولاً ✍️", "amin": "🤲 آمين", "gard": "🏆 حُرّاس الذاكرة", "gardH": "كل إضافة أو رسالة تُحتسب!", "contribs": "مساهمة", "diasp": "🌍 انتشار عائلتنا", "mbs": "عضو", "fiches": "📋 بطاقات مكتملة", "fichesH": "هدف العائلة: مدينة + دولة + سنة للجميع.", "ajout": "➕ إضافة عضو", "fNom": "الاسم الكامل", "fGenre": "الجنس", "fH": "👨🏾 ذكر", "fF": "👩🏾 أنثى", "fAn": "سنة الميلاد", "fVille": "المدينة", "fPays": "الدولة", "fParent": "الوالد (في الشجرة)", "ajBtn": "أضِف إلى النسل", "ajOK": "🌱 {N} انضم إلى النسل — الجيل {g}", "nomOb": "الاسم مطلوب ✍️", "lignee": "🧬 نسبه حتى المؤسس", "enfants": "👶 الأبناء", "aucunE": "لا يوجد", "modif": "✏️ تعديل", "waBtn": "📲 واتساب", "nuitT": "تم تغيير المظهر 🌙", "sonOn": "🔊 الصوت مفعّل", "sonOff": "🔇 الصوت مغلق", "langOK": "العربية ✓", "edNom": "الاسم:", "edVille": "المدينة:", "edOK": "✏️ تم تحديث البطاقة", "retImp": "مستحيل: لهذا العضو ذرية في الشجرة.", "retQ": "إزالة هذا العضو من الشجرة؟", "retOK": "🗑️ تمت الإزالة", "waTxt": "انضم إلى شجرة العائلة!", "expOK": "📤 تم تنزيل النسخة JSON", "impOK": "📥 تم استيراد العائلة:", "impBad": "ملف غير صالح", "phNom": "مثال: إبراهيم دان موسى", "g1": "بطاقات مكتملة", "g2": "صور مضافة", "toi": "أنت", "jr": "ي", "n5": "استوديو", "studioT": "استوديو العائلة", "studioH": "٣٨ أداة لإحياء العائلة", "sg1": "مشاركة", "sg2": "الذاكرة", "sg3": "ألعاب", "sg4": "الفخر", "sg5": "تنظيم", "tInvit": "دعوة", "tWa": "واتساب", "tCarte": "بطاقة العائلة", "tCapsule": "كبسولات الزمن", "tHommage": "تكريم", "tDico": "قاموس", "tVF": "صح أم خطأ", "tMemo": "لعبة الذاكرة", "tPendu": "لعبة الأسماء", "tSondage": "استطلاع", "tDefi": "تحدي الأسبوع", "tRetro": "حصاد السنة", "tLong": "طول العمر", "tPrenoms": "أسماؤنا", "tPyram": "الأجيال", "tCaisse": "صندوق العائلة", "tReunion": "اللقاء", "tTaches": "من يفعل ماذا", "tAnnonce": "إعلانات", "tAmbiance": "الأجواء", "hInvit": "رابط التطبيق ورمز QR", "hWa": "أرسل التطبيق إلى مجموعة العائلة", "hCarte": "صورة لمشاركتها بفخر", "hCapsule": "رسالة مختومة حتى تاريخ قادم", "hHommage": "تكريم من فارقونا", "hDico": "كلمات تفهمها العائلة وحدها", "hVF": "عبارة كل يوم، صحيحة أم خاطئة", "hMemo": "اعثر على الأزواج المتطابقة", "hPendu": "خمّن اسمًا، ٦ محاولات", "hSondage": "سؤال واحد، العائلة تصوّت", "hDefi": "٥ مهام تتجدد كل اثنين", "hRetro": "حصيلة العائلة هذا العام", "hLong": "أطول الأعمار في العائلة", "hPrenoms": "أسماء تتوارثها الأجيال", "hPyram": "كم فردًا في كل جيل", "hCaisse": "متابعة مساهمات العائلة", "hReunion": "تاريخان، والعائلة تختار", "hTaches": "توزيع المسؤوليات", "hAnnonce": "ولادات ونجاحات وأخبار سارة", "hAmbiance": "الأصوات والاهتزاز والاحتفال", "sRetour": "الاستوديو", "sAjouter": "إضافة", "sTitre": "العنوان", "sMsg": "الرسالة", "sDate": "التاريخ", "sSceller": "ختم", "sScelle": "مختومة حتى يومها", "sMot": "كلمة أو لقب", "sSens": "ما معناه", "sVrai": "صح", "sFaux": "خطأ", "sBravo": "أحسنت!", "sRate": "خطأ!", "sRejouer": "العب مجددًا", "sQui": "من؟", "sMontant": "المبلغ", "sPour": "لماذا؟", "sTotal": "إجمالي الصندوق", "sVoter": "صوّت", "sCloturer": "إغلاق", "sLancer": "إطلاق", "sTache": "المهمة", "sPublier": "نشر", "sTel": "تحميل", "sCopier": "نسخ الرابط", "sCopie": "تم نسخ الرابط", "sSons": "الأصوات", "sVibr": "الاهتزاز", "sConf": "القصاصات", "sTester": "جرّب الاحتفال", "sVide": "لا شيء بعد", "sRempli": "املأ الحقول", "sSem": "هذا الأسبوع", "sAns": "سنة", "sFois": "مرات", "sMembres": "أفراد", "sGenN": "الجيل", "sg6": "اكتشاف", "tEvent": "مروحة الأجداد", "hEvent": "أجدادك في نصف دائرة", "tLignee": "نسبي", "hLignee": "الطريق الذي يربطك بالمؤسس", "tSaluer2": "من نُسلّم عليه", "hSaluer2": "كل يوم شخص تتصل به", "sAppeler": "إرسال رسالة", "sFait": "تم", "tQuest": "أسئلة للكبار", "hQuest": "ستة أسئلة قبل فوات الأوان", "q1": "ما أقدم ذكرى لديك؟", "q2": "كيف كان زواج والديك؟", "q3": "ما مهنة والدك؟", "q4": "من أين جاء اسم عائلتنا؟", "q5": "ما أطول رحلة قمت بها؟", "q6": "ما النصيحة التي تتركها للأحفاد؟", "sRepondre": "إجابة الكبير", "tBadges": "الأوسمة", "hBadges": "ما أنجزته العائلة", "b1": "الخطوة الأولى", "b2": "شجرة حيّة", "b3": "عائلة كبيرة", "b4": "خمسة أجيال", "b5": "الشتات", "b6": "حارس الكلمات", "b7": "قلب وفيّ", "b8": "المنظّم", "sDebloque": "مفتوح", "sBloque": "للفتح", "tRappel": "تذكيرات", "hRappel": "لا تنسَ عيد ميلاد بعد اليوم", "sActiver": "تفعيل التذكيرات", "sActive": "التذكيرات مفعّلة", "sMois": "هذا الشهر", "tAine": "وضع الكبار", "hAine": "خط أكبر للعيون المتعبة", "tCousins": "جيلي", "hCousins": "من وُلدوا في السنوات نفسها", "sChoisir": "اختر شخصًا", "sAucunC": "لم يُعثر على أحد", "sg7": "تقاليد", "tHong": "ظرف العيد", "hHong": "قدّم بركة في المناسبة", "sOccasion": "المناسبة", "sBenediction": "البركة", "sDest": "لمن؟", "sEnvoyer": "إرسال", "tArbre": "الشجرة المشتركة", "hArbre": "ينمو مع كل عمل للعائلة", "sNiveau": "المستوى", "sGestes": "أعمال منجزة", "tCuis": "مطبخ العائلة", "hCuis": "أطباق تتوارثها الأمهات", "sPlat": "الطبق", "sGardienR": "من يجيده أكثر", "sSecret": "السر", "tCadeau": "هدايا", "hCadeau": "أرسل رمزًا صغيرًا للمودة", "tFete": "الأعياد", "hFete": "العد التنازلي للمناسبات الكبرى", "f1": "عيد الفطر", "f2": "عيد الأضحى", "f3": "المولد النبوي", "f4": "رمضان", "f5": "لقاء العائلة", "f6": "رأس السنة", "sJours": "يوم", "sPasse": "مضى", "tNasab": "نسبي", "hNasab": "اسمك الكامل، أبًا عن أب", "tRegistre": "السجل", "hRegistre": "الوثيقة الرسمية للعائلة", "sImprimer": "تحميل السجل", "tMatin": "بطاقة الصباح", "hMatin": "صورة ترسلها كل صباح", "tTontine": "الجمعية", "hTontine": "كل واحد بدوره يستلم", "sTour": "دوره الآن", "sSuivant": "التالي", "tParrain": "الدعوة", "hParrain": "ادعُ ثلاثة أشخاص واحصل على مكافأة", "sInvite": "دعوتُ شخصًا", "sObjectif": "الهدف"}, "sw": {"sal": "Karibu katika familia ya Dan Moussa!", "n0": "Nyumbani", "n1": "Wanafamilia", "n2": "Mti", "n3": "Michezo+", "n4": "Ongeza", "tprov": "Methali ya leo", "prov1": "Udugu hulimwa kwa kutembeleana.", "prov2": "Mkono mmoja hauinui paa.", "prov3": "Ukweli ni bora kuliko pesa.", "prov4": "Kuzaliwa ni dawa ya kifo — ukoo unaendelea.", "mb": "wanafamilia", "viv": "walio hai", "gen": "vizazi", "pays": "nchi", "anniv": "🎂 Siku za kuzaliwa mwezi huu", "fete": "anatimiza miaka {n} mwezi huu 🎉", "aucanniv": "Hakuna siku ya kuzaliwa mwezi huu.", "frise": "🕰️ Historia ya familia", "nait": "alizaliwa", "evt": "📯 Matukio ya karibuni", "naiss": "👶 Tangaza kuzaliwa", "mari": "💍 Tangaza harusi", "evtQ1": "Jina la mtoto?", "evtQ2": "Nani anaoa?", "evtN": "👶 Kuzaliwa kwa", "evtM": "💍 Harusi ya", "evtOK": "📯 Familia yote imetangaziwa!", "serie": "Mfululizo wa ziara", "serieH": "Rudi kila siku kusalimia familia — siku 7 = 🏅 Mlinzi wa ukoo", "saluer": "🤲 Habari!", "dejasalue": "Umesalimia leo — kesho tena!", "salueOK": "🔥 Mfululizo: siku {n}. Familia inakusalimu!", "searchPH": "🔎 Tafuta mwanafamilia au mji…", "tousG": "Vizazi vyote", "tousP": "🌍 Nchi zote", "aucun": "Hakuna anayelingana 🔎", "arbreH": "Gusa ▸ kufungua tawi, jina kufungua wasifu.", "lien": "🔗 Kikokotoo cha undugu", "calc": "Kokotoa undugu", "meme": "Ni mtu yule yule 😄", "lienDesc": "{B} anatoka kwa {A} (vizazi {n} chini)", "lienFrere": "Ndugu (mzazi mmoja: {C})", "lienOncle": "Mjomba-shangazi ↔ mpwa, kupitia {C}", "lienCous": "Binamu (daraja {n}), babu wa pamoja: {C}", "quiz": "🎯 Mchezo « Nani ni nani? »", "score": "Alama", "srie": "Mfululizo", "quizQ": "Nani alizaliwa {a} huko {v}?", "bravo": "✅ Alama +10! Mfululizo {n} 🔥", "rate": "❌ Umekosea — mfululizo umerudi sifuri", "myst": "🕵🏾 Mwanafamilia wa siri wa leo", "ind1": "Dokezo 1: kizazi G{g}.", "ind2": "Dokezo 2: anaishi {v}.", "ind3": "Dokezo 3: alizaliwa {a}.", "deviner": "Bashiri", "trouve": "🎉 Hongera, alikuwa {N}!", "encore": "❌ Hapana… dokezo lingine", "perdu": "😅 Pole! Jibu: {N}", "demain": "Siri mpya kesho!", "diapo": "🎞️ Hali ya maonyesho", "diapoH": "Pitia familia yote kwenye mikutano.", "lancer": "▶ Anza maonyesho", "stop": "⏹ Simamisha", "gene": "Kizazi", "livre": "📖 Kitabu cha familia", "msgPH": "Ujumbe wako kwa familia…", "signer": "Tia sahihi", "signOK": "📖 Ujumbe umeongezwa", "videM": "Andika ujumbe kwanza ✍️", "amin": "🤲 Amina", "gard": "🏆 Walinzi wa kumbukumbu", "gardH": "Kila mchango unahesabika!", "contribs": "mchango", "diasp": "🌍 Wanafamilia duniani", "mbs": "mwanafamilia", "fiches": "📋 Wasifu kamili", "fichesH": "Lengo: mji + nchi + mwaka kwa kila mmoja.", "ajout": "➕ Ongeza mwanafamilia", "fNom": "Jina kamili", "fGenre": "Jinsia", "fH": "👨🏾 Mume", "fF": "👩🏾 Mke", "fAn": "Mwaka wa kuzaliwa", "fVille": "Mji", "fPays": "Nchi", "fParent": "Mzazi (katika mti)", "ajBtn": "Ongeza kwenye ukoo", "ajOK": "🌱 {N} amejiunga na ukoo — kizazi {g}", "nomOb": "Jina linahitajika ✍️", "lignee": "🧬 Ukoo hadi mwanzilishi", "enfants": "👶 Watoto", "aucunE": "Hakuna", "modif": "✏️ Hariri", "waBtn": "📲 WhatsApp", "nuitT": "Mandhari imebadilika 🌙", "sonOn": "🔊 Sauti zimewashwa", "sonOff": "🔇 Sauti zimezimwa", "langOK": "Kiswahili ✓", "edNom": "Jina:", "edVille": "Mji:", "edOK": "✏️ Wasifu umesasishwa", "retImp": "Haiwezekani: ana kizazi katika mti.", "retQ": "Kumwondoa mwanafamilia huyu?", "retOK": "🗑️ Ameondolewa", "waTxt": "Jiunge na mti wa familia!", "expOK": "📤 Nakala ya JSON imepakuliwa", "impOK": "📥 Familia imeingizwa:", "impBad": "Faili batili", "phNom": "Mf: Ibrahim Dan Moussa", "g1": "wasifu kamili", "g2": "picha zilizoongezwa", "toi": "Wewe", "jr": "s", "n5": "Studio", "studioT": "Studio ya Familia", "studioH": "Zana 38 za kuhuisha familia", "sg1": "Shiriki", "sg2": "Kumbukumbu", "sg3": "Michezo", "sg4": "Fahari", "sg5": "Panga", "tInvit": "Alika", "tWa": "WhatsApp", "tCarte": "Kadi ya familia", "tCapsule": "Kapsuli za wakati", "tHommage": "Heshima", "tDico": "Kamusi", "tVF": "Kweli au Uongo", "tMemo": "Mchezo wa kumbukumbu", "tPendu": "Mchezo wa majina", "tSondage": "Kura ya maoni", "tDefi": "Changamoto ya wiki", "tRetro": "Muhtasari wa mwaka", "tLong": "Maisha marefu", "tPrenoms": "Majina yetu", "tPyram": "Vizazi", "tCaisse": "Mfuko wa familia", "tReunion": "Mkutano", "tTaches": "Nani anafanya nini", "tAnnonce": "Matangazo", "tAmbiance": "Mazingira", "hInvit": "Kiungo cha programu na msimbo QR", "hWa": "Tuma programu kwenye kikundi cha familia", "hCarte": "Picha ya kushiriki kwa fahari", "hCapsule": "Ujumbe uliofungwa hadi tarehe ya baadaye", "hHommage": "Kuwaenzi walioondoka", "hDico": "Maneno familia pekee inayoelewa", "hVF": "Kauli moja kwa siku", "hMemo": "Tafuta jozi za familia", "hPendu": "Bahatisha jina, majaribio 6", "hSondage": "Swali moja, familia inapiga kura", "hDefi": "Kazi 5, huanza upya kila Jumatatu", "hRetro": "Muhtasari wa familia mwaka huu", "hLong": "Maisha marefu zaidi familia", "hPrenoms": "Majina yanayopita vizazi", "hPyram": "Wanachama wangapi kila ngazi", "hCaisse": "Fuatilia michango ya familia", "hReunion": "Tarehe mbili, familia inachagua", "hTaches": "Gawanya majukumu", "hAnnonce": "Kuzaliwa, mafanikio, habari njema", "hAmbiance": "Sauti, mtetemo na sherehe", "sRetour": "Studio", "sAjouter": "Ongeza", "sTitre": "Kichwa", "sMsg": "Ujumbe", "sDate": "Tarehe", "sSceller": "Funga", "sScelle": "Imefungwa hadi siku yake", "sMot": "Neno au jina la utani", "sSens": "Maana yake", "sVrai": "KWELI", "sFaux": "UONGO", "sBravo": "Hongera!", "sRate": "Umekosa!", "sRejouer": "Cheza tena", "sQui": "Nani?", "sMontant": "Kiasi", "sPour": "Kwa ajili gani?", "sTotal": "Jumla ya mfuko", "sVoter": "Piga kura", "sCloturer": "Funga", "sLancer": "Anzisha", "sTache": "Kazi", "sPublier": "Chapisha", "sTel": "Pakua", "sCopier": "Nakili kiungo", "sCopie": "Kiungo kimenakiliwa", "sSons": "Sauti", "sVibr": "Mtetemo", "sConf": "Konfeti", "sTester": "Jaribu sherehe", "sVide": "Hakuna kitu bado", "sRempli": "Jaza sehemu", "sSem": "wiki hii", "sAns": "miaka", "sFois": "mara", "sMembres": "wanachama", "sGenN": "Kizazi", "sg6": "Gundua", "tEvent": "Feni ya mababu", "hEvent": "Mababu zako katika nusu duara", "tLignee": "Ukoo wangu", "hLignee": "Njia inayokuunganisha na mwanzilishi", "tSaluer2": "Nani wa kusalimia", "hSaluer2": "Kila siku, mtu mmoja wa kupigia", "sAppeler": "Tuma ujumbe", "sFait": "Imefanyika", "tQuest": "Maswali kwa wazee", "hQuest": "Maswali sita kabla haijachelewa", "q1": "Kumbukumbu yako ya kwanza ni ipi?", "q2": "Harusi ya wazazi wako ilikuwaje?", "q3": "Baba yako alifanya kazi gani?", "q4": "Jina la familia yetu limetoka wapi?", "q5": "Safari ndefu zaidi uliyofanya ni ipi?", "q6": "Ushauri gani unawaachia wajukuu?", "sRepondre": "Jibu la mzee", "tBadges": "Beji", "hBadges": "Familia imefanikisha nini", "b1": "Hatua ya kwanza", "b2": "Mti hai", "b3": "Familia kubwa", "b4": "Vizazi vitano", "b5": "Ughaibuni", "b6": "Mlinzi wa maneno", "b7": "Moyo mwaminifu", "b8": "Mratibu", "sDebloque": "Imefunguliwa", "sBloque": "Kufungua", "tRappel": "Vikumbusho", "hRappel": "Usisahau siku ya kuzaliwa tena", "sActiver": "Washa vikumbusho", "sActive": "Vikumbusho vimewashwa", "sMois": "Mwezi huu", "tAine": "Hali ya wazee", "hAine": "Maandishi makubwa kwa macho yaliyochoka", "tCousins": "Kizazi changu", "hCousins": "Waliozaliwa karibu mwaka mmoja", "sChoisir": "Chagua mtu", "sAucunC": "Hakuna aliyepatikana", "sg7": "Mila", "tHong": "Bahasha ya sherehe", "hHong": "Toa baraka kwa sherehe", "sOccasion": "Tukio", "sBenediction": "Baraka", "sDest": "Kwa nani?", "sEnvoyer": "Tuma", "tArbre": "Mti wa pamoja", "hArbre": "Unakua kwa kila tendo la familia", "sNiveau": "Ngazi", "sGestes": "vitendo vilivyofanyika", "tCuis": "Jiko la familia", "hCuis": "Vyakula vinavyorithishwa", "sPlat": "Chakula", "sGardienR": "Nani anaipika vizuri zaidi", "sSecret": "Siri", "tCadeau": "Zawadi", "hCadeau": "Tuma ishara ndogo ya upendo", "tFete": "Sherehe", "hFete": "Hesabu ya siku hadi matukio makubwa", "f1": "Idd el-Fitr", "f2": "Idd el-Hajj", "f3": "Maulidi", "f4": "Ramadhani", "f5": "Mkutano wa familia", "f6": "Mwaka mpya", "sJours": "siku", "sPasse": "imepita", "tNasab": "Nasaba yangu", "hNasab": "Jina lako kamili, baba kwa baba", "tRegistre": "Daftari", "hRegistre": "Hati rasmi ya familia", "sImprimer": "Pakua daftari", "tMatin": "Kadi ya asubuhi", "hMatin": "Picha ya kutuma kila asubuhi", "tTontine": "Chama", "hTontine": "Kila mmoja kwa zamu yake", "sTour": "Ni zamu yake", "sSuivant": "Anayefuata", "tParrain": "Udhamini", "hParrain": "Alika watu watatu, fungua zawadi", "sInvite": "Nimealika mtu", "sObjectif": "Lengo"}, "yo": {"sal": "Ẹ ku abọ sí ìdílé Dan Moussa!", "n0": "Ilé", "n1": "Ìdílé", "n2": "Igi", "n3": "Eré+", "n4": "Fikun", "tprov": "Òwe ojó òní", "prov1": "Ìbátan ni a ń tọ́jú pẹ̀lú ìbẹ̀wò.", "prov2": "Ọwọ́ kan kò lè gbé òrùlé.", "prov3": "Òtítọ́ ju owó lọ.", "prov4": "Ìbí ni oògùn ikú — ìran ń bá a lọ.", "mb": "ọmọ ìdílé", "viv": "alààyè", "gen": "ìran", "pays": "orílẹ̀-èdè", "anniv": "🎂 Ọjọ́ ìbí oṣù yìí", "fete": "yóò pé ọmọ ọdún {n} loṣù yìí 🎉", "aucanniv": "Kò sí ọjọ́ ìbí loṣù yìí.", "frise": "🕰️ Ìtàn ìdílé", "nait": "a bí i ní", "evt": "📯 Ìṣẹ̀lẹ̀ tuntun", "naiss": "👶 Kéde ìbí ọmọ", "mari": "💍 Kéde ìgbéyàwó", "evtQ1": "Orúkọ ọmọ tuntun?", "evtQ2": "Ta ni ó ń gbéyàwó?", "evtN": "👶 Ìbí", "evtM": "💍 Ìgbéyàwó", "evtOK": "📯 A ti kéde fún gbogbo ìdílé!", "serie": "Ìtẹ̀síwájú ìbẹ̀wò", "serieH": "Padà lójoojúmọ́ — ọjọ́ 7 = 🏅 Olùṣọ́ ìran", "saluer": "🤲 Ẹ kú ọjọ́!", "dejasalue": "O ti kí wọn lónìí — di ọ̀la!", "salueOK": "🔥 Ìtẹ̀síwájú: ọjọ́ {n}. Ìdílé kí ọ!", "searchPH": "🔎 Wá ọmọ ìdílé tàbí ìlú…", "tousG": "Gbogbo ìran", "tousP": "🌍 Gbogbo orílẹ̀-èdè", "aucun": "Kò sí ẹni tí ó bá mu 🔎", "arbreH": "Tẹ ▸ láti ṣí ẹ̀ka, orúkọ láti ṣí ìwé.", "lien": "🔗 Ìṣirò ìbátan", "calc": "Ṣírò ìbátan", "meme": "Ẹni kan náà ni 😄", "lienDesc": "{B} wá láti ọ̀dọ̀ {A} (ìran {n} nísàlẹ̀)", "lienFrere": "Ọmọ ìyá kan (òbí kan: {C})", "lienOncle": "Àbúrò bàbá ↔ ọmọ arákùnrin, nípasẹ̀ {C}", "lienCous": "Ìbátan (ipò {n}), baba ńlá kan náà: {C}", "quiz": "🎯 Eré « Ta ni? »", "score": "Àmì", "srie": "Ìtẹ̀síwájú", "quizQ": "Ta ni a bí ní {a} ní {v}?", "bravo": "✅ Àmì +10! Ìtẹ̀síwájú {n} 🔥", "rate": "❌ Àṣìṣe — ó padà sí òdo", "myst": "🕵🏾 Ọmọ ìdílé àṣírí ojó òní", "ind1": "Àmì 1: ìran G{g}.", "ind2": "Àmì 2: ó ń gbé ní {v}.", "ind3": "Àmì 3: a bí i ní {a}.", "deviner": "Dá a mọ̀", "trouve": "🎉 Kú iṣẹ́, {N} ni!", "encore": "❌ Rárá… àmì mìíràn nìyí", "perdu": "😅 Ó ṣeni láàánú! Ìdáhùn: {N}", "demain": "Àṣírí tuntun lọ́la!", "diapo": "🎞️ Ìfihàn", "diapoH": "Wo gbogbo ìdílé fún ìpàdé.", "lancer": "▶ Bẹ̀rẹ̀ ìfihàn", "stop": "⏹ Dúró", "gene": "Ìran", "livre": "📖 Ìwé ìrántí ìdílé", "msgPH": "Ìfiránṣẹ́ rẹ sí ìdílé…", "signer": "Fọwọ́ sí i", "signOK": "📖 A ti fi ìfiránṣẹ́ kún un", "videM": "Kọ ìfiránṣẹ́ rẹ ná ✍️", "amin": "🤲 Àmín", "gard": "🏆 Olùṣọ́ ìrántí", "gardH": "Gbogbo àfikún ní iye!", "contribs": "àfikún", "diasp": "🌍 Ìtànkálẹ̀ ìdílé wa", "mbs": "ọmọ ìdílé", "fiches": "📋 Ìwé pípé", "fichesH": "Ète: ìlú + orílẹ̀-èdè + ọdún fún gbogbo ènìyàn.", "ajout": "➕ Fi ọmọ ìdílé kun", "fNom": "Orúkọ kíkún", "fGenre": "Akọ tàbí abo", "fH": "👨🏾 Ọkùnrin", "fF": "👩🏾 Obìnrin", "fAn": "Ọdún ìbí", "fVille": "Ìlú", "fPays": "Orílẹ̀-èdè", "fParent": "Òbí (nínú igi)", "ajBtn": "Fi kún ìran", "ajOK": "🌱 {N} darapọ̀ mọ́ ìran — ìran {g}", "nomOb": "Orúkọ ṣe pàtàkì ✍️", "lignee": "🧬 Ìran rẹ̀ dé ọ̀dọ̀ olùdásílẹ̀", "enfants": "👶 Àwọn ọmọ", "aucunE": "Kò sí", "modif": "✏️ Ṣàtúnṣe", "waBtn": "📲 WhatsApp", "nuitT": "Àwọ̀ ti yípadà 🌙", "sonOn": "🔊 Ìró wà", "sonOff": "🔇 Ìró kú", "langOK": "Yorùbá ✓", "edNom": "Orúkọ:", "edVille": "Ìlú:", "edOK": "✏️ Ìwé ti yípadà", "retImp": "Kò ṣeé ṣe: ó ní ìran nínú igi.", "retQ": "Yọ ọmọ ìdílé yìí kúrò?", "retOK": "🗑️ Ti yọ kúrò", "waTxt": "Darapọ̀ mọ́ igi ìdílé!", "expOK": "📤 Ìpamọ́ JSON ti gbà", "impOK": "📥 Ìdílé ti wọlé:", "impBad": "Fáìlì kò tọ́", "phNom": "Àpẹẹrẹ: Ibrahim Dan Moussa", "g1": "ìwé pípé", "g2": "àwòrán àfikún", "toi": "Ìwọ", "jr": "ọ", "n5": "Sítúdíò", "studioT": "Sítúdíò Ìdílé", "studioH": "Irinṣẹ́ 38 láti sọ ìdílé di ààyè", "sg1": "Pín", "sg2": "Ìrántí", "sg3": "Eré", "sg4": "Ìgbéraga", "sg5": "Ṣètò", "tInvit": "Pè", "tWa": "WhatsApp", "tCarte": "Káàdì ìdílé", "tCapsule": "Àpótí àkókò", "tHommage": "Ìyìn", "tDico": "Ìwé ìtumọ̀", "tVF": "Òtítọ́ tàbí Irọ́", "tMemo": "Eré ìrántí", "tPendu": "Eré orúkọ", "tSondage": "Ìdìbò", "tDefi": "Ìdíje ọ̀sẹ̀", "tRetro": "Àkótán ọdún", "tLong": "Ẹ̀mí gígùn", "tPrenoms": "Orúkọ wa", "tPyram": "Ìran", "tCaisse": "Àpò ìdílé", "tReunion": "Ìpàdé", "tTaches": "Ta ló ń ṣe kín", "tAnnonce": "Ìkéde", "tAmbiance": "Ìṣesí", "hInvit": "Ọ̀nà àti kóòdù QR", "hWa": "Fi ohun èlò náà ránṣẹ́ sí ẹgbẹ́ ìdílé", "hCarte": "Àwòrán láti pín pẹ̀lú ìgbéraga", "hCapsule": "Ìfiránṣẹ́ tí a dì mọ́ di ọjọ́ iwájú", "hHommage": "Bọlá fún àwọn tí wọ́n ti lọ", "hDico": "Ọ̀rọ̀ tí ìdílé nìkan gbọ́", "hVF": "Ọ̀rọ̀ kan lóòjọ́", "hMemo": "Wá àwọn méjìméjì ìdílé", "hPendu": "Fojú inú wo orúkọ, ìgbà 6", "hSondage": "Ìbéèrè kan, ìdílé dìbò", "hDefi": "Iṣẹ́ 5, tuntun ní Ajé kọ̀ọ̀kan", "hRetro": "Àkótán ìdílé lọ́dún yìí", "hLong": "Ẹ̀mí tí ó gùn jù nínú ìdílé", "hPrenoms": "Orúkọ tí ń kọjá láti ìran dé ìran", "hPyram": "Iye ènìyàn ní ipele kọ̀ọ̀kan", "hCaisse": "Tọpa ìdáwó ìdílé", "hReunion": "Ọjọ́ méjì, ìdílé yàn", "hTaches": "Pín iṣẹ́ ojúṣe", "hAnnonce": "Ìbí, àṣeyọrí, ìròyìn rere", "hAmbiance": "Ìró, gbọ̀n àti ayẹyẹ", "sRetour": "Sítúdíò", "sAjouter": "Fikún", "sTitre": "Àkọlé", "sMsg": "Ìfiránṣẹ́", "sDate": "Ọjọ́", "sSceller": "Dì mọ́", "sScelle": "Ó dì mọ́ di ọjọ́ náà", "sMot": "Ọ̀rọ̀ tàbí ìnagijẹ", "sSens": "Ìtumọ̀ rẹ̀", "sVrai": "ÒTÍTỌ́", "sFaux": "IRỌ́", "sBravo": "Ó ṣeun!", "sRate": "Ó pàdánù!", "sRejouer": "Tún ṣeré", "sQui": "Ta ni?", "sMontant": "Iye owó", "sPour": "Fún kín?", "sTotal": "Àpapọ̀ àpò", "sVoter": "Dìbò", "sCloturer": "Pa dé", "sLancer": "Bẹ̀rẹ̀", "sTache": "Iṣẹ́ náà", "sPublier": "Tẹ̀jáde", "sTel": "Gbà sílẹ̀", "sCopier": "Ṣe àdàkọ ọ̀nà", "sCopie": "A ti ṣe àdàkọ", "sSons": "Ìró", "sVibr": "Gbọ̀n", "sConf": "Konfẹ́tì", "sTester": "Dán ayẹyẹ wò", "sVide": "Kò sí nǹkan síbẹ̀", "sRempli": "Kún àwọn ààyè", "sSem": "ọ̀sẹ̀ yìí", "sAns": "ọdún", "sFois": "ìgbà", "sMembres": "ọmọ ìdílé", "sGenN": "Ìran", "sg6": "Ṣàwárí", "tEvent": "Àwòrán abẹ̀bẹ̀", "hEvent": "Àwọn baba ńlá rẹ ní ìdajì àyíká", "tLignee": "Ìlà mi", "hLignee": "Ọ̀nà tí ó so ọ́ mọ́ olùdásílẹ̀", "tSaluer2": "Ta ni láti kí", "hSaluer2": "Lójoojúmọ́, ẹnì kan láti pè", "sAppeler": "Fi ìfiránṣẹ́ ránṣẹ́", "sFait": "Ó ti parí", "tQuest": "Ìbéèrè fún àgbà", "hQuest": "Ìbéèrè mẹ́fà kí ó tó pẹ́", "q1": "Kí ni ìrántí rẹ àkọ́kọ́?", "q2": "Báwo ni ìgbéyàwó àwọn òbí rẹ ṣe rí?", "q3": "Iṣẹ́ wo ni bàbá rẹ ń ṣe?", "q4": "Níbo ni orúkọ ìdílé wa ti wá?", "q5": "Ìrìnàjò wo ni ó gùn jù tí o rìn?", "q6": "Ìmọ̀ràn wo ni o fi sílẹ̀ fún àwọn ọmọ ọmọ?", "sRepondre": "Èsì àgbà", "tBadges": "Àmì ẹ̀yẹ", "hBadges": "Ohun tí ìdílé ti ṣàṣeyọrí", "b1": "Ìgbésẹ̀ àkọ́kọ́", "b2": "Igi ààyè", "b3": "Ìdílé ńlá", "b4": "Ìran márùn-ún", "b5": "Àwọn òkèèrè", "b6": "Olùtọ́jú ọ̀rọ̀", "b7": "Ọkàn olùṣòtítọ́", "b8": "Olùṣètò", "sDebloque": "Ó ti ṣí", "sBloque": "Láti ṣí", "tRappel": "Ìránnilétí", "hRappel": "Má ṣe gbàgbé ọjọ́ ìbí mọ́", "sActiver": "Tan ìránnilétí", "sActive": "Ìránnilétí ti tan", "sMois": "Oṣù yìí", "tAine": "Ipò àgbà", "hAine": "Ọ̀rọ̀ tí ó tóbi fún ojú tí ó rẹ̀", "tCousins": "Ìran mi", "hCousins": "Àwọn tí a bí ní nǹkan bí ọdún kan", "sChoisir": "Yan ẹnì kan", "sAucunC": "Kò sí ẹni tí a rí", "sg7": "Àṣà", "tHong": "Àpò ẹ̀bùn", "hHong": "Fún ni ìbùkún fún ayẹyẹ", "sOccasion": "Ayẹyẹ náà", "sBenediction": "Ìbùkún", "sDest": "Fún ta?", "sEnvoyer": "Fi ránṣẹ́", "tArbre": "Igi àpapọ̀", "hArbre": "Ó ń dàgbà pẹ̀lú iṣẹ́ ìdílé kọ̀ọ̀kan", "sNiveau": "Ipele", "sGestes": "iṣẹ́ tí a ṣe", "tCuis": "Ìdáná ìdílé", "hCuis": "Oúnjẹ tí a jogún", "sPlat": "Oúnjẹ náà", "sGardienR": "Ta ló ṣe é jù", "sSecret": "Àṣírí", "tCadeau": "Ẹ̀bùn", "hCadeau": "Fi àmì ìfẹ́ kékeré ránṣẹ́", "tFete": "Àwọn ayẹyẹ", "hFete": "Ìkàsílẹ̀ sí àwọn ọjọ́ ńlá", "f1": "Ọdún Kékeré", "f2": "Ọdún Ìlàjí", "f3": "Maulud", "f4": "Ààwẹ̀", "f5": "Ìpàdé ìdílé", "f6": "Ọdún tuntun", "sJours": "ọjọ́", "sPasse": "ó ti kọjá", "tNasab": "Nasab mi", "hNasab": "Orúkọ rẹ pípé, baba lẹ́yìn baba", "tRegistre": "Ìwé ìforúkọsílẹ̀", "hRegistre": "Ìwé àṣẹ ìdílé", "sImprimer": "Gbà ìwé náà sílẹ̀", "tMatin": "Káàdì òwúrọ̀", "hMatin": "Àwòrán láti fi ránṣẹ́ lóòwúrọ̀", "tTontine": "Àjọ", "hTontine": "Ẹnìkọ̀ọ̀kan ní ìgbà tirẹ̀", "sTour": "Ìgbà rẹ̀ ni", "sSuivant": "Ẹni tí ó tẹ̀lé", "tParrain": "Ìpè ẹgbẹ́", "hParrain": "Pe ẹni mẹ́ta, ṣí ẹ̀bùn", "sInvite": "Mo pe ẹnì kan", "sObjectif": "Ète"}, "am": {"sal": "ወደ ዳን ሙሳ ቤተሰብ እንኳን ደህና መጡ!", "n0": "መነሻ", "n1": "አባላት", "n2": "ዛፍ", "n3": "ጨዋታ+", "n4": "ጨምር", "tprov": "የዛሬ ምሳሌ", "prov1": "ወንድማማችነት በመጎብኘት ያድጋል።", "prov2": "አንድ እጅ ጣሪያ አያነሳም።", "prov3": "እውነት ከገንዘብ ይበልጣል።", "prov4": "መወለድ የሞት መድኃኒት ነው — ትውልዱ ይቀጥላል።", "mb": "አባላት", "viv": "በሕይወት ያሉ", "gen": "ትውልዶች", "pays": "አገሮች", "anniv": "🎂 የዚህ ወር ልደቶች", "fete": "በዚህ ወር {n} ዓመት ይሞላል 🎉", "aucanniv": "በዚህ ወር ልደት የለም።", "frise": "🕰️ የቤተሰብ ታሪክ", "nait": "ተወለደ በ", "evt": "📯 የቅርብ ክስተቶች", "naiss": "👶 ልደት አብስር", "mari": "💍 ሰርግ አብስር", "evtQ1": "የሕፃኑ ስም?", "evtQ2": "ማን ያገባል?", "evtN": "👶 የ… ልደት", "evtM": "💍 የ… ሰርግ", "evtOK": "📯 ለመላው ቤተሰብ ተነግሯል!", "serie": "የጉብኝት ተከታታይ", "serieH": "በየቀኑ ተመለስ — 7 ቀን = 🏅 የትውልድ ጠባቂ", "saluer": "🤲 ሰላም!", "dejasalue": "ዛሬ ሰላም ብለሃል — እስከ ነገ!", "salueOK": "🔥 ተከታታይ: {n} ቀናት። ቤተሰቡ ሰላም ይልሃል!", "searchPH": "🔎 አባል ወይም ከተማ ፈልግ…", "tousG": "ሁሉም ትውልዶች", "tousP": "🌍 ሁሉም አገሮች", "aucun": "ማንም አልተገኘም 🔎", "arbreH": "▸ ንካ ቅርንጫፍ ለመክፈት፣ ስም ለመግለጫ።", "lien": "🔗 የዝምድና ማስያ", "calc": "ዝምድናውን አስላ", "meme": "ያው ሰው ነው 😄", "lienDesc": "{B} ከ{A} የተወለደ ነው ({n} ትውልድ በታች)", "lienFrere": "ወንድማማቾች (አንድ ወላጅ: {C})", "lienOncle": "አጎት-አክስት ↔ የወንድም ልጅ፣ በ{C}", "lienCous": "የአጎት ልጆች (ደረጃ {n})፣ የጋራ ቅድመ አያት: {C}", "quiz": "🎯 « ማን ነው? » ጨዋታ", "score": "ነጥብ", "srie": "ተከታታይ", "quizQ": "በ{a} በ{v} ማን ተወለደ?", "bravo": "✅ +10 ነጥብ! ተከታታይ {n} 🔥", "rate": "❌ ተሳስተሃል — ወደ ዜሮ ተመለሰ", "myst": "🕵🏾 የዛሬ ሚስጥራዊ አባል", "ind1": "ፍንጭ 1: ትውልድ G{g}።", "ind2": "ፍንጭ 2: በ{v} ይኖራል።", "ind3": "ፍንጭ 3: በ{a} ተወለደ።", "deviner": "ገምት", "trouve": "🎉 ጎበዝ! {N} ነበር!", "encore": "❌ አይደለም… ሌላ ፍንጭ", "perdu": "😅 አዝናለሁ! መልስ: {N}", "demain": "ነገ አዲስ ሚስጥር!", "diapo": "🎞️ የማቅረቢያ ሁነታ", "diapoH": "ለስብሰባ ቤተሰቡን ሁሉ አሳይ።", "lancer": "▶ ማሳያ ጀምር", "stop": "⏹ አቁም", "gene": "ትውልድ", "livre": "📖 የቤተሰብ መዝገብ", "msgPH": "ለቤተሰቡ መልእክትህ…", "signer": "ፈርም", "signOK": "📖 መልእክት ታክሏል", "videM": "መጀመሪያ መልእክት ጻፍ ✍️", "amin": "🤲 አሜን", "gard": "🏆 የትውስታ ጠባቂዎች", "gardH": "እያንዳንዱ አስተዋጽኦ ይቆጠራል!", "contribs": "አስተዋጽኦ", "diasp": "🌍 ቤተሰባችን በዓለም", "mbs": "አባል", "fiches": "📋 የተሟሉ መገለጫዎች", "fichesH": "ግብ: ከተማ + አገር + ዓመት ለሁሉም።", "ajout": "➕ አባል ጨምር", "fNom": "ሙሉ ስም", "fGenre": "ፆታ", "fH": "👨🏾 ወንድ", "fF": "👩🏾 ሴት", "fAn": "የልደት ዓመት", "fVille": "ከተማ", "fPays": "አገር", "fParent": "ወላጅ (በዛፉ ውስጥ)", "ajBtn": "ወደ ትውልዱ ጨምር", "ajOK": "🌱 {N} ትውልዱን ተቀላቀለ — ትውልድ {g}", "nomOb": "ስም ያስፈልጋል ✍️", "lignee": "🧬 እስከ መስራቹ ያለው ትውልድ", "enfants": "👶 ልጆች", "aucunE": "የለም", "modif": "✏️ አርትዕ", "waBtn": "📲 ዋትሳፕ", "nuitT": "ገጽታ ተቀይሯል 🌙", "sonOn": "🔊 ድምፅ በርቷል", "sonOff": "🔇 ድምፅ ጠፍቷል", "langOK": "አማርኛ ✓", "edNom": "ስም:", "edVille": "ከተማ:", "edOK": "✏️ መገለጫ ተዘምኗል", "retImp": "አይቻልም: በዛፉ ውስጥ ዘር አለው።", "retQ": "ይህን አባል ከዛፉ ላስወግድ?", "retOK": "🗑️ ተወግዷል", "waTxt": "የቤተሰብ ዛፍ ተቀላቀል!", "expOK": "📤 የJSON ቅጂ ወርዷል", "impOK": "📥 ቤተሰብ ገብቷል:", "impBad": "ልክ ያልሆነ ፋይል", "phNom": "ምሳሌ: Ibrahim Dan Moussa", "g1": "የተሟሉ መገለጫዎች", "g2": "የታከሉ ፎቶዎች", "toi": "አንተ", "jr": "ቀ", "n5": "ስቱዲዮ", "studioT": "የቤተሰብ ስቱዲዮ", "studioH": "ቤተሰብን ለማነቃቃት 38 መሣሪያዎች", "sg1": "አጋራ", "sg2": "ትውስታ", "sg3": "ጨዋታዎች", "sg4": "ኩራት", "sg5": "አደራጅ", "tInvit": "ጋብዝ", "tWa": "ዋትስአፕ", "tCarte": "የቤተሰብ ካርድ", "tCapsule": "የጊዜ ካፕሱል", "tHommage": "መታሰቢያ", "tDico": "መዝገበ ቃላት", "tVF": "እውነት ወይስ ሐሰት", "tMemo": "የማስታወስ ጨዋታ", "tPendu": "የስም ጨዋታ", "tSondage": "የሕዝብ አስተያየት", "tDefi": "የሳምንቱ ፈተና", "tRetro": "የዓመቱ ማጠቃለያ", "tLong": "ረጅም ዕድሜ", "tPrenoms": "ስሞቻችን", "tPyram": "ትውልዶች", "tCaisse": "የቤተሰብ ገንዘብ", "tReunion": "ስብሰባ", "tTaches": "ማን ምን ይሠራል", "tAnnonce": "ማስታወቂያዎች", "tAmbiance": "ድባብ", "hInvit": "የመተግበሪያ አገናኝና QR ኮድ", "hWa": "መተግበሪያውን ለቤተሰብ ቡድን ላክ", "hCarte": "በኩራት የሚጋራ ምስል", "hCapsule": "እስከ ወደፊት ቀን የታሸገ መልእክት", "hHommage": "ያለፉትን ማክበር", "hDico": "ቤተሰብ ብቻ የሚረዳቸው ቃላት", "hVF": "በቀን አንድ ዓረፍተ ነገር", "hMemo": "የቤተሰብ ጥንዶችን አግኝ", "hPendu": "ስም ገምት፣ 6 ሙከራ", "hSondage": "አንድ ጥያቄ፣ ቤተሰቡ ይመርጣል", "hDefi": "5 ተግባራት፣ በየሰኞ አዲስ", "hRetro": "የዘንድሮ የቤተሰብ ማጠቃለያ", "hLong": "በቤተሰቡ ረጅሙ ዕድሜ", "hPrenoms": "ከትውልድ ወደ ትውልድ የሚተላለፉ ስሞች", "hPyram": "በእያንዳንዱ ደረጃ ስንት አባል", "hCaisse": "የቤተሰብ መዋጮ ክትትል", "hReunion": "ሁለት ቀናት፣ ቤተሰቡ ይመርጣል", "hTaches": "ኃላፊነቶችን ማከፋፈል", "hAnnonce": "ልደት፣ ስኬት፣ መልካም ዜና", "hAmbiance": "ድምፅ፣ ንዝረትና በዓል", "sRetour": "ስቱዲዮ", "sAjouter": "ጨምር", "sTitre": "ርዕስ", "sMsg": "መልእክት", "sDate": "ቀን", "sSceller": "አሽግ", "sScelle": "እስከ ቀኑ ታሽጓል", "sMot": "ቃል ወይም ቅጽል", "sSens": "ትርጉሙ", "sVrai": "እውነት", "sFaux": "ሐሰት", "sBravo": "በጣም ጥሩ!", "sRate": "ተሳስተሃል!", "sRejouer": "እንደገና ተጫወት", "sQui": "ማን?", "sMontant": "መጠን", "sPour": "ለምን?", "sTotal": "ጠቅላላ ገንዘብ", "sVoter": "ምረጥ", "sCloturer": "ዝጋ", "sLancer": "ጀምር", "sTache": "ተግባሩ", "sPublier": "አትም", "sTel": "አውርድ", "sCopier": "አገናኙን ቅዳ", "sCopie": "አገናኙ ተቀድቷል", "sSons": "ድምፆች", "sVibr": "ንዝረት", "sConf": "ኮንፌቲ", "sTester": "በዓሉን ሞክር", "sVide": "እስካሁን ምንም የለም", "sRempli": "ቦታዎቹን ሙላ", "sSem": "በዚህ ሳምንት", "sAns": "ዓመት", "sFois": "ጊዜ", "sMembres": "አባላት", "sGenN": "ትውልድ", "sg6": "አግኝ", "tEvent": "የቅድመ አያት ደጋፊ", "hEvent": "ቅድመ አያቶችህ በግማሽ ክብ", "tLignee": "የእኔ ሐረግ", "hLignee": "ከመሥራቹ ጋር የሚያገናኝህ መንገድ", "tSaluer2": "ማንን ሰላም ማለት", "hSaluer2": "በየቀኑ አንድ ሰው ለመደወል", "sAppeler": "መልእክት ላክ", "sFait": "ተከናውኗል", "tQuest": "ለሽማግሌዎች ጥያቄዎች", "hQuest": "ጊዜው ሳያልፍ ስድስት ጥያቄዎች", "q1": "የመጀመሪያ ትውስታህ ምንድነው?", "q2": "የወላጆችህ ሠርግ እንዴት ነበር?", "q3": "አባትህ ምን ሥራ ይሠራ ነበር?", "q4": "የቤተሰባችን ስም ከየት መጣ?", "q5": "ያደረግከው ረጅሙ ጉዞ የትኛው ነው?", "q6": "ለልጅ ልጆች ምን ምክር ትተዋለህ?", "sRepondre": "የሽማግሌው መልስ", "tBadges": "ባጆች", "hBadges": "ቤተሰቡ ያከናወነው", "b1": "የመጀመሪያ እርምጃ", "b2": "ሕያው ዛፍ", "b3": "ትልቅ ቤተሰብ", "b4": "አምስት ትውልዶች", "b5": "በውጭ ያሉ", "b6": "የቃላት ጠባቂ", "b7": "ታማኝ ልብ", "b8": "አደራጅ", "sDebloque": "ተከፍቷል", "sBloque": "ለመክፈት", "tRappel": "ማስታወሻዎች", "hRappel": "የልደት ቀን አትርሳ", "sActiver": "ማስታወሻዎችን አብራ", "sActive": "ማስታወሻዎች በርተዋል", "sMois": "በዚህ ወር", "tAine": "የሽማግሌ ሁኔታ", "hAine": "ለደከሙ ዓይኖች ትልቅ ጽሑፍ", "tCousins": "የእኔ ትውልድ", "hCousins": "በተመሳሳይ ዓመት አካባቢ የተወለዱ", "sChoisir": "አንድ ሰው ምረጥ", "sAucunC": "ማንም አልተገኘም", "sg7": "ወጎች", "tHong": "የበዓል ኤንቨሎፕ", "hHong": "ለበዓል በረከት አቅርብ", "sOccasion": "አጋጣሚው", "sBenediction": "በረከቱ", "sDest": "ለማን?", "sEnvoyer": "ላክ", "tArbre": "የጋራ ዛፍ", "hArbre": "በእያንዳንዱ የቤተሰብ ተግባር ያድጋል", "sNiveau": "ደረጃ", "sGestes": "የተከናወኑ ተግባራት", "tCuis": "የቤተሰብ ወጥ ቤት", "hCuis": "ከእናት ወደ ልጅ የተላለፉ ምግቦች", "sPlat": "ምግቡ", "sGardienR": "ማን በተሻለ ያዘጋጃል", "sSecret": "ምስጢሩ", "tCadeau": "ስጦታዎች", "hCadeau": "ትንሽ የፍቅር ምልክት ላክ", "tFete": "በዓላት", "hFete": "ወደ ታላላቅ ቀናት መቁጠሪያ", "f1": "ኢድ አል-ፈጥር", "f2": "ኢድ አል-አድሓ", "f3": "መውሊድ", "f4": "ረመዳን", "f5": "የቤተሰብ ስብሰባ", "f6": "አዲስ ዓመት", "sJours": "ቀናት", "sPasse": "አልፏል", "tNasab": "የእኔ ነሰብ", "hNasab": "ሙሉ ስምህ፣ ከአባት ወደ አባት", "tRegistre": "መዝገብ", "hRegistre": "የቤተሰቡ ኦፊሴላዊ ሰነድ", "sImprimer": "መዝገቡን አውርድ", "tMatin": "የጠዋት ካርድ", "hMatin": "በየጠዋቱ የሚላክ ምስል", "tTontine": "እቁብ", "hTontine": "እያንዳንዱ በተራው ይቀበላል", "sTour": "የእሱ ተራ ነው", "sSuivant": "ቀጣዩ", "tParrain": "ግብዣ", "hParrain": "ሦስት ሰዎችን ጋብዝ፣ ሽልማት ክፈት", "sInvite": "አንድ ሰው ጋብዣለሁ", "sObjectif": "ግብ"}, "wo": {"sal": "Dalal ak jàmm ci njabootu Dan Moussa!", "n0": "Kër", "n1": "Njaboot", "n2": "Garab", "n3": "Po+", "n4": "Yokk", "tprov": "Léebu tey", "prov1": "Mbokk dañu koy suqali ak ganesi.", "prov2": "Benn loxo du yékkati kaw kër.", "prov3": "Dëgg moo gën xaalis.", "prov4": "Juddu mooy garabu dee — askan wi di wéy.", "mb": "mbokk", "viv": "ñuy dund", "gen": "maas", "pays": "réew", "anniv": "🎂 Bés-juddu weer wi", "fete": "dina am {n} at ci weer wii 🎉", "aucanniv": "Amul bés-juddu ci weer wii.", "frise": "🕰️ Taarixu njaboot gi", "nait": "juddu ci", "evt": "📯 Xew-xew yu mujj", "naiss": "👶 Yégle juddu", "mari": "💍 Yégle takk", "evtQ1": "Turu liir bi?", "evtQ2": "Kan mooy takk?", "evtN": "👶 Juddug", "evtM": "💍 Takku", "evtOK": "📯 Njaboot gépp xam na!", "serie": "Toftalu ganesi", "serieH": "Ñëwal bés bu nekk — 7 fan = 🏅 Wottukatu askan", "saluer": "🤲 Salaam!", "dejasalue": "Nuyu nga tey — ba suba!", "salueOK": "🔥 Toftal: {n} fan. Njaboot gi di la nuyu!", "searchPH": "🔎 Seet ab mbokk walla dëkk…", "tousG": "Maas yépp", "tousP": "🌍 Réew yépp", "aucun": "Kenn feeñul 🔎", "arbreH": "Bësal ▸ ngir ubbi banqaas, tur ngir ubbi kayit.", "lien": "🔗 Nattukaayu mbokk", "calc": "Natt mbokk gi", "meme": "Benn nit la 😄", "lienDesc": "{B} mu ngi jóge ci {A} ({n} maas ci suuf)", "lienFrere": "Doomi ndey (benn waajur: {C})", "lienOncle": "Nijaay ↔ doomu mag, jaare ko {C}", "lienCous": "Doomi nijaay (tolluwaay {n}), maam bu ñu bokk: {C}", "quiz": "🎯 Po « Kan la? »", "score": "Tomb", "srie": "Toftal", "quizQ": "Kan moo juddu ci {a} ci {v}?", "bravo": "✅ +10 tomb! Toftal {n} 🔥", "rate": "❌ Juum nga — toftal bi dellu ci tus", "myst": "🕵🏾 Mbokk bu kumpa bu tey", "ind1": "Firnde 1: maas G{g}.", "ind2": "Firnde 2: dëkk na {v}.", "ind3": "Firnde 3: juddu ci {a}.", "deviner": "Xalaat", "trouve": "🎉 Baax na! {N} la woon!", "encore": "❌ Déedéet… beneen firnde", "perdu": "😅 Ndeysaan! Tontu: {N}", "demain": "Beneen kumpa suba!", "diapo": "🎞️ Wone", "diapoH": "Wonal njaboot gépp ci ndaje yi.", "lancer": "▶ Tàmbali wone bi", "stop": "⏹ Taxaw", "gene": "Maas", "livre": "📖 Téereb njaboot", "msgPH": "Sa bataaxal ci njaboot gi…", "signer": "Xaatim", "signOK": "📖 Bataaxal bi dugg na", "videM": "Bindal sa bataaxal bu jëkk ✍️", "amin": "🤲 Amiin", "gard": "🏆 Wottukati fàttaliku", "gardH": "Lu nekk loo yokk am na solo!", "contribs": "ndimbal", "diasp": "🌍 Sunu njaboot ci àddina", "mbs": "mbokk", "fiches": "📋 Kayit yu mat", "fichesH": "Yéene: dëkk + réew + at ngir ku nekk.", "ajout": "➕ Yokk ab mbokk", "fNom": "Tur wu mat", "fGenre": "Awra", "fH": "👨🏾 Góor", "fF": "👩🏾 Jigéen", "fAn": "Atum juddu", "fVille": "Dëkk", "fPays": "Réew", "fParent": "Waajur (ci garab gi)", "ajBtn": "Yokk ci askan wi", "ajOK": "🌱 {N} dugg na ci askan wi — maas {g}", "nomOb": "Tur wi war na ✍️", "lignee": "🧬 Askanam ba ci njiitu njaboot gi", "enfants": "👶 Doom yi", "aucunE": "Amul", "modif": "✏️ Soppi", "waBtn": "📲 WhatsApp", "nuitT": "Melo wi soppiku na 🌙", "sonOn": "🔊 Xumbaay taxaw na", "sonOff": "🔇 Xumbaay fey na", "langOK": "Wolof ✓", "edNom": "Tur:", "edVille": "Dëkk:", "edOK": "✏️ Kayit bi yeesal na", "retImp": "Mënul: am na askan ci garab gi.", "retQ": "Dindi mbokk mii ci garab gi?", "retOK": "🗑️ Dindi nañu ko", "waTxt": "Duggal ci garabu njaboot gi!", "expOK": "📤 JSON bi yebbu na", "impOK": "📥 Njaboot gi dugg na:", "impBad": "Fiise bu baaxul", "phNom": "Misaal: Ibrahim Dan Moussa", "g1": "kayit yu mat", "g2": "nataal yu yokku", "toi": "Yow", "jr": "f", "n5": "Estidiyo", "studioT": "Estidiyo bu Njaboot", "studioH": "38 jumtukaay ngir dundal njaboot gi", "sg1": "Séddoo", "sg2": "Fàttaliku", "sg3": "Fo", "sg4": "Ngërëm", "sg5": "Toftal", "tInvit": "Woo", "tWa": "WhatsApp", "tCarte": "Kart bu njaboot", "tCapsule": "Kapsil bu jamono", "tHommage": "Teraanga", "tDico": "Baat-baat", "tVF": "Dëgg walla Fen", "tMemo": "Fo fàttaliku", "tPendu": "Fo tur", "tSondage": "Palanteer", "tDefi": "Jéema bu ayubés", "tRetro": "Booloo bu at mi", "tLong": "Ngëneel", "tPrenoms": "Sunuy tur", "tPyram": "Niiroo", "tCaisse": "Kees bu njaboot", "tReunion": "Ndaje", "tTaches": "Kan mooy def lan", "tAnnonce": "Yégle", "tAmbiance": "Naaj", "hInvit": "Lëkkalekaay bi ak kod QR", "hWa": "Yónnee aplikaasioŋ bi ci mbooloo njaboot gi", "hCarte": "Nataal ngir séddoo ak ngërëm", "hCapsule": "Bataaxal bu tëj ba bés bu ñëw", "hHommage": "Teral ñi ñu dem", "hDico": "Baat yi njaboot gi rekk xam", "hVF": "Benn kàddu bés bu nekk", "hMemo": "Wut ñaari-ñaari njaboot gi", "hPendu": "Tontu tur, 6 jéem", "hSondage": "Benn laaj, njaboot gi di palanteer", "hDefi": "5 liggéey, di tàmbali altine bu nekk", "hRetro": "Booloo bu njaboot gi at mii", "hLong": "Ñi gën a yàgg ci njaboot gi", "hPrenoms": "Tur yi jaar ci niiroo yi", "hPyram": "Ñaata nit ci bopp bu nekk", "hCaisse": "Topp ndimbal njaboot gi", "hReunion": "Ñaari bés, njaboot gi tànn", "hTaches": "Séddale liggéey yi", "hAnnonce": "Judd, ndam, xibaar yu neex", "hAmbiance": "Baat, yëngu ak màggal", "sRetour": "Estidiyo", "sAjouter": "Yokk", "sTitre": "Bopp", "sMsg": "Bataaxal", "sDate": "Bés", "sSceller": "Tëj", "sScelle": "Tëj ba bés bi", "sMot": "Baat walla tudd", "sSens": "Li mu tekki", "sVrai": "DËGG", "sFaux": "FEN", "sBravo": "Baax na!", "sRate": "Àntu nga!", "sRejouer": "Footi waat", "sQui": "Kan?", "sMontant": "Njëg", "sPour": "Ngir lan?", "sTotal": "Mboolem kees bi", "sVoter": "Palanteer", "sCloturer": "Tëj", "sLancer": "Tàmbali", "sTache": "Liggéey bi", "sPublier": "Yégle", "sTel": "Yeb", "sCopier": "Kopi lëkkalekaay bi", "sCopie": "Kopi na", "sSons": "Baat", "sVibr": "Yëngu", "sConf": "Konfeti", "sTester": "Seetal màggal gi", "sVide": "Dara amul ba tey", "sRempli": "Fees palaas yi", "sSem": "ayubés bii", "sAns": "at", "sFois": "yoon", "sMembres": "way-bokk", "sGenN": "Niiroo", "sg6": "Gis", "tEvent": "Wetéel maam", "hEvent": "Say maam ci genn-wàll bu wër", "tLignee": "Sama giir", "hLignee": "Yoon wi la boole ak ki sos", "tSaluer2": "Kan lañuy nuyu", "hSaluer2": "Bés bu nekk, kenn ngir woo", "sAppeler": "Yónnee bataaxal", "sFait": "Def na", "tQuest": "Laaj yi ci mag ñi", "hQuest": "Juróom-benn laaj balaa mu gëj", "q1": "Ban fàttaliku moo la gën a jëkk?", "q2": "Naka la takk bu say waajur meloon?", "q3": "Ban liggéey la sa baay doon def?", "q4": "Fan la sunu sant jóge?", "q5": "Ban tukki moo la gën a gudd?", "q6": "Ban ndigal nga bàyyi ci say sët?", "sRepondre": "Tontu mag mi", "tBadges": "Màndarga", "hBadges": "Li njaboot gi def ba tey", "b1": "Tànk bu njëkk", "b2": "Garab gu dund", "b3": "Njaboot gu mag", "b4": "Juróomi niiroo", "b5": "Bitim réew", "b6": "Wottukaayu baat", "b7": "Xol bu takku", "b8": "Toftalkat", "sDebloque": "Ubbeeku na", "sBloque": "Ngir ubbi", "tRappel": "Fàttali", "hRappel": "Bul fàtte bés bu judd", "sActiver": "Ubbi fàttali yi", "sActive": "Fàttali yi ubbeeku nañu", "sMois": "Weer wii", "tAine": "Anam mag ñi", "hAine": "Mbind mu mag ngir bët yu sonn", "tCousins": "Sama niiroo", "hCousins": "Ñi juddu ci at yu jege", "sChoisir": "Tànn nit", "sAucunC": "Kenn gisu ñu", "sg7": "Aada", "tHong": "Anwelop bu màggal", "hHong": "Jox barke ci màggal", "sOccasion": "Xew bi", "sBenediction": "Barke bi", "sDest": "Ngir kan?", "sEnvoyer": "Yónnee", "tArbre": "Garab gu bokk", "hArbre": "Mu ngi mag ak jëf bu nekk", "sNiveau": "Tolluwaay", "sGestes": "jëf yu ñu def", "tCuis": "Waañ bu njaboot", "hCuis": "Ñam yi ñu jaarale", "sPlat": "Ñam wi", "sGardienR": "Kan moo ko gën a defar", "sSecret": "Kumpa gi", "tCadeau": "Ndëwëñ", "hCadeau": "Yónnee tuuti màndargay mbëggéel", "tFete": "Màggal yi", "hFete": "Waññi bés yu mag yi", "f1": "Korité", "f2": "Tabaski", "f3": "Gàmmu", "f4": "Koor", "f5": "Ndajem njaboot", "f6": "At mu bees", "sJours": "fan", "sPasse": "weesu na", "tNasab": "Sama nasab", "hNasab": "Sa tur wu mat, baay ci baay", "tRegistre": "Téere bu njaboot", "hRegistre": "Kayit bu njaboot gi", "sImprimer": "Yeb téere bi", "tMatin": "Kart bu suba", "hMatin": "Nataal ngir yónnee suba su nekk", "tTontine": "Natt", "hTontine": "Ku nekk ak sa wàll", "sTour": "Moom la wàll wi", "sSuivant": "Ki ci topp", "tParrain": "Woote", "hParrain": "Woo ñetti nit, ubbi yóol", "sInvite": "Woo naa kenn", "sObjectif": "Pàkk"}, "ff": {"sal": "Bisimilla e ɓesngu Dan Moussa!", "n0": "Galle", "n1": "Ɓesngu", "n2": "Lekki", "n3": "Fijo+", "n4": "Ɓeydu", "tprov": "Tindol hannde", "prov1": "Musidal na moƴƴinee e njillu.", "prov2": "Junngo gootel ɓamataa tiba.", "prov3": "Goonga ɓuri jawdi.", "prov4": "Jibinegol ko lekki maayde — jurol na jokka.", "mb": "ɓesngu", "viv": "wuurɓe", "gen": "jamaanuuji", "pays": "leyɗeele", "anniv": "🎂 Ñalɗi jibineede lewru ndu", "fete": "timmata duuɓi {n} e lewru ndu 🎉", "aucanniv": "Alaa ñalngu jibineede e lewru ndu.", "frise": "🕰️ Taariika ɓesngu", "nait": "jibinaa to", "evt": "📯 Kew-kewe cakkitiiɗe", "naiss": "👶 Yeeynude jibinegol", "mari": "💍 Yeeynude dewgal", "evtQ1": "Innde ɓinngel ngel?", "evtQ2": "Hol resata?", "evtN": "👶 Jibinegol", "evtM": "💍 Dewgal", "evtOK": "📯 Ɓesngu fof anndinaama!", "serie": "Jokkondiral njillu", "serieH": "Artu ñalnde kala — balɗe 7 = 🏅 Deenoowo jurol", "saluer": "🤲 Jam!", "dejasalue": "A salminii hannde — haa janngo!", "salueOK": "🔥 Jokkondiral: balɗe {n}. Ɓesngu ngu na salmina!", "searchPH": "🔎 Yiylo neɗɗo walla wuro…", "tousG": "Jamaanuuji fof", "tousP": "🌍 Leyɗeele fof", "aucun": "Hay gooto yiytaaka 🔎", "arbreH": "Ƴeew ▸ ngam udditde catal, innde ngam kaayit.", "lien": "🔗 Limoore enɗam", "calc": "Limto enɗam", "meme": "Ko neɗɗo gooto 😄", "lienDesc": "{B} ummii e {A} (jamaanu {n} les)", "lienFrere": "Sukaaɓe yumma (jinnaaɗo gooto: {C})", "lienOncle": "Kaawu ↔ ɓiy mawniraaɗo, rewde e {C}", "lienCous": "Denɗiraaɓe (tolno {n}), maama gooto: {C}", "quiz": "🎯 Fijo « Hol oon? »", "score": "Poɓɓe", "srie": "Jokkondiral", "quizQ": "Hol jibinaaɗo e {a} to {v}?", "bravo": "✅ Poɓɓe +10! Jokkondiral {n} 🔥", "rate": "❌ A juumii — artii e meere", "myst": "🕵🏾 Neɗɗo suuɗiiɗo hannde", "ind1": "Maale 1: jamaanu G{g}.", "ind2": "Maale 2: hoɗi to {v}.", "ind3": "Maale 3: jibinaa e {a}.", "deviner": "Sikkito", "trouve": "🎉 Moƴƴii! Ko {N}!", "encore": "❌ Alaa… maale goɗɗe", "perdu": "😅 Yurmeende! Jaabawol: {N}", "demain": "Sirlu keso janngo!", "diapo": "🎞️ Hollirde", "diapoH": "Hollir ɓesngu fof e batuuji.", "lancer": "▶ Fuɗɗu hollirde", "stop": "⏹ Dartin", "gene": "Jamaanu", "livre": "📖 Deftere ɓesngu", "msgPH": "Ɓataake maa e ɓesngu…", "signer": "Siifu", "signOK": "📖 Ɓataake ɓeydaama", "videM": "Winndu ɓataake maa tawo ✍️", "amin": "🤲 Aamiin", "gard": "🏆 Deenooɓe siftorde", "gardH": "Kala ko ɓeydaa na limee!", "contribs": "ballal", "diasp": "🌍 Ɓesngu men e winndere", "mbs": "neɗɗo", "fiches": "📋 Kaayitaaji timmuɗi", "fichesH": "Faandaare: wuro + leydi + hitaande wonande kala.", "ajout": "➕ Ɓeydu neɗɗo", "fNom": "Innde timmunde", "fGenre": "Njogoram", "fH": "👨🏾 Gorko", "fF": "👩🏾 Debbo", "fAn": "Hitaande jibineede", "fVille": "Wuro", "fPays": "Leydi", "fParent": "Jinnaaɗo (e lekki ki)", "ajBtn": "Ɓeydu e jurol", "ajOK": "🌱 {N} naatii e jurol — jamaanu {g}", "nomOb": "Innde na waɗɗii ✍️", "lignee": "🧬 Jurol makko haa fuɗɗuɗo", "enfants": "👶 Ɓiɓɓe", "aucunE": "Alaa winndaaɗo", "modif": "✏️ Waylu", "waBtn": "📲 WhatsApp", "nuitT": "Mbaydi waylaama 🌙", "sonOn": "🔊 Hito huɓɓaama", "sonOff": "🔇 Hito ñifaama", "langOK": "Pulaar ✓", "edNom": "Innde:", "edVille": "Wuro:", "edOK": "✏️ Kaayit heseɗinaama", "retImp": "Waawaa: omo jogii jurol e lekki ki.", "retQ": "Ittu neɗɗo oo e lekki ki?", "retOK": "🗑️ Ittaama", "waTxt": "Naat e lekki ɓesngu!", "expOK": "📤 JSON danndaama", "impOK": "📥 Ɓesngu naatii:", "impBad": "Fiilde moƴƴaani", "phNom": "Yeru: Ibrahim Dan Moussa", "g1": "kaayitaaji timmuɗi", "g2": "natal ɓeydaaɗi", "toi": "Aan", "jr": "ñ", "n5": "Sutudiyo", "studioT": "Sutudiyo Ɓesngu", "studioH": "Kuutorɗe 38 ngam wuurnude ɓesngu", "sg1": "Lollingol", "sg2": "Miijo", "sg3": "Fijirde", "sg4": "Teddungal", "sg5": "Peewnugol", "tInvit": "Noddugol", "tWa": "WhatsApp", "tCarte": "Karta ɓesngu", "tCapsule": "Kapsul waqtu", "tHommage": "Teddungal", "tDico": "Ƙaamuusu", "tVF": "Goonga walla Fenaande", "tMemo": "Fijirde miijo", "tPendu": "Fijirde inɗe", "tSondage": "Woote", "tDefi": "Ƴeewndo yontere", "tRetro": "Tesko hitaande", "tLong": "Juutugol nguurndam", "tPrenoms": "Inɗe amen", "tPyram": "Jamaanuuji", "tCaisse": "Kaisa ɓesngu", "tReunion": "Batu", "tTaches": "Moye waɗata hoore", "tAnnonce": "Habaruuji", "tAmbiance": "Ngonka", "hInvit": "Ceŋol e kod QR", "hWa": "Neldu jaŋde nde e hoore ɓesngu", "hCarte": "Nataal ngam lollinde e teddungal", "hCapsule": "Ɓataake uddaaɗo haa ñalnde arooje", "hHommage": "Teddinde ɓe ɗalii en", "hDico": "Konnguɗi ɓesngu tan faamata", "hVF": "Konngol gootol ñalnde kala", "hMemo": "Yiylo nooneeji ɓesngu", "hPendu": "Miijo innde, ƴeewndooji 6", "hSondage": "Naamnal gootal, ɓesngu wootata", "hDefi": "Golle 5, fuɗɗitte aaɓnde kala", "hRetro": "Tesko ɓesngu hitaande nde", "hLong": "Ɓe ɓuri juutude nguurndam", "hPrenoms": "Inɗe ɗe jamaanuuji lollinta", "hPyram": "Yimɓe ɗuuɗi e daraja kala", "hCaisse": "Ndaarugol ballal ɓesngu", "hReunion": "Ñalɗi ɗiɗi, ɓesngu suɓoto", "hTaches": "Senndude golle", "hAnnonce": "Jibinannde, jaŋde, kabaruuji moƴƴi", "hAmbiance": "Daaɗe, yiiwde e juldeere", "sRetour": "Sutudiyo", "sAjouter": "Ɓeydu", "sTitre": "Tiitoonde", "sMsg": "Ɓataake", "sDate": "Ñalnde", "sSceller": "Uddu", "sScelle": "Uddaama haa ñalnde ndee", "sMot": "Konngol walla innde", "sSens": "Ko ɗum firti", "sVrai": "GOONGA", "sFaux": "FENAANDE", "sBravo": "Jaaraama!", "sRate": "A faljii!", "sRejouer": "Fijir kadi", "sQui": "Moye?", "sMontant": "Keewal", "sPour": "Ngam hino?", "sTotal": "Denndaangal kaisa", "sVoter": "Woote", "sCloturer": "Uddu", "sLancer": "Fuɗɗu", "sTache": "Golle ɗee", "sPublier": "Yaltin", "sTel": "Aawtaade", "sCopier": "Natto ceŋol", "sCopie": "Ceŋol nattaama", "sSons": "Daaɗe", "sVibr": "Yiiwde", "sConf": "Konfeti", "sTester": "Ndaaro juldeere", "sVide": "Hay huunde tawaaka", "sRempli": "Hebbin nokkuuji", "sSem": "yontere nde", "sAns": "duuɓi", "sFois": "laabi", "sMembres": "yimɓe", "sGenN": "Jamaanu", "sg6": "Yiytude", "tEvent": "Fewndo maamiraaɓe", "hEvent": "Maamiraaɓe maa e feccere sett", "tLignee": "Asko am", "hLignee": "Laawol ngol jokkata ma e puɗɗiɗo", "tSaluer2": "Moye hiwreteeɗo", "hSaluer2": "Ñalnde kala, gooto noddeteeɗo", "sAppeler": "Neldu ɓataake", "sFait": "Gasii", "tQuest": "Naamnce mawɓe", "hQuest": "Naamnce jeegom ado waqtu ɓennude", "q1": "Ko honɗum woni miijo maa ɓurngo hiiɗde?", "q2": "Hono dewgal jibinɓe maa wonirnoo?", "q3": "Ko honnde golle baaba maa waɗaynoo?", "q4": "To innde ɓesngu amen ummorii?", "q5": "Ko honnde jahaangal ɓuri juutude ngal ngaɗ-ɗaa?", "q6": "Ko honnde waaju accanaa taaniraaɓe?", "sRepondre": "Jaabawol mawɗo", "tBadges": "Maandeeji", "hBadges": "Ko ɓesngu waɗi", "b1": "Tabital adanal", "b2": "Lekki wuurki", "b3": "Ɓesngu mawngu", "b4": "Jamaanuuji jowi", "b5": "Ley leyɗe goɗɗe", "b6": "Reenoowo konnguɗi", "b7": "Ɓernde goongɗinnde", "b8": "Peewnoowo", "sDebloque": "Uddintaama", "sBloque": "Ngam uddintude", "tRappel": "Anndinooje", "hRappel": "Hoto yejjit ñalnde jibinannde", "sActiver": "Huɓɓin anndinooje", "sActive": "Anndinooje huɓɓaama", "sMois": "Lewru ndu", "tAine": "Mbaydi mawɓe", "hAine": "Binndi mawɗi ngam gite tampuɗe", "tCousins": "Jamaanu am", "hCousins": "Ɓe njibinaa e duuɓi ɓadiiɗi", "sChoisir": "Suɓo neɗɗo", "sAucunC": "Hay gooto yiyaaka", "sg7": "Aadaaji", "tHong": "Anwelob juldeere", "hHong": "Yeɗ barke e juldeere", "sOccasion": "Sabu ngu", "sBenediction": "Barke ngen", "sDest": "Ngam moye?", "sEnvoyer": "Neldu", "tArbre": "Lekki denndaangal", "hArbre": "Hino mawna e golle ɓesngu kala", "sNiveau": "Daraja", "sGestes": "golle gasɗe", "tCuis": "Defirde ɓesngu", "hCuis": "Ñaametee ɗe ronaa", "sPlat": "Ñaametee ngee", "sGardienR": "Moye ɓuri defde ɗum", "sSecret": "Sirru ngu", "tCadeau": "Dokke", "hCadeau": "Neldu maande giɗli", "tFete": "Juldeeje", "hFete": "Limugol ñalɗi mawɗi", "f1": "Juulde Koorka", "f2": "Juulde Donkin", "f3": "Mawluudu", "f4": "Koorka", "f5": "Batu ɓesngu", "f6": "Hitaande hesere", "sJours": "ñalɗi", "sPasse": "ɓennii", "tNasab": "Nasab am", "hNasab": "Innde maa timmunde, baaba e baaba", "tRegistre": "Deftere ɓesngu", "hRegistre": "Ɗerewol laamu ɓesngu", "sImprimer": "Aawto deftere nde", "tMatin": "Karta subaka", "hMatin": "Nataal ngam neldude subaka kala", "tTontine": "Adashi", "hTontine": "Gooto kala e laawol makko", "sTour": "Ko laawol makko", "sSuivant": "Garoowo", "tParrain": "Noddugol", "hParrain": "Nodda yimɓe tati, uddintu njoɓdi", "sInvite": "Mi noddii gooto", "sObjectif": "Faandaare"}};
+
+const DEFIS={"fr": ["Ajouter une photo ou un détail", "Écrire un souvenir", "Inviter une personne", "Compléter un lieu de naissance", "Ajouter un mot au dictionnaire"], "en": ["Add a photo or detail", "Write a memory", "Invite someone", "Complete a birthplace", "Add a word to the dictionary"], "ha": ["Ƙara hoto ko bayani", "Rubuta tunawa", "Gayyaci wani", "Cika wurin haihuwa", "Ƙara kalma a ƙamus"], "ar": ["أضف صورة أو تفصيلاً", "اكتب ذكرى", "ادعُ شخصًا", "أكمل مكان الميلاد", "أضف كلمة للقاموس"], "sw": ["Ongeza picha au maelezo", "Andika kumbukumbu", "Alika mtu", "Kamilisha mahali pa kuzaliwa", "Ongeza neno kamusini"], "yo": ["Fi àwòrán kún", "Kọ ìrántí kan", "Pe ẹnì kan", "Parí ibi ìbí", "Fi ọ̀rọ̀ kún ìwé ìtumọ̀"], "am": ["ፎቶ ወይም ዝርዝር ጨምር", "ትውስታ ጻፍ", "አንድ ሰው ጋብዝ", "የትውልድ ቦታ አሟላ", "መዝገበ ቃላት ላይ ቃል ጨምር"], "wo": ["Yokk nataal walla xibaar", "Bind fàttaliku", "Woo kenn", "Matal bérab bu judd", "Yokk baat ci baat-baat bi"], "ff": ["Ɓeydu nataal walla humpito", "Winndu miijo", "Nodda gooto", "Timmin nokku jibinannde", "Ɓeydu konngol e ƙaamuusu"]};
+const LANGS=[['fr','🇫🇷 Français'],['en','🇬🇧 English'],['ha','🇳🇬 Hausa'],['ar','🇸🇦 العربية'],
+ ['sw','🇰🇪 Kiswahili'],['yo','🇳🇬 Yorùbá'],['am','🇪🇹 አማርኛ'],['wo','🇸🇳 Wolof'],['ff','🇬🇳 Pulaar']];
+DICT.fr.appTitre='Notre Famille';DICT.en.appTitre='Our Family';DICT.ha.appTitre='Iyalinmu';
+DICT.ar.appTitre='عائلتنا';DICT.sw.appTitre='Familia Yetu';DICT.yo.appTitre='Ìdílé Wa';
+DICT.am.appTitre='ቤተሰባችን';DICT.wo.appTitre='Sunu Njaboot';DICT.ff.appTitre='Ɓesngu Amen';
+let LG=localStorage.getItem('nf_lang')||'fr';
+const T=k=>(DICT[LG]&&DICT[LG][k])??DICT.fr[k]??k;
+const F=(k,o)=>Object.entries(o||{}).reduce((s,[a,b])=>s.split('{'+a+'}').join(b),T(k));
+
+// ── Données ──
+let M=[[0,null,'Alhaji Oumarou Dan Moussa','h',1918,1996,'Maroua','Cameroun'],
+[1,0,'Moussa Dan Oumarou','h',1940,2015,'Garoua','Cameroun'],
+[2,0,'Amadou Dan Oumarou','h',1943,null,'Ngaoundéré','Cameroun'],
+[3,0,'Fadimatou Oumarou','f',1946,null,'Maroua','Cameroun'],
+[4,0,'Abba Dan Oumarou','h',1949,null,'Kano','Nigeria'],
+[5,0,'Hadjara Oumarou','f',1952,null,'Yaoundé','Cameroun'],
+[6,0,'Boukar Dan Oumarou','h',1955,null,'Douala','Cameroun'],
+[7,1,'Oumarou Dan Moussa II','h',1963,null,'Garoua','Cameroun'],
+[8,1,'Aïssatou Moussa','f',1966,null,'N\'Djamena','Tchad'],
+[9,1,'Sani Dan Moussa','h',1969,null,'Djeddah','Arabie saoudite'],
+[10,1,'Hadiza Moussa','f',1972,null,'Garoua','Cameroun'],
+[11,2,'Yaya Dan Amadou','h',1965,null,'Ngaoundéré','Cameroun'],
+[12,2,'Zaïnabou Amadou','f',1968,null,'Libreville','Gabon'],
+[13,2,'Ibrahim Dan Amadou','h',1971,null,'Paris','France'],
+[14,3,'Bello Fadimatou','h',1967,null,'Maroua','Cameroun'],
+[15,3,'Maïram Fadimatou','f',1970,null,'Foumban','Cameroun'],
+[16,4,'Moussa Dan Abba','h',1970,null,'Kano','Nigeria'],
+[17,4,'Halima Abba','f',1973,null,'Accra','Ghana'],
+[18,4,'Aboubakar Dan Abba','h',1977,null,'Lagos','Nigeria'],
+[19,5,'Souley Dan Souleymanou','h',1974,null,'Yaoundé','Cameroun'],
+[20,5,'Amina Souleymanou','f',1978,null,'New York','États-Unis'],
+[21,6,'Adamou Dan Boukar','h',1976,null,'Douala','Cameroun'],
+[22,6,'Fanta Boukar','f',1980,null,'Malabo','Guinée équatoriale'],
+[23,7,'Farida Oumarou','f',1988,null,'Garoua','Cameroun'],
+[24,7,'Dan Ladi Oumarou','h',1991,null,'Yaoundé','Cameroun'],
+[25,9,'Khadidja Sani','f',1995,null,'Djeddah','Arabie saoudite'],
+[26,11,'Oumar Dan Yaya','h',1990,null,'Ngaoundéré','Cameroun'],
+[27,11,'Nafissatou Yaya','f',1993,null,'Douala','Cameroun'],
+[28,13,'Ahmad Dan Ibrahim','h',1998,null,'Paris','France'],
+[29,13,'Zara Ibrahim','f',2001,null,'Paris','France'],
+[30,14,'Baba Dan Bello','h',1992,null,'Maroua','Cameroun'],
+[31,16,'Sadiya Moussa','f',1996,null,'Kano','Nigeria'],
+[32,16,'Yusuf Dan Moussa','h',1999,null,'Abuja','Nigeria'],
+[33,17,'Rabi Halima','f',1998,null,'Accra','Ghana'],
+[34,19,'Salihou Dan Souley','h',1999,null,'Yaoundé','Cameroun'],
+[35,20,'Aïcha Amina','f',2004,null,'New York','États-Unis'],
+[36,21,'Moctar Dan Adamou','h',2000,null,'Douala','Cameroun'],
+[37,24,'Oumarou Dan Ladi','h',2020,null,'Yaoundé','Cameroun'],
+[38,26,'Hafsat Oumar','f',2018,null,'Ngaoundéré','Cameroun'],
+[39,30,'Imran Dan Baba','h',2021,null,'Maroua','Cameroun'],
+[40,33,'Amani Rabi','f',2023,null,'Accra','Ghana']]
+.map(m=>({id:m[0],p:m[1],nom:m[2],g:m[3],na:m[4],dc:m[5],ville:m[6],pays:m[7]}));
+let NEXTID=100;
+const DRAP={Cameroun:'🇨🇲',Nigeria:'🇳🇬',Ghana:'🇬🇭','Arabie saoudite':'🇸🇦',France:'🇫🇷',Gabon:'🇬🇦',Tchad:'🇹🇩','États-Unis':'🇺🇸','Guinée équatoriale':'🇬🇶'};
+const PROV=['Zumunta a ƙafa take.','Hannu ɗaya ba ya ɗaukar jinka.','Gaskiya ta fi kwabo.','Haihuwa maganin mutuwa.'];
+let EVTS=[{k:'n',nom:'Amani Rabi',d:'2023'},{k:'m',nom:'Farida Oumarou',d:'2014'}];
+let LIVRE=[{n:'Hadiza Moussa',m:'Allah ya kiyaye iyalinmu. Amin.',r:4}];
+let STREAK=1,CKF=false,QSCORE=0,QSERIE=0,CONTRIB=0,SON=(localStorage.getItem('nf_amb_son')!=='false'),indice=1,diapoT=null,quizRep=null;
+const MYST={m:null,trouve:false};
+
+// ── Outils ──
+const $=id=>document.getElementById(id);
+const av=m=>m.g==='f'?'👩🏾':'👨🏾';
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('show');bip(640);clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('show'),2600)}
+let AC=null;
+function bip(f){if(!SON)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();
+ const o=AC.createOscillator(),g=AC.createGain();o.frequency.value=f||600;g.gain.value=.05;
+ o.connect(g);g.connect(AC.destination);o.start();o.stop(AC.currentTime+.09)}catch(e){}}
+function confF(){['🎉','🎊','🌿','⭐','🎉','⭐','🎊'].forEach(e=>{const s=document.createElement('span');
+ s.className='confF';s.textContent=e;s.style.left=(8+Math.random()*84)+'vw';s.style.animationDelay=(Math.random()*.5)+'s';
+ document.body.appendChild(s);setTimeout(()=>s.remove(),2800)})}
+function gener(m){let g=1,c=m;while(c.p!==null){c=M.find(x=>x.id===c.p);if(!c)break;g++}return g}
+const enfants=id=>M.filter(x=>x.p===id);
+function ancetres(m){const a=[m];let c=m;while(c.p!==null){c=M.find(x=>x.id===c.p);if(!c)break;a.push(c)}return a}
+function ecran(i,b){document.querySelectorAll('.ecr').forEach((e,j)=>e.classList.toggle('on',j===i));
+ document.querySelectorAll('nav>button').forEach(x=>x.classList.remove('on'));b.classList.add('on');window.scrollTo(0,0)}
+function basculerNuit(){document.body.classList.toggle('nuit');toast(T('nuitT'))}
+function basculerSon(){SON=!SON;$('bSon').textContent=SON?'🔊':'🔇';toast(T(SON?'sonOn':'sonOff'))}
+
+// ══ MOTEUR DE LANGUE — un seul point d'entrée ══
+function setLang(l){LG=l;localStorage.setItem('nf_lang',l);
+ document.documentElement.lang=l;document.documentElement.dir=(l==='ar')?'rtl':'ltr';
+ appliquer();toast(T('langOK'))}
+function appliquer(){
+ document.querySelectorAll('[data-i18n]').forEach(e=>e.textContent=T(e.dataset.i18n));
+ document.querySelectorAll('[data-ph]').forEach(e=>e.placeholder=T(e.dataPh||e.dataset.ph));
+ $('lang').innerHTML=LANGS.map(([c,n])=>`<option value="${c}"${c===LG?' selected':''}>${n}</option>`).join('');
+ $('aG').innerHTML=`<option value="h">${T('fH')}</option><option value="f">${T('fF')}</option>`;
+ toutRendre();
+ if(FICHE!==null)ouvrir(FICHE);}
+
+// ── Rendus (100 % traduits) ──
+function rendreAccueil(){
+ const i=new Date().getDate()%PROV.length;
+ $('proverbe').innerHTML='« '+PROV[i]+' »<br><small style="opacity:.85">'+T('prov'+(i+1))+'</small>';
+ const gens=Math.max(...M.map(gener)),np=new Set(M.map(m=>m.pays)).size,viv=M.filter(m=>!m.dc).length;
+ $('stats').innerHTML=[[M.length,'mb'],[viv,'viv'],[gens,'gen'],[np,'pays']]
+  .map(s=>`<div class="s1"><b>${s[0]}</b><small>${T(s[1])}</small></div>`).join('');
+ $('stF').textContent=STREAK;
+ const mois=new Date().getMonth(),an=M.filter(m=>!m.dc&&(m.id*7)%12===mois);
+ $('annivs').innerHTML=an.length?an.map(m=>`<div class="membre" onclick="ouvrir(${m.id})"><div class="av">${av(m)}</div>
+  <div><b>${m.nom}</b><small>${F('fete',{n:new Date().getFullYear()-m.na})}</small></div></div>`).join('')
+  :'<p class="hint">'+T('aucanniv')+'</p>';
+ $('frise').innerHTML=[...M].sort((a,b)=>a.na-b.na).slice(0,7)
+  .map(m=>`<div class="ev"><b>${m.na}</b> — ${av(m)} ${m.nom}<small>${T('nait')} ${m.ville} ${DRAP[m.pays]||''}</small></div>`).join('');
+ $('evts').innerHTML=EVTS.map(e=>`<div class="m1">${e.k==='n'?T('evtN'):T('evtM')} ${e.nom}<br><small>${e.d}</small></div>`).join('');
+ rendreDiasp()}
+function rendreDiasp(){const cp={};M.forEach(m=>cp[m.pays]=(cp[m.pays]||0)+1);
+ $('diasp').innerHTML=Object.entries(cp).sort((a,b)=>b[1]-a[1]).map(([p,n])=>
+  `<div class="d1"><b>${DRAP[p]||'🏳️'}</b><small>${p}</small><small><b>${n}</b> ${T('mbs')}</small></div>`).join('');
+ const ok=M.filter(m=>m.ville!=='—'&&m.pays&&m.na).length,pct=Math.round(100*ok/M.length);
+ $('ringC').querySelector('i').style.setProperty('--deg',pct*3.6+'deg');$('ringCT').textContent=pct+'%'}
+function evt(k){const nom=prompt(k==='n'?T('evtQ1'):T('evtQ2'));if(!nom)return;
+ EVTS.unshift({k,nom,d:new Date().getFullYear()});CONTRIB++;rendreAccueil();rendreGardiens();confF();toast(T('evtOK'))}
+function ckFam(){if(CKF)return toast(T('dejasalue'));CKF=true;STREAK++;$('stF').textContent=STREAK;
+ $('ckF').disabled=true;confF();toast(F('salueOK',{n:STREAK}))}
+
+let fGen=0,fPays='';
+function setGen(g){fGen=g;rendreMembres()}
+function setPays(p){fPays=p;rendreMembres()}
+function rendreMembres(){const gens=Math.max(...M.map(gener));
+ $('chGen').innerHTML=`<button class="chip${fGen===0?' on':''}" onclick="setGen(0)">${T('tousG')}</button>`+
+  Array.from({length:gens},(_,i)=>`<button class="chip${fGen===i+1?' on':''}" onclick="setGen(${i+1})">G${i+1}</button>`).join('');
+ $('chPays').innerHTML=`<button class="chip${fPays===''?' on':''}" onclick="setPays('')">${T('tousP')}</button>`+
+  [...new Set(M.map(m=>m.pays))].map(p=>`<button class="chip${fPays===p?' on':''}" onclick="setPays('${p}')">${DRAP[p]||'🏳️'} ${p}</button>`).join('');
+ const q=($('q').value||'').toLowerCase();
+ const l=M.filter(m=>(!q||m.nom.toLowerCase().includes(q)||m.ville.toLowerCase().includes(q)||m.pays.toLowerCase().includes(q))
+  &&(!fGen||gener(m)===fGen)&&(!fPays||m.pays===fPays));
+ $('liste').innerHTML=l.length?l.map(m=>`<div class="membre" onclick="ouvrir(${m.id})"><div class="av">${av(m)}</div>
+  <div><b>${m.nom}${m.dc?' 🕊️':''}</b><small>${m.na}${m.dc?'–'+m.dc:''} · ${m.ville} ${DRAP[m.pays]||''}</small></div>
+  <span class="gen">G${gener(m)}</span></div>`).join('')
+  :'<p class="hint" style="padding:20px;text-align:center">'+T('aucun')+'</p>'}
+
+const plis=new Set();
+function plier(id){plis.has(id)?plis.delete(id):plis.add(id);rendreArbre()}
+function rendreArbre(){const root=M.find(m=>m.p===null);if(!root)return;
+ const rec=m=>{const k=enfants(m.id),fe=plis.has(m.id);
+  return `<div class="noeud">${k.length?`<button class="pli" onclick="event.stopPropagation();plier(${m.id})">${fe?'▸':'▾'}</button>`:'<span class="pli" style="opacity:.3">·</span>'}
+   <span class="nm" onclick="ouvrir(${m.id})">${av(m)} ${m.nom} <small>· G${gener(m)} ${m.dc?'🕊️':''}</small></span></div>
+   ${k.length&&!fe?'<ul>'+k.map(x=>'<li>'+rec(x)+'</li>').join('')+'</ul>':''}`};
+ $('arbre').innerHTML=rec(root)}
+
+let FICHE=null;
+function ouvrir(id){const m=M.find(x=>x.id===id);if(!m)return;FICHE=id;
+ const lig=ancetres(m).map(a=>a.nom.split(' ')[0]).join(' → ');
+ $('fbody').innerHTML=`<div style="text-align:center"><div style="font-size:52px">${av(m)}</div>
+  <h2 style="font-size:17px;margin-top:6px">${m.nom} ${m.dc?'🕊️':''}</h2>
+  <p class="hint">${m.na}${m.dc?' – '+m.dc:''} · ${m.ville}, ${m.pays} ${DRAP[m.pays]||''} · ${T('gene')} ${gener(m)}</p></div>
+  <div class="carte" style="margin-top:12px"><b style="font-size:13px">${T('lignee')}</b><p class="hint" style="margin-top:6px">${lig}</p></div>
+  <div class="carte"><b style="font-size:13px">${T('enfants')} (${enfants(m.id).length})</b>
+  <p class="hint" style="margin-top:6px">${enfants(m.id).map(e=>e.nom).join(', ')||T('aucunE')}</p></div>
+  <div class="frow"><button class="btn o small" onclick="partager(${m.id})">${T('waBtn')}</button>
+   <button class="btn g small" onclick="editer(${m.id})">${T('modif')}</button>
+   <button class="btn g small" style="color:#A33" onclick="retirer(${m.id})">🗑️</button></div>`;
+ $('fiche').classList.add('on')}
+function fermer(){FICHE=null;clearInterval(diapoT);$('fiche').classList.remove('on')}
+function partager(id){const m=M.find(x=>x.id===id);
+ window.open('https://wa.me/?text='+encodeURIComponent('🌳 '+T('appTitre')+' — '+m.nom+' ('+m.na+', '+m.ville+' '+(DRAP[m.pays]||'')+'), '+T('gene')+' '+gener(m)+'. '+T('waTxt')));
+ toast(T('waBtn'))}
+function editer(id){const m=M.find(x=>x.id===id);const n=prompt(T('edNom'),m.nom);if(!n)return;
+ m.nom=n;const v=prompt(T('edVille'),m.ville);if(v)m.ville=v;CONTRIB++;toutRendre();ouvrir(id);toast(T('edOK'))}
+function retirer(id){if(enfants(id).length)return toast(T('retImp'));
+ if(!confirm(T('retQ')))return;M=M.filter(x=>x.id!==id);fermer();toutRendre();toast(T('retOK'))}
+
+function rendreSelects(){const o=M.map(m=>`<option value="${m.id}">${m.nom}</option>`).join('');
+ const a=$('lA').value,b=$('lB').value;
+ $('lA').innerHTML=o;$('lB').innerHTML=o;
+ $('lA').value=a||M[0].id;$('lB').value=b||M[Math.min(9,M.length-1)].id;
+ $('aParent').innerHTML=M.map(m=>`<option value="${m.id}">${m.nom} (G${gener(m)})</option>`).join('');
+ $('mystS').innerHTML=o}
+function calcLien(){const a=M.find(x=>x.id==$('lA').value),b=M.find(x=>x.id==$('lB').value);
+ if(!a||!b)return;if(a===b)return $('lienRes').textContent=T('meme');
+ const A=ancetres(a),B=ancetres(b),com=A.find(x=>B.includes(x));
+ if(!com)return $('lienRes').textContent='—';
+ const da=A.indexOf(com),db=B.indexOf(com);let r;
+ if(da===0)r=F('lienDesc',{B:b.nom,A:a.nom,n:db});
+ else if(db===0)r=F('lienDesc',{B:a.nom,A:b.nom,n:da});
+ else if(da===1&&db===1)r=F('lienFrere',{C:com.nom});
+ else if(da===1||db===1)r=F('lienOncle',{C:com.nom});
+ else r=F('lienCous',{n:Math.min(da,db),C:com.nom});
+ $('lienRes').innerHTML='🔗 <b>'+r+'</b>';bip(700)}
+
+function quiz(){const m=M[Math.floor(Math.random()*M.length)];quizRep=m;
+ const rep=[m.nom,...M.filter(x=>x!==m).sort(()=>Math.random()-.5).slice(0,2).map(x=>x.nom)].sort(()=>Math.random()-.5);
+ $('quizQ').textContent=F('quizQ',{a:m.na,v:m.ville});
+ $('quizR').innerHTML=rep.map((r,i)=>`<button class="chip" style="margin:3px" onclick="repQuiz(${i})">${r}</button>`).join('');
+ $('quizR').dataset.rep=JSON.stringify(rep)}
+function repQuiz(i){const rep=JSON.parse($('quizR').dataset.rep);
+ if(rep[i]===quizRep.nom){QSCORE+=10;QSERIE++;if(QSERIE%3===0)confF();toast(F('bravo',{n:QSERIE}))}
+ else{QSERIE=0;toast(T('rate'))}
+ $('qS').textContent=QSCORE;$('qSer').textContent=QSERIE;quiz()}
+
+function rendreMystere(){if(!MYST.m)MYST.m=M[new Date().getDate()%M.length];
+ const m=MYST.m;
+ if(MYST.trouve){$('mystI').innerHTML='✅ <b>'+m.nom+'</b> — '+T('demain');return}
+ $('mystI').textContent=[,F('ind1',{g:gener(m)}),F('ind2',{v:m.ville}),F('ind3',{a:m.na})][Math.min(3,indice)]}
+function deviner(){const m=MYST.m;
+ if(+$('mystS').value===m.id){MYST.trouve=true;confF();toast(F('trouve',{N:m.nom}));rendreMystere();return}
+ indice++;
+ if(indice<=3){rendreMystere();toast(T('encore'))}
+ else{$('mystI').textContent=F('perdu',{N:m.nom})+' — '+T('demain');toast(F('perdu',{N:m.nom}))}}
+
+function diapo(){let i=0;$('fiche').classList.add('on');
+ const step=()=>{const m=M[i%M.length];
+  $('fbody').innerHTML=`<div class="diapo"><div class="av">${av(m)}</div>
+   <h2 style="font-size:18px;margin:8px 0">${m.nom}</h2>
+   <p class="hint">${m.na} · ${m.ville}, ${m.pays} ${DRAP[m.pays]||''} · ${T('gene')} ${gener(m)}</p>
+   <p class="hint" style="margin-top:8px">${i+1} / ${M.length}</p>
+   <button class="btn g small" style="margin-top:12px" onclick="fermer()">${T('stop')}</button></div>`;i++};
+ step();clearInterval(diapoT);diapoT=setInterval(step,2200)}
+
+function rendreLivre(){$('livre').innerHTML=LIVRE.map((l,i)=>
+ `<div class="m1">« ${l.m} »<br><small>— ${l.nk?T(l.nk):l.n}</small><br>
+  <button class="reactF" onclick="amin(${i})">${T('amin')} · ${l.r}</button></div>`).join('')}
+function amin(i){LIVRE[i].r++;bip(700);rendreLivre()}
+function signer(){const m=$('lMsg').value.trim();if(!m)return toast(T('videM'));
+ LIVRE.unshift({nk:'toi',m,r:0});$('lMsg').value='';CONTRIB++;rendreLivre();rendreGardiens();toast(T('signOK'))}
+function rendreGardiens(){$('gardiens').innerHTML=
+ `<div class="ldrF">🥇 <b>Hadiza</b><span>12 ${T('g1')}</span></div>
+  <div class="ldrF">🥈 <b>Zainab</b><span>8 ${T('g2')}</span></div>
+  <div class="ldrF">🥉 <b>${T('toi')}</b><span>${CONTRIB} ${T('contribs')}</span></div>`}
+
+function ajouter(){const nom=$('aNom').value.trim();if(!nom)return toast(T('nomOb'));
+ M.push({id:NEXTID++,p:+$('aParent').value,nom,g:$('aG').value,na:+$('aAn').value||2000,dc:null,
+  ville:$('aVille').value||'—',pays:$('aPays').value||'Cameroun'});
+ $('aNom').value='';$('aAn').value='';CONTRIB++;confF();bip(880);
+ const nv=M[M.length-1];toutRendre();toast(F('ajOK',{N:nom,g:gener(nv)}))}
+function exporter(){const b=new Blob([JSON.stringify(M,null,1)],{type:'application/json'});
+ const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='famille-dan-moussa.json';a.click();toast(T('expOK'))}
+function importer(inp){const f=inp.files[0];if(!f)return;const r=new FileReader();
+ r.onload=()=>{try{const d=JSON.parse(r.result);
+  if(Array.isArray(d)&&d.length&&d[0].nom){M=d;NEXTID=Math.max(...M.map(x=>x.id))+1;MYST.m=null;MYST.trouve=false;indice=1;
+   toutRendre();toast(T('impOK')+' '+M.length)}else toast(T('impBad'))}catch(e){toast(T('impBad'))}};
+ r.readAsText(f)}
+
+// ══════════ STUDIO V36 — 20 outils, 100 % traduits ══════════
+// Règle d'or i18n : on ne stocke JAMAIS de texte traduit, seulement des clés/indices.
+const SG=[['sg1',['invit','wa','carte']],['sg2',['capsule','hommage','dico']],
+ ['sg3',['vf','memo','pendu','sondage','defi']],['sg4',['retro','long','prenoms','pyram']],
+ ['sg5',['caisse','reunion','taches','annonce','ambiance']]];
+const TI={invit:'📨',wa:'💬',carte:'🪪',capsule:'⏳',hommage:'🕯️',dico:'📖',vf:'🎯',memo:'🃏',
+ pendu:'🪢',sondage:'🗳️',defi:'🏁',retro:'🎁',long:'🏛️',prenoms:'🔤',pyram:'🔺',caisse:'💰',
+ reunion:'📅',taches:'✅',annonce:'📢',ambiance:'🎚️'};
+const TK={invit:'tInvit',wa:'tWa',carte:'tCarte',capsule:'tCapsule',hommage:'tHommage',dico:'tDico',
+ vf:'tVF',memo:'tMemo',pendu:'tPendu',sondage:'tSondage',defi:'tDefi',retro:'tRetro',long:'tLong',
+ prenoms:'tPrenoms',pyram:'tPyram',caisse:'tCaisse',reunion:'tReunion',taches:'tTaches',
+ annonce:'tAnnonce',ambiance:'tAmbiance'};
+let OUTIL=null;
+const sg=(k,d)=>{try{const v=JSON.parse(localStorage.getItem('nf_'+k));return v==null?d:v}catch(e){return d}};
+const ss=(k,v)=>{try{localStorage.setItem('nf_'+k,JSON.stringify(v))}catch(e){}};
+const esc=s=>String(s==null?'':s).replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
+const pref=n=>sg('amb_'+n,true);
+const vibr=ms=>{try{if(pref('vibr')&&navigator.vibrate)navigator.vibrate(ms)}catch(e){}};
+function fete(){bip(880);setTimeout(()=>bip(1174),110);vibr([20,40,20]);if(pref('conf'))confF()}
+
+function ouvrirOutil(o){OUTIL=o;bip(560);vibr(8);rendreStudio();window.scrollTo(0,0)}
+function rendreStudio(){
+ const z=$('studioZ');if(!z)return;
+ if(!OUTIL){
+  z.innerHTML=SG.map(([g,l])=>`<div class="sgt">${T(g)}</div><div class="tuiles">`+
+   l.map(o=>`<button class="tuile" onclick="ouvrirOutil('${o}')"><i>${TI[o]}</i><b>${esc(T(TK[o]))}</b></button>`).join('')+
+   `</div>`).join('');return;}
+ z.innerHTML=`<button class="btn g small" onclick="OUTIL=null;rendreStudio()">← ${esc(T('sRetour'))}</button>`+
+  `<div class="sect"><h2>${TI[OUTIL]} ${esc(T(TK[OUTIL]))}</h2></div>`+
+  `<p class="hint" style="margin-bottom:10px">${esc(T('h'+TK[OUTIL].slice(1)))}</p>`+(VUE[OUTIL]?VUE[OUTIL]():'');
+ if(OUTIL==='carte')setTimeout(dessinerCarte,60);
+ if(OUTIL==='event')setTimeout(dessinerEvent,60);
+}
+const VUE={};
+
+/* 1 — Inviter (lien + QR) */
+VUE.invit=()=>{const u=location.href.split('#')[0];
+ return `<div class="carte"><div class="lienB">${esc(u)}</div>
+ <button class="btn p" onclick="copierLien()">${esc(T('sCopier'))}</button></div>
+ <div class="carte" style="text-align:center"><img src="https://api.qrserver.com/v1/create-qr-code/?size=170x170&data=${encodeURIComponent(u)}" width="170" height="170" alt="QR"
+ onerror="this.outerHTML='<p class=hint>QR ✕</p>'"></div>`};
+function copierLien(){try{navigator.clipboard.writeText(location.href.split('#')[0]);toast(T('sCopie'))}catch(e){toast(T('sCopie'))}}
+
+/* 2 — WhatsApp */
+VUE.wa=()=>{const u=location.href.split('#')[0];
+ return `<div class="carte"><em>« ${esc(T('appTitre'))} — ${esc(u)} »</em></div>
+ <a class="btn o" style="display:inline-block;text-decoration:none" target="_blank" rel="noopener"
+ href="https://wa.me/?text=${encodeURIComponent(T('appTitre')+' — '+u)}">💬 WhatsApp</a>`};
+
+/* 3 — Carte de la famille (image) */
+VUE.carte=()=>`<canvas id="cvF" width="600" height="330" style="width:100%;border-radius:14px"></canvas>
+ <button class="btn p" style="margin-top:8px" onclick="telCarte()">${esc(T('sTel'))}</button>`;
+function dessinerCarte(){const c=$('cvF');if(!c||!c.getContext)return;const x=c.getContext('2d');
+ const viv=M.filter(m=>!m.dc).length,g=Math.max(...M.map(gener));
+ x.fillStyle='#155E4B';x.fillRect(0,0,600,330);x.fillStyle='#D89A2B';x.fillRect(0,0,600,9);
+ x.font='bold 33px Georgia';x.fillStyle='#FBF6EC';x.fillText(T('appTitre'),38,78);
+ x.font='bold 50px Georgia';x.fillStyle='#fff';
+ x.fillText(String(M.length),38,190);x.fillText(String(viv),240,190);x.fillText(String(g),440,190);
+ x.font='15px Georgia';x.fillStyle='#CBBFA6';
+ x.fillText(T('sMembres'),38,218);x.fillText(T('viv'),240,218);x.fillText(T('gen'),440,218);
+ x.font='13px Georgia';x.fillStyle='#9C8F76';x.fillText(new Date().getFullYear(),38,290);}
+function telCarte(){const c=$('cvF');if(!c)return;const a=document.createElement('a');
+ a.download='famille.png';a.href=c.toDataURL('image/png');a.click();fete();toast(T('sTel'))}
+
+/* 4 — Capsules temporelles */
+VUE.capsule=()=>{const L=sg('caps',[]),auj=new Date().toISOString().slice(0,10);
+ return `<div class="carte"><input id="cpT" placeholder="${esc(T('sTitre'))}">
+ <textarea id="cpX" rows="2" style="margin-top:6px" placeholder="${esc(T('sMsg'))}"></textarea>
+ <input id="cpD" type="date" style="margin-top:6px">
+ <button class="btn p" style="margin-top:8px" onclick="addCaps()">${esc(T('sSceller'))}</button></div>`+
+ (L.length?L.map(c=>{const o=c.d<=auj;return `<div class="carte">${o?'🔓':'🔒'} <b>${esc(c.t)}</b> — ${esc(c.d)}
+ <p class="hint">${o?esc(c.x):esc(T('sScelle'))}</p></div>`}).join(''):`<p class="hint">${esc(T('sVide'))}</p>`)};
+function addCaps(){const t=$('cpT').value.trim(),x=$('cpX').value.trim(),d=$('cpD').value;
+ if(!t||!x||!d)return toast(T('sRempli'));const L=sg('caps',[]);L.unshift({t,x,d});ss('caps',L);fete();rendreStudio()}
+
+/* 5 — Hommages */
+VUE.hommage=()=>{const H=sg('hom',{}),D=M.filter(m=>m.dc);
+ if(!D.length)return `<p class="hint">${esc(T('sVide'))}</p>`;
+ return D.map(m=>`<div class="carte"><b>🕯️ ${esc(m.nom)}</b> <small class="hint">${m.na}–${m.dc}</small>
+ ${(H[m.id]||[]).map(v=>`<p class="hint">« ${esc(v)} »</p>`).join('')}
+ <input id="hm${m.id}" style="margin-top:6px" placeholder="${esc(T('sMsg'))}">
+ <button class="btn g small" style="margin-top:6px" onclick="addHom(${m.id})">${esc(T('sAjouter'))}</button></div>`).join('')};
+function addHom(id){const e=$('hm'+id);if(!e||!e.value.trim())return toast(T('sRempli'));
+ const H=sg('hom',{});(H[id]=H[id]||[]).unshift(e.value.trim());ss('hom',H);bip(700);rendreStudio()}
+
+/* 6 — Dictionnaire familial */
+VUE.dico=()=>{const D=sg('dico',[]);
+ return `<div class="carte"><input id="dcM" placeholder="${esc(T('sMot'))}">
+ <input id="dcS" style="margin-top:6px" placeholder="${esc(T('sSens'))}">
+ <button class="btn p" style="margin-top:8px" onclick="addMot()">${esc(T('sAjouter'))}</button></div>`+
+ (D.length?D.map(d=>`<div class="carte"><b>${esc(d.m)}</b><p class="hint">${esc(d.s)}</p></div>`).join(''):`<p class="hint">${esc(T('sVide'))}</p>`)};
+function addMot(){const m=$('dcM').value.trim(),s=$('dcS').value.trim();
+ if(!m||!s)return toast(T('sRempli'));const D=sg('dico',[]);D.unshift({m,s});ss('dico',D);bip(700);rendreStudio()}
+
+/* 7 — Vrai ou Faux */
+let VFQ=null;
+VUE.vf=()=>{const L=M.filter(m=>m.na);if(L.length<2)return `<p class="hint">${esc(T('sVide'))}</p>`;
+ const s=Number(new Date().toISOString().slice(0,10).replace(/-/g,''));
+ const m=L[s%L.length],vrai=(s%2===0),an=vrai?m.na:m.na+3+(s%7);
+ VFQ={v:vrai,nom:m.nom,an:m.na};
+ return `<div class="carte" style="text-align:center"><b>${esc(m.nom)} — ${an} ?</b></div>
+ <div class="frow"><button class="btn p" onclick="repVF(true)">${esc(T('sVrai'))}</button>
+ <button class="btn g" onclick="repVF(false)">${esc(T('sFaux'))}</button></div>
+ <div id="vfR" style="margin-top:8px"></div>`};
+function repVF(r){if(!VFQ)return;const ok=(r===VFQ.v);
+ $('vfR').innerHTML=`<div class="carte">${ok?'✅ '+esc(T('sBravo')):'❌ '+esc(T('sRate'))} — ${esc(VFQ.nom)} : <b>${VFQ.an}</b></div>`;
+ if(ok)fete();else bip(200)}
+
+/* 8 — Memory des visages */
+let MEM=null;
+VUE.memo=()=>{const P=M.slice(0,6);if(P.length<3)return `<p class="hint">${esc(T('sVide'))}</p>`;
+ const c=[];P.forEach((m,i)=>{c.push({k:i,e:av(m)},{k:i,e:av(m)})});
+ for(let i=c.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[c[i],c[j]]=[c[j],c[i]]}
+ MEM={c,o:[],t:[]};
+ return `<div class="grilleM">${c.map((_,i)=>`<div class="mc" id="mc${i}" onclick="clicMem(${i})">❦</div>`).join('')}</div>
+ <div id="memR" style="margin-top:8px"></div>
+ <button class="btn g small" style="margin-top:8px" onclick="rendreStudio()">${esc(T('sRejouer'))}</button>`};
+function clicMem(i){const g=MEM;if(!g||g.t.includes(i)||g.o.includes(i)||g.o.length>=2)return;
+ $('mc'+i).textContent=g.c[i].e;g.o.push(i);bip(620);
+ if(g.o.length===2){const[a,b]=g.o;setTimeout(()=>{
+  if(g.c[a].k===g.c[b].k){g.t.push(a,b);
+   if(g.t.length===g.c.length){$('memR').innerHTML=`<div class="carte">🏆 ${esc(T('sBravo'))}</div>`;fete()}}
+  else{[a,b].forEach(x=>{const e=$('mc'+x);if(e)e.textContent='❦'})}g.o=[]},700)}}
+
+/* 9 — Le pendu */
+let PEN=null;
+VUE.pendu=()=>{if(!M.length)return `<p class="hint">${esc(T('sVide'))}</p>`;
+ const m=M[Math.floor(Math.random()*M.length)];
+ const mot=(m.nom.split(' ')[0]||'').toUpperCase().replace(/[^A-ZÀ-Ü]/g,'');
+ PEN={mot,tr:[],ra:0};
+ return `<div class="carte" style="text-align:center;font-size:22px;letter-spacing:5px" id="pnM">${mot.replace(/./g,'_ ')}</div>
+ <div class="hint" style="text-align:center" id="pnV">❤️❤️❤️❤️❤️❤️</div>
+ <div class="clav">${'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(l=>`<button class="tch" id="tc${l}" onclick="penL('${l}')">${l}</button>`).join('')}</div>
+ <div id="pnR"></div>
+ <button class="btn g small" style="margin-top:8px" onclick="rendreStudio()">${esc(T('sRejouer'))}</button>`};
+function penL(l){const g=PEN;if(!g)return;const b=$('tc'+l);if(b)b.disabled=true;
+ if(g.mot.includes(l)){g.tr.push(l);bip(700)}else{g.ra++;bip(220);$('pnV').textContent='❤️'.repeat(Math.max(0,6-g.ra))+'🖤'.repeat(g.ra)}
+ const a=g.mot.split('').map(c=>g.tr.includes(c)?c:'_').join(' ');$('pnM').textContent=a;
+ if(!a.includes('_')){$('pnR').innerHTML=`<div class="carte">🏆 ${esc(T('sBravo'))} <b>${g.mot}</b></div>`;fete()}
+ else if(g.ra>=6)$('pnR').innerHTML=`<div class="carte">💀 ${esc(T('sRate'))} <b>${g.mot}</b></div>`}
+
+/* 10 — Sondage */
+VUE.sondage=()=>{const s=sg('sond',null);
+ if(!s)return `<div class="carte"><input id="soQ" placeholder="${esc(T('sTitre'))}">
+ <input id="soA" style="margin-top:6px" placeholder="A"><input id="soB" style="margin-top:6px" placeholder="B">
+ <button class="btn p" style="margin-top:8px" onclick="newSond()">${esc(T('sLancer'))}</button></div>`;
+ const t=(s.va+s.vb)||1;
+ return `<div class="carte"><b>${esc(s.q)}</b>
+ <div class="bar"><span style="width:${Math.round(100*s.va/t)}%"></span></div><p class="hint">${esc(s.a)} — ${s.va}</p>
+ <div class="bar"><span style="width:${Math.round(100*s.vb/t)}%"></span></div><p class="hint">${esc(s.b)} — ${s.vb}</p>
+ <div class="frow"><button class="btn p small" onclick="voteS('va')">${esc(T('sVoter'))} A</button>
+ <button class="btn p small" onclick="voteS('vb')">${esc(T('sVoter'))} B</button>
+ <button class="btn g small" onclick="ss('sond',null);rendreStudio()">${esc(T('sCloturer'))}</button></div></div>`};
+function newSond(){const q=$('soQ').value.trim(),a=$('soA').value.trim(),b=$('soB').value.trim();
+ if(!q||!a||!b)return toast(T('sRempli'));ss('sond',{q,a,b,va:0,vb:0});bip(700);rendreStudio()}
+function voteS(c){const s=sg('sond',null);if(!s)return;s[c]++;ss('sond',s);bip(760);rendreStudio()}
+
+/* 11 — Défi de la semaine (indices stockés, jamais le texte) */
+function numSem(){const d=new Date(),j=new Date(d.getFullYear(),0,1);
+ return d.getFullYear()+'-S'+Math.ceil((((d-j)/864e5)+j.getDay()+1)/7)}
+VUE.defi=()=>{const s=numSem();let d=sg('defi',{s:'',f:[]});
+ if(d.s!==s){d={s,f:[]};ss('defi',d)}
+ const L=DEFIS[LG]||DEFIS.fr;
+ return L.map((o,i)=>{const ok=d.f.includes(i);
+  return `<div class="carte lgn"><button class="ck ${ok?'ok':''}" onclick="ckDefi(${i})">${ok?'✓':''}</button>
+  <span style="${ok?'text-decoration:line-through;opacity:.55':''}">${esc(o)}</span></div>`}).join('')+
+  `<div class="carte" style="text-align:center"><b>${d.f.length}/5</b> ${esc(T('sSem'))} ${d.f.length===5?'🏆':''}</div>`};
+function ckDefi(i){const s=numSem();let d=sg('defi',{s,f:[]});if(d.s!==s)d={s,f:[]};
+ if(d.f.includes(i))d.f=d.f.filter(x=>x!==i);else{d.f.push(i);if(d.f.length===5)fete();else bip(760)}
+ ss('defi',d);rendreStudio()}
+
+/* 12 — Notre Rétro */
+VUE.retro=()=>{const viv=M.filter(m=>!m.dc).length,g=Math.max(...M.map(gener));
+ const vs=M.filter(m=>!m.dc&&m.na).sort((a,b)=>a.na-b.na)[0];
+ const bj=M.filter(m=>!m.dc&&m.na).sort((a,b)=>b.na-a.na)[0];
+ return `<div class="wrp"><b>${M.length}</b><span>${esc(T('sMembres'))}</span></div>
+ <div class="wrp"><b>${viv}</b><span>${esc(T('viv'))}</span></div>
+ <div class="wrp"><b>${g}</b><span>${esc(T('gen'))}</span></div>
+ ${vs?`<div class="carte">👑 ${esc(vs.nom)} (${vs.na})</div>`:''}
+ ${bj?`<div class="carte">🌱 ${esc(bj.nom)} (${bj.na})</div>`:''}`};
+
+/* 13 — Longévité */
+VUE.long=()=>{const an=new Date().getFullYear();
+ const L=M.filter(m=>m.na).map(m=>({n:m.nom,a:(m.dc||an)-m.na,d:!!m.dc}))
+  .filter(m=>m.a>0&&m.a<130).sort((a,b)=>b.a-a.a).slice(0,5);
+ const md=['🥇','🥈','🥉','4.','5.'];
+ return L.length?L.map((m,i)=>`<div class="carte">${md[i]} <b>${esc(m.n)}</b> — ${m.a} ${esc(T('sAns'))} ${m.d?'🕯️':''}</div>`).join(''):`<p class="hint">${esc(T('sVide'))}</p>`};
+
+/* 14 — Les prénoms */
+VUE.prenoms=()=>{const c={};M.forEach(m=>{const p=(m.nom||'').trim().split(' ')[0];if(p)c[p]=(c[p]||0)+1});
+ const t=Object.entries(c).sort((a,b)=>b[1]-a[1]).slice(0,8);
+ return t.map(([p,n],i)=>`<div class="carte"><b>${i+1}. ${esc(p)}</b>${n>1?` — ${n} ${esc(T('sFois'))} 🔁`:''}</div>`).join('')};
+
+/* 15 — Pyramide des générations */
+VUE.pyram=()=>{const N={};M.forEach(m=>{const g=gener(m);N[g]=(N[g]||0)+1});
+ const mx=Math.max(...Object.values(N),1);
+ return Object.keys(N).sort((a,b)=>a-b).map(g=>`<div class="carte">${esc(T('sGenN'))} ${g} — <b>${N[g]}</b>
+ <div class="bar"><span style="width:${Math.round(100*N[g]/mx)}%"></span></div></div>`).join('')};
+
+/* 16 — Caisse familiale */
+VUE.caisse=()=>{const C=sg('caisse',[]),tt=C.reduce((s,x)=>s+(parseFloat(x.m)||0),0);
+ return `<div class="carte"><input id="caN" placeholder="${esc(T('sQui'))}">
+ <input id="caM" type="number" style="margin-top:6px" placeholder="${esc(T('sMontant'))}">
+ <input id="caP" style="margin-top:6px" placeholder="${esc(T('sPour'))}">
+ <button class="btn p" style="margin-top:8px" onclick="addCais()">${esc(T('sAjouter'))}</button></div>
+ <div class="carte" style="text-align:center"><b>${esc(T('sTotal'))} : ${tt.toLocaleString()}</b></div>`+
+ C.map(x=>`<div class="carte">${esc(x.n)} — <b>${(+x.m).toLocaleString()}</b><p class="hint">${esc(x.p)}</p></div>`).join('')};
+function addCais(){const n=$('caN').value.trim(),m=$('caM').value,p=$('caP').value.trim();
+ if(!n||!m)return toast(T('sRempli'));const C=sg('caisse',[]);C.unshift({n,m,p});ss('caisse',C);bip(760);rendreStudio()}
+
+/* 17 — Prochaine réunion */
+VUE.reunion=()=>{const r=sg('reu',null);
+ if(!r)return `<div class="carte"><input id="reT" placeholder="${esc(T('sTitre'))}">
+ <input id="reA" type="date" style="margin-top:6px"><input id="reB" type="date" style="margin-top:6px">
+ <button class="btn p" style="margin-top:8px" onclick="newReu()">${esc(T('sLancer'))}</button></div>`;
+ return `<div class="carte"><b>${esc(r.t)}</b>
+ <p class="hint">📆 ${esc(r.a)} — ${r.va}</p><p class="hint">📆 ${esc(r.b)} — ${r.vb}</p>
+ <div class="frow"><button class="btn p small" onclick="voteR('va')">${esc(T('sVoter'))} 1</button>
+ <button class="btn p small" onclick="voteR('vb')">${esc(T('sVoter'))} 2</button>
+ <button class="btn g small" onclick="ss('reu',null);rendreStudio()">${esc(T('sCloturer'))}</button></div>
+ ${(r.va||r.vb)?`<div style="margin-top:8px">🏆 <b>${esc(r.va>=r.vb?r.a:r.b)}</b></div>`:''}</div>`};
+function newReu(){const t=$('reT').value.trim(),a=$('reA').value,b=$('reB').value;
+ if(!t||!a||!b)return toast(T('sRempli'));ss('reu',{t,a,b,va:0,vb:0});bip(760);rendreStudio()}
+function voteR(c){const r=sg('reu',null);if(!r)return;r[c]++;ss('reu',r);bip(760);rendreStudio()}
+
+/* 18 — Qui fait quoi */
+VUE.taches=()=>{const L=sg('tac',[]);
+ return `<div class="carte"><input id="taX" placeholder="${esc(T('sTache'))}">
+ <input id="taQ" style="margin-top:6px" placeholder="${esc(T('sQui'))}">
+ <button class="btn p" style="margin-top:8px" onclick="addTac()">${esc(T('sAjouter'))}</button></div>`+
+ (L.length?L.map((x,i)=>`<div class="carte lgn"><button class="ck ${x.f?'ok':''}" onclick="tglTac(${i})">${x.f?'✓':''}</button>
+ <span style="${x.f?'text-decoration:line-through;opacity:.55':''}"><b>${esc(x.q)}</b> — ${esc(x.x)}</span></div>`).join(''):`<p class="hint">${esc(T('sVide'))}</p>`)};
+function addTac(){const x=$('taX').value.trim(),q=$('taQ').value.trim();
+ if(!x||!q)return toast(T('sRempli'));const L=sg('tac',[]);L.unshift({x,q,f:false});ss('tac',L);bip(760);rendreStudio()}
+function tglTac(i){const L=sg('tac',[]);if(L[i]){L[i].f=!L[i].f;if(L[i].f)bip(820)}ss('tac',L);rendreStudio()}
+
+/* 19 — Annonces */
+VUE.annonce=()=>{const A=sg('ann',[]);
+ return `<div class="carte"><input id="anT" placeholder="${esc(T('sTitre'))}">
+ <textarea id="anX" rows="2" style="margin-top:6px" placeholder="${esc(T('sMsg'))}"></textarea>
+ <button class="btn p" style="margin-top:8px" onclick="addAnn()">${esc(T('sPublier'))}</button></div>`+
+ (A.length?A.map(a=>`<div class="carte"><b>${esc(a.t)}</b><p class="hint">${esc(a.x)}</p></div>`).join(''):`<p class="hint">${esc(T('sVide'))}</p>`)};
+function addAnn(){const t=$('anT').value.trim(),x=$('anX').value.trim();
+ if(!t)return toast(T('sRempli'));const A=sg('ann',[]);A.unshift({t,x});ss('ann',A);fete();rendreStudio()}
+
+/* 20 — Ambiance */
+VUE.ambiance=()=>{const l=(n,k)=>{const on=pref(n);
+ return `<div class="carte lgn"><button class="ck ${on?'ok':''}" onclick="tglAmb('${n}')">${on?'✓':''}</button>
+ <span><b>${esc(T(k))}</b></span></div>`};
+ return l('son','sSons')+l('vibr','sVibr')+l('conf','sConf')+
+ `<button class="btn o" style="margin-top:8px" onclick="fete()">🎉 ${esc(T('sTester'))}</button>`};
+function tglAmb(n){ss('amb_'+n,!pref(n));if(n==='son')SON=pref('son');bip(700);rendreStudio()}
+
+// ══════════ LOT H — V37 : 8 nouvelles fonctionnalités ══════════
+const TI2={event:'🌀',lignee:'🧭',saluer2:'👋',quest:'🎙️',badges:'🏅',rappel:'🔔',aine:'👴',cousins:'🤝'};
+const TK2={event:'tEvent',lignee:'tLignee',saluer2:'tSaluer2',quest:'tQuest',badges:'tBadges',
+ rappel:'tRappel',aine:'tAine',cousins:'tCousins'};
+Object.assign(TI,TI2);Object.assign(TK,TK2);
+SG.push(['sg6',['event','lignee','cousins','saluer2']]);
+SG[1][1].push('quest');SG[3][1].push('badges');SG[4][1].push('rappel','aine');
+const selM=(id,sel)=>`<select id="${id}">`+M.map(m=>`<option value="${m.id}"${m.id===sel?' selected':''}>${esc(m.nom)}</option>`).join('')+`</select>`;
+
+/* 21 — Éventail des ancêtres (façon Ancestry / MyHeritage) */
+VUE.event=()=>`<div class="carte"><label class="lb">${esc(T('sChoisir'))}</label>
+ ${selM('evM',SELM)}<button class="btn p" style="margin-top:8px" onclick="SELM=+$('evM').value;rendreStudio()">${esc(T('calc'))}</button></div>
+ <canvas id="cvE" width="600" height="330" style="width:100%;background:var(--carte);border:1.5px solid var(--ligne);border-radius:14px"></canvas>`;
+let SELM=0;
+function dessinerEvent(){
+ const c=$('cvE');if(!c||!c.getContext)return;const x=c.getContext('2d');
+ const dep=M.find(m=>m.id===SELM)||M[0];const A=ancetres(dep);
+ x.clearRect(0,0,600,330);x.fillStyle='#155E4B';
+ const cx=300,cy=300,cols=['#155E4B','#1E7A62','#2E9179','#D89A2B','#B8801F','#8C3B22'];
+ A.forEach((m,i)=>{
+  const r0=26+i*46,r1=r0+42;
+  x.beginPath();x.arc(cx,cy,r1,Math.PI,2*Math.PI);x.arc(cx,cy,r0,2*Math.PI,Math.PI,true);x.closePath();
+  x.fillStyle=cols[i%cols.length];x.fill();
+  x.strokeStyle='#FBF6EC';x.lineWidth=2;x.stroke();
+  x.fillStyle='#FBF6EC';x.font='bold 13px Georgia';x.textAlign='center';
+  const nom=(m.nom||'').length>26?m.nom.slice(0,25)+'…':m.nom;
+  x.fillText(nom+(m.na?'  ·  '+m.na:''),cx,cy-r0-17);
+ });
+ x.fillStyle='#8A7A5F';x.font='11px Georgia';x.textAlign='center';
+ x.fillText(A.length+' × '+T('sGenN'),cx,cy-8);
+}
+/* 22 — Ma lignée (chemin vers le fondateur) */
+VUE.lignee=()=>{const dep=M.find(m=>m.id===SELM)||M[0];const A=ancetres(dep).reverse();
+ return `<div class="carte"><label class="lb">${esc(T('sChoisir'))}</label>${selM('lgM',SELM)}
+ <button class="btn p" style="margin-top:8px" onclick="SELM=+$('lgM').value;rendreStudio()">${esc(T('calc'))}</button></div>`+
+ A.map((m,i)=>`<div class="carte lgn"><div class="avL">${av(m)}</div>
+ <div><b>${esc(m.nom)}</b><p class="hint">${esc(T('sGenN'))} ${i+1} · ${esc(m.ville)} ${DRAP[m.pays]||''}${m.na?' · '+m.na:''}</p></div></div>`
+ ).join('')+`<div class="carte" style="text-align:center"><b>${A.length}</b> ${esc(T('sGenN').toLowerCase())}</div>`};
+
+/* 23 — Ma génération (cousins du même âge) */
+VUE.cousins=()=>{const dep=M.find(m=>m.id===SELM)||M[0];
+ const L=M.filter(m=>m.id!==dep.id&&m.na&&dep.na&&Math.abs(m.na-dep.na)<=5)
+  .sort((a,b)=>Math.abs(a.na-dep.na)-Math.abs(b.na-dep.na)).slice(0,8);
+ return `<div class="carte"><label class="lb">${esc(T('sChoisir'))}</label>${selM('coM',SELM)}
+ <button class="btn p" style="margin-top:8px" onclick="SELM=+$('coM').value;rendreStudio()">${esc(T('calc'))}</button></div>`+
+ (L.length?L.map(m=>`<div class="membre" onclick="ouvrir(${m.id})"><div class="av">${av(m)}</div>
+ <div><b>${esc(m.nom)}</b><small>${m.na} · ${esc(m.ville)} ${DRAP[m.pays]||''}</small></div>
+ <span class="gen">${Math.abs(m.na-dep.na)} ${esc(T('sAns'))}</span></div>`).join('')
+ :`<p class="hint">${esc(T('sAucunC'))}</p>`)};
+
+/* 24 — Qui saluer aujourd'hui (nudge quotidien) */
+VUE.saluer2=()=>{const V=M.filter(m=>!m.dc);if(!V.length)return `<p class="hint">${esc(T('sVide'))}</p>`;
+ const j=new Date().toISOString().slice(0,10);
+ const s=Number(j.replace(/-/g,''));const m=V[s%V.length];
+ const fait=sg('salue','')===j;
+ const msg=encodeURIComponent(T('appTitre')+' — '+location.href.split('#')[0]);
+ return `<div class="carte" style="text-align:center"><div style="font-size:52px">${av(m)}</div>
+ <b style="font-size:16px">${esc(m.nom)}</b><p class="hint">${esc(m.ville)} ${DRAP[m.pays]||''}${m.na?' · '+(new Date().getFullYear()-m.na)+' '+esc(T('sAns')):''}</p></div>
+ <a class="btn o" style="display:inline-block;text-decoration:none" target="_blank" rel="noopener"
+  href="https://wa.me/?text=${msg}">💬 ${esc(T('sAppeler'))}</a>
+ <button class="btn ${fait?'g':'p'}" onclick="ss('salue','${j}');fete();rendreStudio()">${fait?'✓ ':''}${esc(T('sFait'))}</button>`};
+
+/* 25 — Questions aux anciens (façon StoryWorth) */
+VUE.quest=()=>{const R=sg('quest',{});
+ return [1,2,3,4,5,6].map(i=>`<div class="carte"><b>${i}. ${esc(T('q'+i))}</b>
+ ${R[i]?`<p class="hint" style="margin-top:5px">« ${esc(R[i])} »</p>`:''}
+ <textarea id="qz${i}" rows="2" style="margin-top:6px" placeholder="${esc(T('sRepondre'))}">${esc(R[i]||'')}</textarea>
+ <button class="btn g small" style="margin-top:6px" onclick="repQ(${i})">${esc(T('sAjouter'))}</button></div>`).join('')};
+function repQ(i){const e=$('qz'+i);if(!e||!e.value.trim())return toast(T('sRempli'));
+ const R=sg('quest',{});R[i]=e.value.trim();ss('quest',R);fete();rendreStudio()}
+
+/* 26 — Badges (façon Duolingo / Sololearn) */
+function badges(){const g=Math.max(...M.map(gener)),p=new Set(M.map(m=>m.pays)).size;
+ const dico=sg('dico',[]).length,hom=Object.keys(sg('hom',{})).length;
+ const org=sg('caisse',[]).length>0||sg('reu',null)!==null;
+ return [['b1','🌱',true],['b2','🌳',M.length>=10],['b3','🏘️',M.length>=40],['b4','🕰️',g>=5],
+  ['b5','🌍',p>=5],['b6','📖',dico>=3],['b7','🕯️',hom>=1],['b8','🗂️',org]];}
+VUE.badges=()=>{const B=badges(),n=B.filter(b=>b[2]).length;
+ return `<div class="carte" style="text-align:center"><b style="font-size:26px;color:var(--or)">${n}/8</b>
+ <p class="hint">${esc(T('sDebloque'))}</p></div><div class="grilleB">`+
+ B.map(b=>`<div class="bg ${b[2]?'on':''}"><i>${b[2]?b[1]:'🔒'}</i><b>${esc(T(b[0]))}</b>
+ <small>${esc(T(b[2]?'sDebloque':'sBloque'))}</small></div>`).join('')+`</div>`};
+
+/* 27 — Rappels d'anniversaire */
+VUE.rappel=()=>{const mois=new Date().getMonth();
+ const L=M.filter(m=>!m.dc&&(m.id*7)%12===mois);
+ const on=sg('notif',false);
+ return `<div class="carte lgn"><button class="ck ${on?'ok':''}" onclick="demanderNotif()">${on?'✓':''}</button>
+ <span><b>${esc(T(on?'sActive':'sActiver'))}</b></span></div>
+ <div class="sgt">${esc(T('sMois'))}</div>`+
+ (L.length?L.map(m=>`<div class="membre" onclick="ouvrir(${m.id})"><div class="av">${av(m)}</div>
+ <div><b>${esc(m.nom)}</b><small>${new Date().getFullYear()-m.na} ${esc(T('sAns'))}</small></div></div>`).join('')
+ :`<p class="hint">${esc(T('aucanniv'))}</p>`)};
+function demanderNotif(){
+ try{ if(typeof Notification==='undefined'){toast(T('sVide'));return}
+  Notification.requestPermission().then(p=>{ const ok=(p==='granted');ss('notif',ok);
+   if(ok){try{new Notification(T('appTitre'),{body:T('hRappel')})}catch(e){}fete()}
+   rendreStudio()});
+ }catch(e){ ss('notif',false);rendreStudio() }}
+
+/* 28 — Mode Aîné (accessibilité) */
+VUE.aine=()=>{const on=sg('aine',false);
+ return `<div class="carte lgn"><button class="ck ${on?'ok':''}" onclick="tglAine()">${on?'✓':''}</button>
+ <span><b>${esc(T('tAine'))}</b><br><span class="hint">${esc(T('hAine'))}</span></span></div>
+ <div class="carte"><p style="font-size:${on?'19px':'15px'}">${esc(T('hAine'))}</p></div>`};
+function tglAine(){const v=!sg('aine',false);ss('aine',v);
+ document.body.classList.toggle('aine',v);bip(700);rendreStudio()}
+
+// ══════════ LOT I — V38 : inspiration mondiale ══════════
+const TI3={hong:'🧧',arbre:'🌱',cuis:'🍲',cadeau:'🎁',fete:'🌙',nasab:'📜',registre:'📋',matin:'🌅',tontine:'🔄',parrain:'🎟️'};
+const TK3={hong:'tHong',arbre:'tArbre',cuis:'tCuis',cadeau:'tCadeau',fete:'tFete',nasab:'tNasab',
+ registre:'tRegistre',matin:'tMatin',tontine:'tTontine',parrain:'tParrain'};
+Object.assign(TI,TI3);Object.assign(TK,TK3);
+SG[0][1].push('matin','parrain');SG[1][1].push('cuis','registre');
+SG[3][1].push('arbre');SG[4][1].push('hong','tontine');
+SG.push(['sg7',['fete','nasab','cadeau']]);
+
+/* 29 — Enveloppe de fête (Chine · WeChat 红包) */
+VUE.hong=()=>{const L=sg('hong',[]);
+ return `<div class="carte"><label class="lb">${esc(T('sDest'))}</label>${selM('hoD',SELM)}
+ <input id="hoO" style="margin-top:6px" placeholder="${esc(T('sOccasion'))}">
+ <input id="hoM" type="number" style="margin-top:6px" placeholder="${esc(T('sMontant'))}">
+ <input id="hoB" style="margin-top:6px" placeholder="${esc(T('sBenediction'))}">
+ <button class="btn p" style="margin-top:8px" onclick="addHong()">🧧 ${esc(T('sEnvoyer'))}</button></div>`+
+ (L.length?L.map(e=>`<div class="hongE"><div class="hongS">🧧</div>
+ <div><b>${esc(e.n)}</b><small>${esc(e.o)}${e.m?' · '+(+e.m).toLocaleString():''}</small>
+ <p>« ${esc(e.b)} »</p></div></div>`).join(''):`<p class="hint">${esc(T('sVide'))}</p>`)};
+function addHong(){const id=+$('hoD').value,o=$('hoO').value.trim(),m=$('hoM').value,b=$('hoB').value.trim();
+ if(!o||!b)return toast(T('sRempli'));
+ const L=sg('hong',[]);L.unshift({n:(M.find(x=>x.id===id)||{}).nom,o,m,b});ss('hong',L);fete();rendreStudio()}
+
+/* 30 — L'arbre collectif (Chine · Alipay 蚂蚁森林) */
+function scoreArbre(){
+ return sg('dico',[]).length+Object.keys(sg('quest',{})).length+
+  Object.keys(sg('hom',{})).length+sg('caps',[]).length+sg('cuis',[]).length+
+  sg('ann',[]).length+sg('hong',[]).length+sg('cadeau',[]).length+
+  sg('tac',[]).filter(t=>t.f).length+(sg('parrain',0));}
+VUE.arbre=()=>{const s=scoreArbre();
+ const P=[['🌱',0],['🌿',5],['🪴',12],['🌳',22],['🌳🌳',35],['🌳🌳🌳',50]];
+ let n=0;P.forEach((p,i)=>{if(s>=p[1])n=i});
+ const suiv=P[n+1],reste=suiv?suiv[1]-s:0,pct=suiv?Math.min(100,Math.round(100*(s-P[n][1])/(suiv[1]-P[n][1]))):100;
+ return `<div class="arbreB"><div class="arbreE">${P[n][0]}</div>
+ <b>${esc(T('sNiveau'))} ${n+1}</b><small>${s} ${esc(T('sGestes'))}</small>
+ <div class="bar" style="margin-top:9px"><span style="width:${pct}%"></span></div>
+ ${suiv?`<small>${reste} → ${suiv[0]}</small>`:'<small>🏆</small>'}</div>
+ <p class="hint">${esc(T('hArbre'))}</p>`};
+
+/* 31 — Cuisine de famille (Chine · 小红书) */
+VUE.cuis=()=>{const L=sg('cuis',[]);
+ return `<div class="carte"><input id="cuP" placeholder="${esc(T('sPlat'))}">
+ <input id="cuG" style="margin-top:6px" placeholder="${esc(T('sGardienR'))}">
+ <textarea id="cuS" rows="2" style="margin-top:6px" placeholder="${esc(T('sSecret'))}"></textarea>
+ <button class="btn p" style="margin-top:8px" onclick="addCuis()">${esc(T('sAjouter'))}</button></div>`+
+ (L.length?L.map(r=>`<div class="carte"><b>🍲 ${esc(r.p)}</b>
+ <p class="hint">👩🏾‍🍳 ${esc(r.g)}</p><p class="hint">« ${esc(r.s)} »</p></div>`).join(''):`<p class="hint">${esc(T('sVide'))}</p>`)};
+function addCuis(){const p=$('cuP').value.trim(),g=$('cuG').value.trim(),s=$('cuS').value.trim();
+ if(!p||!g)return toast(T('sRempli'));
+ const L=sg('cuis',[]);L.unshift({p,g,s});ss('cuis',L);fete();rendreStudio()}
+
+/* 32 — Cadeaux virtuels (Russie · Одноклассники · Corée KakaoTalk) */
+const CADX=['🌹','💐','🍯','📿','🕌','🍫','☕','🧺','🕊️','⭐'];
+VUE.cadeau=()=>{const L=sg('cadeau',[]);
+ return `<div class="carte"><label class="lb">${esc(T('sDest'))}</label>${selM('cdD',SELM)}
+ <div class="cadG">${CADX.map((e,i)=>`<button class="cadB${sg('cadS',0)===i?' on':''}" onclick="ss('cadS',${i});rendreStudio()">${e}</button>`).join('')}</div>
+ <input id="cdM" placeholder="${esc(T('sMsg'))}">
+ <button class="btn p" style="margin-top:8px" onclick="addCad()">🎁 ${esc(T('sEnvoyer'))}</button></div>`+
+ (L.length?L.map(c=>`<div class="carte lgn"><div class="cadV">${c.e}</div>
+ <div><b>${esc(c.n)}</b><p class="hint">${esc(c.m)}</p></div></div>`).join(''):`<p class="hint">${esc(T('sVide'))}</p>`)};
+function addCad(){const id=+$('cdD').value,m=$('cdM').value.trim();
+ const L=sg('cadeau',[]);L.unshift({n:(M.find(x=>x.id===id)||{}).nom,e:CADX[sg('cadS',0)],m});
+ ss('cadeau',L);fete();rendreStudio()}
+
+/* 33 — Calendrier des fêtes (monde arabe · apps islamiques) */
+VUE.fete=()=>{const D=sg('fetes',{}),auj=new Date();
+ return [1,2,3,4,5,6].map(i=>{const d=D[i];
+  let info='';
+  if(d){const j=Math.ceil((new Date(d)-auj)/864e5);
+   info=j>=0?`<b class="cnt">${j}</b> ${esc(T('sJours'))}`:`<span class="hint">${esc(T('sPasse'))}</span>`}
+  return `<div class="carte"><b>🌙 ${esc(T('f'+i))}</b> ${info}
+  <input type="date" id="ft${i}" value="${d||''}" style="margin-top:6px" onchange="setFete(${i})"></div>`}).join('')};
+function setFete(i){const D=sg('fetes',{});D[i]=$('ft'+i).value;ss('fetes',D);bip(760);rendreStudio()}
+
+/* 34 — Mon nasab (monde arabe · chaîne patronymique) */
+VUE.nasab=()=>{const dep=M.find(m=>m.id===SELM)||M[0];const A=ancetres(dep);
+ const p1=m=>(m.nom||'').split(' ')[0];
+ let s=p1(A[0]);
+ for(let i=1;i<A.length;i++) s+=(i===1?(dep.g==='f'?' bint ':' ibn '):' ibn ')+p1(A[i]);
+ return `<div class="carte"><label class="lb">${esc(T('sChoisir'))}</label>${selM('nsM',SELM)}
+ <button class="btn p" style="margin-top:8px" onclick="SELM=+$('nsM').value;rendreStudio()">${esc(T('calc'))}</button></div>
+ <div class="nasabB">${esc(s)}</div>
+ <button class="btn o" onclick="copierTexte('${s.replace(/'/g,"\\'")}')">${esc(T('sCopier'))}</button>`};
+function copierTexte(t){try{navigator.clipboard.writeText(t)}catch(e){}toast(T('sCopie'))}
+
+/* 35 — Registre de famille (Japon · 戸籍 koseki) */
+function texteRegistre(){
+ const L=[...M].sort((a,b)=>gener(a)-gener(b)||(a.na||0)-(b.na||0));
+ let s=T('appTitre')+' — '+T('tRegistre')+'\n'+new Date().toLocaleDateString()+'\n\n';
+ let g=-1;
+ L.forEach(m=>{const gg=gener(m);
+  if(gg!==g){g=gg;s+='\n── '+T('sGenN')+' '+g+' ──\n'}
+  const pe=M.find(x=>x.id===m.p);
+  s+='· '+m.nom+' ('+(m.na||'?')+(m.dc?'–'+m.dc:'')+') — '+m.ville+', '+m.pays+(pe?' · '+pe.nom:'')+'\n'});
+ s+='\n'+M.length+' '+T('sMembres')+'\n';return s}
+VUE.registre=()=>{const L=[...M].sort((a,b)=>gener(a)-gener(b));
+ let g=-1,h='';
+ L.forEach(m=>{const gg=gener(m);if(gg!==g){g=gg;h+=`<div class="sgt">${esc(T('sGenN'))} ${g}</div>`}
+  h+=`<div class="regL"><b>${esc(m.nom)}</b><small>${m.na||'?'}${m.dc?'–'+m.dc:''} · ${esc(m.ville)} ${DRAP[m.pays]||''}</small></div>`});
+ return `<button class="btn p" onclick="telRegistre()">⬇️ ${esc(T('sImprimer'))}</button><div class="regB">${h}</div>`};
+function telRegistre(){try{
+ const b=new Blob([texteRegistre()],{type:'text/plain;charset=utf-8'});
+ const a=document.createElement('a');a.href=URL.createObjectURL(b);
+ a.download='registre-famille.txt';a.click();fete();toast(T('sImprimer'))}catch(e){}}
+
+/* 36 — Carte du matin (Inde · Nigeria · culture du bonjour) */
+VUE.matin=()=>`<canvas id="cvM" width="600" height="420" style="width:100%;border-radius:14px"></canvas>
+ <button class="btn p" style="margin-top:8px" onclick="telMatin()">${esc(T('sTel'))}</button>
+ <a class="btn o" style="display:inline-block;text-decoration:none;margin-top:8px" target="_blank" rel="noopener"
+  href="https://wa.me/?text=${encodeURIComponent(T('sal'))}">💬 WhatsApp</a>`;
+function dessinerMatin(){const c=$('cvM');if(!c||!c.getContext)return;const x=c.getContext('2d');
+ const i=new Date().getDate()%PROV.length;
+ x.fillStyle='#155E4B';x.fillRect(0,0,600,420);
+ const bandes=['#D89A2B','#8C3B22','#2E3A87','#FBF6EC'];
+ for(let k=0;k<24;k++){x.fillStyle=bandes[k%4];x.fillRect(k*25,0,25,14);x.fillRect(k*25,406,25,14)}
+ x.fillStyle='#D89A2B';x.beginPath();x.arc(300,132,54,0,7);x.fill();
+ x.fillStyle='#FBF6EC';x.font='bold 33px Georgia';x.textAlign='center';
+ const h=new Date().getHours();
+ x.fillText(h<12?'☀️':'🌙',300,146);
+ x.font='bold 27px Georgia';x.fillText(T('appTitre'),300,232);
+ x.font='italic 17px Georgia';x.fillStyle='#EFD9A8';
+ const mots=PROV[i].split(' ');let ln='',y=278;
+ mots.forEach(w=>{if((ln+w).length>34){x.fillText(ln,300,y);y+=25;ln=w+' '}else ln+=w+' '});
+ x.fillText(ln,300,y);
+ x.font='14px Georgia';x.fillStyle='#9CBFB2';x.fillText(T('prov'+(i+1)).slice(0,52),300,y+34);}
+function telMatin(){const c=$('cvM');if(!c)return;const a=document.createElement('a');
+ a.download='bonjour-famille.png';a.href=c.toDataURL('image/png');a.click();fete()}
+
+/* 37 — Tontine familiale (Afrique de l'Ouest · adashe/esusu · Corée 계) */
+VUE.tontine=()=>{const t=sg('tontine',null);
+ if(!t){const ids=M.filter(m=>!m.dc).slice(0,10).map(m=>m.id);
+  return `<div class="carte"><p class="hint">${esc(T('hTontine'))}</p>
+  <button class="btn p" style="margin-top:8px" onclick='ss("tontine",{o:${JSON.stringify(ids)},i:0});bip(760);rendreStudio()'>${esc(T('sLancer'))}</button></div>`}
+ return t.o.map((id,k)=>{const m=M.find(x=>x.id===id)||{nom:'?'};const on=(k===t.i);
+  return `<div class="carte lgn${on?' tourOn':''}"><div class="avL">${m.nom?av(m):'?'}</div>
+  <div><b>${esc(m.nom)}</b>${on?`<p class="hint">👉 ${esc(T('sTour'))}</p>`:''}</div></div>`}).join('')+
+ `<button class="btn p" onclick="tourSuivant()">${esc(T('sSuivant'))} →</button>
+  <button class="btn g small" onclick="ss('tontine',null);rendreStudio()">${esc(T('sCloturer'))}</button>`};
+function tourSuivant(){const t=sg('tontine',null);if(!t)return;
+ t.i=(t.i+1)%t.o.length;ss('tontine',t);fete();rendreStudio()}
+
+/* 38 — Parrainage (Chine · Pinduoduo) */
+VUE.parrain=()=>{const n=sg('parrain',0),but=3;
+ return `<div class="carte" style="text-align:center">
+ <div class="parrG">${[0,1,2].map(i=>`<div class="parrC${i<n?' on':''}">${i<n?'✓':'?'}</div>`).join('')}</div>
+ <b>${n}/${but}</b> <span class="hint">${esc(T('sObjectif'))}</span>
+ ${n>=but?`<div style="font-size:34px;margin-top:8px">🏅</div>`:''}</div>
+ <button class="btn p" onclick="ss('parrain',Math.min(3,${n}+1));fete();rendreStudio()">${esc(T('sInvite'))}</button>
+ <button class="btn o" onclick="copierLien()">${esc(T('sCopier'))}</button>`};
+
+// ══════════ LOT J — Ambiance africaine & animations ══════════
+// Inspiré des applis qui cartonnent en Afrique : MTN MoMo, Orange Money, Wave,
+// Nkwa & Diool (Cameroun), Moniepoint, OPay, Jumia, Yango, Waspito.
+
+/* A — Écran d'ouverture animé (motif toghu / kente) */
+function splash(){
+ try{
+  if(sessionStorage.getItem('nf_splash'))return;
+  sessionStorage.setItem('nf_splash','1');
+ }catch(e){}
+ const d=document.createElement('div');d.className='splash';d.id='splash';
+ let bandes='';for(let i=0;i<40;i++)bandes+='<i></i>';
+ d.innerHTML='<div class="spB spT">'+bandes+'</div>'+
+  '<div class="spC"><div class="spLogo">✦</div><div class="spN"></div><div class="spS"></div>'+
+  '<div class="spPts"><b></b><b></b><b></b></div></div>'+
+  '<div class="spB spBt">'+bandes+'</div>';
+ document.body.appendChild(d);
+ const n=d.querySelector('.spN'),s=d.querySelector('.spS');
+ if(n)n.textContent=T('appTitre');
+ if(s)s.textContent=T('sal');
+ perc(196);setTimeout(()=>perc(262),190);setTimeout(()=>perc(330),380);
+ setTimeout(()=>{d.classList.add('off');setTimeout(()=>d.remove(),520)},1750);
+}
+
+/* B — Percussion douce (djembé synthétique) */
+function perc(f){
+ try{
+  if(!SON)return;
+  const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
+  PERCX=PERCX||new AC();const c=PERCX,t=c.currentTime;
+  const o=c.createOscillator(),g=c.createGain();
+  o.type='sine';o.frequency.setValueAtTime(f||180,t);
+  o.frequency.exponentialRampToValueAtTime(Math.max(40,(f||180)*0.45),t+0.13);
+  g.gain.setValueAtTime(0.0001,t);
+  g.gain.exponentialRampToValueAtTime(0.16,t+0.008);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+0.16);
+  o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+0.18);
+ }catch(e){}
+}
+let PERCX=null;
+
+/* C — Compteurs qui montent (façon solde MoMo / Wave) */
+function animerCompteurs(){
+ try{
+  document.querySelectorAll('.s1 b').forEach(function(el){
+   const fin=parseInt(el.textContent,10);if(isNaN(fin)||fin>9999)return;
+   let n=0;const pas=Math.max(1,Math.ceil(fin/16));
+   el.textContent='0';
+   const it=setInterval(function(){n+=pas;if(n>=fin){n=fin;clearInterval(it)}el.textContent=n},32);
+  });
+ }catch(e){}
+}
+
+/* D — Ondulation au toucher (ripple, standard Android) */
+document.addEventListener('click',function(e){
+ try{
+  const c=e.target&&e.target.closest&&e.target.closest('button,.tuile,.membre,.carte');
+  if(!c)return;
+  perc(150+Math.random()*40);
+  const r=document.createElement('span');r.className='ripple';
+  const b=c.getBoundingClientRect&&c.getBoundingClientRect();
+  if(b){r.style.left=((e.clientX||b.left+b.width/2)-b.left)+'px';
+        r.style.top=((e.clientY||b.top+b.height/2)-b.top)+'px';}
+  c.appendChild(r);setTimeout(function(){r.remove()},520);
+ }catch(x){}
+},true);
+
+/* E — Bandeau défilant (ticker d'annonces, façon Jumia / MoMo) */
+function rendreTicker(){
+ try{
+  const z=$('ticker');if(!z)return;
+  const bits=[];
+  const viv=M.filter(m=>!m.dc).length,p=new Set(M.map(m=>m.pays)).size;
+  bits.push('👥 '+M.length+' '+T('sMembres'));
+  bits.push('🌍 '+p+' '+T('pays'));
+  bits.push('🌳 '+Math.max(...M.map(gener))+' '+T('gen'));
+  const an=sg('ann',[]);if(an.length)bits.push('📢 '+an[0].t);
+  const s=scoreArbre();if(s)bits.push('🌱 '+s+' '+T('sGestes'));
+  const mois=new Date().getMonth();
+  M.filter(m=>!m.dc&&(m.id*7)%12===mois).slice(0,2).forEach(m=>bits.push('🎂 '+m.nom));
+  const txt=bits.join('   •   ');
+  z.innerHTML='<div class="tkR"><span>'+esc(txt)+'</span><span>'+esc(txt)+'</span></div>';
+ }catch(e){}
+}
+
+function toutRendre(){rendreAccueil();rendreMembres();rendreArbre();rendreSelects();rendreLivre();rendreGardiens();rendreMystere();quiz();rendreStudio();rendreTicker()}
+document.documentElement.lang=LG;document.documentElement.dir=(LG==='ar')?'rtl':'ltr';
+appliquer();
+</script>
+</body>
+</html>
