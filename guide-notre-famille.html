@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notre Famille — Le guide</title>
+<style>
+:root{
+ --fond:#FBF6EC; --carte:#fff; --ligne:#E7DCC6;
+ --vert:#155E4B; --vert2:#0E4739; --or:#D89A2B; --henne:#8C3B22;
+ --indigo:#2E3A87; --txt:#2A2318; --doux:#8A7A5F;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#EDE5D5;color:var(--txt);line-height:1.5;
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+ padding:18px 12px 60px;-webkit-text-size-adjust:100%}
+
+/* ── page ── */
+.page{max-width:520px;margin:0 auto 18px;background:var(--fond);border-radius:20px;
+ overflow:hidden;box-shadow:0 3px 14px rgba(42,35,24,.13);position:relative}
+.corps{padding:22px 20px 30px}
+.num{position:absolute;right:16px;bottom:10px;font-size:10.5px;color:var(--doux);letter-spacing:1px}
+
+/* ── bandes tissées ── */
+.tissu{display:flex;height:11px}
+.tissu i{flex:1}
+.tissu i:nth-child(4n+1){background:var(--or)}
+.tissu i:nth-child(4n+2){background:var(--henne)}
+.tissu i:nth-child(4n+3){background:var(--indigo)}
+.tissu i:nth-child(4n){background:#FBF6EC}
+
+/* ── couverture ── */
+.couv{background:linear-gradient(160deg,var(--vert) 0%,var(--vert2) 100%);color:#FBF6EC;
+ padding:46px 22px 40px;text-align:center}
+.couv .logo{font-size:60px;color:var(--or);line-height:1}
+.couv h1{font-size:33px;font-weight:900;letter-spacing:-1px;margin:10px 0 4px}
+.couv .bl{font-size:14.5px;color:#A9C7BB;max-width:300px;margin:0 auto}
+.couv .puces{display:flex;gap:16px;justify-content:center;margin-top:22px;flex-wrap:wrap}
+.couv .puces div{font-size:11px;color:#A9C7BB}
+.couv .puces b{display:block;font-size:23px;color:var(--or);font-weight:800}
+
+/* ── titres ── */
+.eti{font-size:10.5px;letter-spacing:2.4px;text-transform:uppercase;color:var(--or);font-weight:800}
+h2{font-size:25px;color:var(--vert);letter-spacing:-.6px;margin:5px 0 4px;line-height:1.15}
+.chapo{font-size:14px;color:var(--doux);margin-bottom:18px}
+
+/* ── blocs ── */
+.gros{background:var(--carte);border:1.5px solid var(--ligne);border-radius:16px;
+ padding:15px 16px;margin-bottom:10px;display:flex;gap:13px;align-items:flex-start}
+.gros .ic{width:42px;height:42px;flex:none;border-radius:13px;display:grid;place-items:center;
+ font-size:21px;background:var(--fond);border:1.5px solid var(--ligne)}
+.gros b{display:block;font-size:16px;color:var(--vert);letter-spacing:-.2px}
+.gros span{display:block;font-size:13.5px;color:var(--doux);margin-top:3px}
+
+.mini{display:flex;gap:10px;align-items:flex-start;padding:9px 2px;border-bottom:1px dashed var(--ligne)}
+.mini:last-child{border-bottom:none}
+.mini .e{width:26px;flex:none;font-size:17px;text-align:center;line-height:1.35}
+.mini b{font-size:14px;color:var(--txt);display:block}
+.mini span{font-size:12.5px;color:var(--doux);display:block}
+
+/* ── en-tête de groupe coloré ── */
+.gt{border-radius:16px;padding:14px 16px;color:#fff;margin-bottom:12px}
+.gt b{display:block;font-size:19px;letter-spacing:-.3px}
+.gt span{font-size:12.5px;opacity:.86}
+.g1{background:linear-gradient(135deg,#1C7A5F,#0E4739)}
+.g2{background:linear-gradient(135deg,#8C3B22,#5E2415)}
+.g3{background:linear-gradient(135deg,#2E3A87,#1B2359)}
+.g4{background:linear-gradient(135deg,#D89A2B,#A06A12)}
+.g5{background:linear-gradient(135deg,#3E6B52,#24402F)}
+.g6{background:linear-gradient(135deg,#6B4E8C,#3E2B54)}
+.g7{background:linear-gradient(135deg,#B0442F,#6E2519)}
+
+/* ── étapes ── */
+.et{display:flex;gap:13px;align-items:flex-start;margin-bottom:13px}
+.et .n{width:32px;height:32px;flex:none;border-radius:50%;background:var(--vert);color:#fff;
+ display:grid;place-items:center;font-weight:800;font-size:15px}
+.et b{display:block;font-size:15.5px;color:var(--vert)}
+.et span{display:block;font-size:13.5px;color:var(--doux);margin-top:2px}
+
+/* ── divers ── */
+.enc{background:#F4EEDF;border-left:4px solid var(--or);border-radius:0 12px 12px 0;
+ padding:12px 14px;font-size:13.5px;margin:14px 0}
+.enc b{color:var(--henne)}
+.lgs{display:flex;flex-wrap:wrap;gap:7px}
+.lg{background:var(--carte);border:1.5px solid var(--ligne);border-radius:20px;
+ padding:7px 13px;font-size:13px}
+.tel{background:var(--vert2);border-radius:18px;padding:12px;margin:14px 0}
+.tel .ec{background:var(--fond);border-radius:11px;padding:13px 12px;min-height:120px}
+.tel .bar{display:flex;justify-content:space-around;margin-top:10px;background:var(--carte);
+ border-radius:11px;padding:8px 4px}
+.tel .bar div{text-align:center;font-size:9px;color:var(--doux);line-height:1.5}
+.tel .bar i{display:block;font-size:17px;font-style:normal}
+.tel .bar .on{color:var(--vert);font-weight:700}
+.tk{background:linear-gradient(90deg,#155E4B,#1B6B54);color:#FBF6EC;border-left:4px solid var(--or);
+ border-radius:8px;padding:6px 11px;font-size:11.5px;font-weight:600;white-space:nowrap;overflow:hidden}
+.fin{text-align:center;padding:34px 20px}
+.fin .lg2{font-size:44px;color:var(--or)}
+.fin p{font-size:14px;color:var(--doux);margin-top:8px}
+@media print{body{background:#fff;padding:0}.page{box-shadow:none;margin-bottom:0;page-break-after:always}}
+</style>
+</head>
+<body>
+
+<!-- ══ 1 · COUVERTURE ══ -->
+<div class="page">
+ <div class="tissu"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+ <div class="couv">
+  <div class="logo">✦</div>
+  <h1>Notre Famille</h1>
+  <p class="bl">L'application qui garde vivante la mémoire de toute une famille — où qu'elle se trouve dans le monde.</p>
+  <div class="puces">
+   <div><b>38</b>outils</div>
+   <div><b>9</b>langues</div>
+   <div><b>5</b>générations</div>
+   <div><b>0 F</b>gratuite</div>
+  </div>
+ </div>
+ <div class="tissu"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+ <div class="corps" style="padding:18px 20px 22px">
+  <p style="font-size:13.5px;color:var(--doux);text-align:center">Le guide — à lire en cinq minutes</p>
+ </div>
+</div>
+
+<!-- ══ 2 · C'EST QUOI ══ -->
+<div class="page"><div class="corps">
+ <div class="eti">Page 1</div>
+ <h2>C'est quoi, cette application ?</h2>
+ <p class="chapo">Trois idées, et vous avez tout compris.</p>
+
+ <div class="gros"><div class="ic">🌳</div><div>
+  <b>Un arbre familial vivant</b>
+  <span>Chaque personne de la famille y est inscrite : nom, année, ville, pays, parents. On voit d'un coup d'œil qui descend de qui.</span></div></div>
+
+ <div class="gros"><div class="ic">📖</div><div>
+  <b>Une mémoire qui ne s'efface pas</b>
+  <span>Les récits des anciens, les surnoms, les recettes, les hommages aux disparus. Tout ce qui se perdait est écrit.</span></div></div>
+
+ <div class="gros"><div class="ic">🤝</div><div>
+  <b>Un lieu où la famille se retrouve</b>
+  <span>Annonces, réunions, cotisations, jeux, cadeaux. Même à dix mille kilomètres, on reste ensemble.</span></div></div>
+
+ <div class="enc"><b>Et concrètement ?</b> Vous ouvrez l'application sur votre téléphone comme WhatsApp. Elle fonctionne <b>même sans internet</b> une fois installée.</div>
+ <div class="num">1</div>
+</div></div>
+
+<!-- ══ 3 · LES 6 ONGLETS ══ -->
+<div class="page"><div class="corps">
+ <div class="eti">Page 2</div>
+ <h2>Se repérer en 10 secondes</h2>
+ <p class="chapo">Six boutons en bas de l'écran. C'est toute la navigation.</p>
+
+ <div class="tel">
+  <div class="ec">
+   <div class="tk">👥 41 membres • 🌍 9 pays • 🎂 Farida</div>
+   <p style="font-size:12px;color:var(--doux);margin-top:9px">« Une famille unie est comme la main : chaque doigt compte. »</p>
+  </div>
+  <div class="bar">
+   <div class="on"><i>🏠</i>Accueil</div><div><i>👥</i>Membres</div><div><i>🌳</i>Arbre</div>
+   <div><i>🧩</i>Jeux+</div><div><i>➕</i>Ajouter</div><div><i>✦</i>Studio</div>
+  </div>
+ </div>
+
+ <div class="mini"><div class="e">🏠</div><div><b>Accueil</b><span>Le proverbe du jour, les chiffres de la famille, les anniversaires, la diaspora.</span></div></div>
+ <div class="mini"><div class="e">👥</div><div><b>Membres</b><span>La liste complète. On cherche un nom, on touche, la fiche s'ouvre.</span></div></div>
+ <div class="mini"><div class="e">🌳</div><div><b>Arbre</b><span>La descendance branche par branche, et le calcul de lien entre deux personnes.</span></div></div>
+ <div class="mini"><div class="e">🧩</div><div><b>Jeux+</b><span>Quiz, mystère, diaporama, livre d'or, classement des gardiens.</span></div></div>
+ <div class="mini"><div class="e">➕</div><div><b>Ajouter</b><span>Inscrire un nouveau membre en quelques champs.</span></div></div>
+ <div class="mini"><div class="e">✦</div><div><b>Studio</b><span>Les 38 outils, rangés en 7 familles. Les pages suivantes les expliquent.</span></div></div>
+ <div class="num">2</div>
+</div></div>
+
+<!-- ══ 4 · PARTAGER ══ -->
+<div class="page"><div class="corps">
+ <div class="eti">Studio · groupe 1 sur 7</div>
+ <div class="gt g1"><b>📨 Partager</b><span>Faire grandir la famille sur l'application</span></div>
+ <div class="mini"><div class="e">📨</div><div><b>Inviter</b><span>Le lien et un QR code à faire scanner en réunion.</span></div></div>
+ <div class="mini"><div class="e">💬</div><div><b>WhatsApp</b><span>Message tout prêt pour le groupe familial.</span></div></div>
+ <div class="mini"><div class="e">🪪</div><div><b>Carte famille</b><span>Une image avec vos chiffres, à partager avec fierté.</span></div></div>
+ <div class="mini"><div class="e">🌅</div><div><b>Carte du matin</b><span>L'image « bonjour » du jour, avec un proverbe.</span></div></div>
+ <div class="mini"><div class="e">🎟️</div><div><b>Parrainage</b><span>Invitez trois personnes, gagnez la médaille.</span></div></div>
+ <div class="enc">Commencez par ici : une famille de deux personnes n'a pas encore d'histoire.</div>
+ <div class="num">3</div>
+</div></div>
+
+<!-- ══ 5 · MÉMOIRE ══ -->
+<div class="page"><div class="corps">
+ <div class="eti">Studio · groupe 2 sur 7</div>
+ <div class="gt g2"><b>🕯️ Mémoire</b><span>Écrire ce qui se perdrait autrement</span></div>
+ <div class="mini"><div class="e">⏳</div><div><b>Capsules</b><span>Un message scellé qui ne s'ouvrira qu'à une date choisie.</span></div></div>
+ <div class="mini"><div class="e">🕯️</div><div><b>Hommages</b><span>Déposer un mot pour ceux qui nous ont quittés.</span></div></div>
+ <div class="mini"><div class="e">📖</div><div><b>Dictionnaire</b><span>Les surnoms et expressions que seule la famille comprend.</span></div></div>
+ <div class="mini"><div class="e">🎙️</div><div><b>Questions aux anciens</b><span>Six questions à poser avant qu'il soit trop tard.</span></div></div>
+ <div class="mini"><div class="e">🍲</div><div><b>Cuisine de famille</b><span>Le plat, qui le réussit le mieux, et le secret.</span></div></div>
+ <div class="mini"><div class="e">📋</div><div><b>Registre</b><span>Le document officiel de la famille, à télécharger.</span></div></div>
+ <div class="num">4</div>
+</div></div>
+
+<!-- ══ 6 · JEUX ══ -->
+<div class="page"><div class="corps">
+ <div class="eti">Studio · groupe 3 sur 7</div>
+ <div class="gt g3"><b>🎮 Jeux</b><span>Pour que les enfants apprennent leur famille</span></div>
+ <div class="mini"><div class="e">🎯</div><div><b>Vrai ou Faux</b><span>Une affirmation par jour, tirée de vos données.</span></div></div>
+ <div class="mini"><div class="e">🃏</div><div><b>Memory</b><span>Retrouver les paires de visages.</span></div></div>
+ <div class="mini"><div class="e">🪢</div><div><b>Le pendu</b><span>Deviner un prénom de la famille en six essais.</span></div></div>
+ <div class="mini"><div class="e">🗳️</div><div><b>Sondage</b><span>Une question, deux choix, tout le monde vote.</span></div></div>
+ <div class="mini"><div class="e">🏁</div><div><b>Défi hebdo</b><span>Cinq missions, remises à zéro chaque lundi.</span></div></div>
+ <div class="enc">Les jeux utilisent les <b>vrais noms</b> de la famille. On joue, et sans s'en rendre compte, on apprend qui est qui.</div>
+ <div class="num">5</div>
+</div></div>
+
+<!-- ══ 7 · FIERTÉ ══ -->
+<div class="page"><div class="corps">
+ <div class="eti">Studio · groupe 4 sur 7</div>
+ <div class="gt g4"><b>🏆 Fierté</b><span>Voir de quoi la famille est faite</span></div>
+ <div class="mini"><div class="e">🎁</div><div><b>Notre Rétro</b><span>Le bilan de l'année : effectif, doyen, benjamin.</span></div></div>
+ <div class="mini"><div class="e">🏛️</div><div><b>Longévité</b><span>Les plus longues vies, en podium.</span></div></div>
+ <div class="mini"><div class="e">🔤</div><div><b>Les prénoms</b><span>Ceux qui reviennent de génération en génération.</span></div></div>
+ <div class="mini"><div class="e">🔺</div><div><b>Générations</b><span>Combien de personnes à chaque étage de l'arbre.</span></div></div>
+ <div class="mini"><div class="e">🏅</div><div><b>Badges</b><span>Huit récompenses à débloquer ensemble.</span></div></div>
+ <div class="mini"><div class="e">🌱</div><div><b>L'arbre collectif</b><span>Un arbre qui grandit à chaque geste de n'importe qui : 🌱 🌿 🪴 🌳</span></div></div>
+ <div class="num">6</div>
+</div></div>
+
+<!-- ══ 8 · ORGANISER ══ -->
+<div class="page"><div class="corps">
+ <div class="eti">Studio · groupe 5 sur 7</div>
+ <div class="gt g5"><b>🗂️ Organiser</b><span>La vie pratique de la famille</span></div>
+ <div class="mini"><div class="e">💰</div><div><b>Caisse</b><span>Les cotisations, avec le total qui se calcule seul.</span></div></div>
+ <div class="mini"><div class="e">🔄</div><div><b>Tontine</b><span>Chacun son tour de recevoir. L'application tient l'ordre.</span></div></div>
+ <div class="mini"><div class="e">🧧</div><div><b>Enveloppe de fête</b><span>Offrir une bénédiction pour un mariage ou la Tabaski.</span></div></div>
+ <div class="mini"><div class="e">📅</div><div><b>Réunion</b><span>Deux dates proposées, la famille vote.</span></div></div>
+ <div class="mini"><div class="e">✅</div><div><b>Qui fait quoi</b><span>Les responsabilités réparties et cochées.</span></div></div>
+ <div class="mini"><div class="e">📢</div><div><b>Annonces</b><span>Naissances, réussites, bonnes nouvelles.</span></div></div>
+ <div class="mini"><div class="e">🔔</div><div><b>Rappels</b><span>Ne plus jamais oublier un anniversaire.</span></div></div>
+ <div class="mini"><div class="e">👴</div><div><b>Mode Aîné</b><span>Tout le texte agrandi, pour les yeux fatigués.</span></div></div>
+ <div class="mini"><div class="e">🎚️</div><div><b>Ambiance</b><span>Sons, vibrations et confettis : à couper si on préfère le calme.</span></div></div>
+ <div class="num">7</div>
+</div></div>
+
+<!-- ══ 9 · DÉCOUVRIR ══ -->
+<div class="page"><div class="corps">
+ <div class="eti">Studio · groupe 6 sur 7</div>
+ <div class="gt g6"><b>🧭 Découvrir</b><span>Comprendre sa place dans la lignée</span></div>
+ <div class="mini"><div class="e">🌀</div><div><b>Éventail</b><span>Vos ancêtres dessinés en demi-cercle coloré, génération par génération.</span></div></div>
+ <div class="mini"><div class="e">🧭</div><div><b>Ma lignée</b><span>Le chemin complet qui vous relie au fondateur.</span></div></div>
+ <div class="mini"><div class="e">🤝</div><div><b>Ma génération</b><span>Les cousins nés autour de la même année que vous.</span></div></div>
+ <div class="mini"><div class="e">👋</div><div><b>Qui saluer</b><span>Chaque jour, l'application choisit une personne à appeler.</span></div></div>
+ <div class="enc">L'éventail est le plus impressionnant : montrez-le aux enfants, ils comprennent l'arbre <b>immédiatement</b>.</div>
+ <div class="num">8</div>
+</div></div>
+
+<!-- ══ 10 · TRADITIONS ══ -->
+<div class="page"><div class="corps">
+ <div class="eti">Studio · groupe 7 sur 7</div>
+ <div class="gt g7"><b>🌙 Traditions</b><span>Ce qui fait notre culture</span></div>
+ <div class="mini"><div class="e">🌙</div><div><b>Fêtes</b><span>Le compte à rebours vers l'Aïd, la Tabaski, le Mawlid, le Ramadan.</span></div></div>
+ <div class="mini"><div class="e">📜</div><div><b>Mon nasab</b><span>Votre nom complet remonté de père en père : « Amani bint Rabi ibn Halima ibn Abba… »</span></div></div>
+ <div class="mini"><div class="e">🎁</div><div><b>Cadeaux</b><span>Une rose, un chapelet, du miel : un petit signe d'affection à envoyer.</span></div></div>
+ <div class="num">9</div>
+</div></div>
+
+<!-- ══ 11 · LANGUES ══ -->
+<div class="page"><div class="corps">
+ <div class="eti">Page 10</div>
+ <h2>Chacun dans sa langue</h2>
+ <p class="chapo">Un seul appui, et toute l'application change. Même les grands-parents s'y retrouvent.</p>
+ <div class="lgs">
+  <span class="lg">🇫🇷 Français</span><span class="lg">🇬🇧 English</span><span class="lg">🇳🇬 Hausa</span>
+  <span class="lg">🇸🇦 العربية</span><span class="lg">🇰🇪 Kiswahili</span><span class="lg">🇳🇬 Yorùbá</span>
+  <span class="lg">🇪🇹 አማርኛ</span><span class="lg">🇸🇳 Wolof</span><span class="lg">🇬🇳 Pulaar</span>
+ </div>
+ <div class="enc">L'arabe s'affiche <b>de droite à gauche</b>, comme il se doit. Les données que vous écrivez ne changent jamais : seuls les libellés se traduisent.</div>
+ <div class="gros" style="margin-top:16px"><div class="ic">🌍</div><div>
+  <b>Pourquoi c'est important</b>
+  <span>Une famille éclatée entre Maroua, Kano, Accra, Paris et New York ne parle pas une seule langue. Ici, chacun garde la sienne.</span></div></div>
+ <div class="num">10</div>
+</div></div>
+
+<!-- ══ 12 · INSTALLER ══ -->
+<div class="page"><div class="corps">
+ <div class="eti">Page 11</div>
+ <h2>L'installer sur son téléphone</h2>
+ <p class="chapo">Trois gestes. Pas de Play Store, pas de compte à créer.</p>
+ <div class="et"><div class="n">1</div><div><b>Ouvrir le lien</b><span>Celui reçu par WhatsApp, ou scanner le QR code de la famille.</span></div></div>
+ <div class="et"><div class="n">2</div><div><b>Menu ⋮ → Installer l'application</b><span>Dans Chrome, en haut à droite. Sur iPhone : Partager → Sur l'écran d'accueil.</span></div></div>
+ <div class="et"><div class="n">3</div><div><b>C'est fini</b><span>L'icône ✦ apparaît sur l'écran d'accueil. Elle s'ouvre en plein écran, comme une vraie application.</span></div></div>
+ <div class="enc"><b>Sans internet ?</b> Une fois installée, elle continue de fonctionner. Vos données restent sur votre téléphone.</div>
+ <div class="num">11</div>
+</div></div>
+
+<!-- ══ 13 · PREMIERS PAS ══ -->
+<div class="page"><div class="corps">
+ <div class="eti">Page 12</div>
+ <h2>Que faire aujourd'hui ?</h2>
+ <p class="chapo">Cinq minutes suffisent pour que la famille sente la différence.</p>
+ <div class="et"><div class="n">1</div><div><b>Ajoutez trois personnes</b><span>Onglet ➕. Vos parents, vos frères et sœurs.</span></div></div>
+ <div class="et"><div class="n">2</div><div><b>Envoyez le lien au groupe</b><span>Studio ✦ → Partager → WhatsApp.</span></div></div>
+ <div class="et"><div class="n">3</div><div><b>Posez une question à un ancien</b><span>Studio ✦ → Mémoire → Questions aux anciens. Appelez-le ce soir.</span></div></div>
+ <div class="et"><div class="n">4</div><div><b>Regardez votre éventail</b><span>Studio ✦ → Découvrir → Éventail. Et partagez l'image.</span></div></div>
+ <div class="num">12</div>
+</div></div>
+
+<!-- ══ 14 · FIN ══ -->
+<div class="page">
+ <div class="tissu"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+ <div class="fin">
+  <div class="lg2">✦</div>
+  <h2 style="font-size:21px;margin-top:8px">Une famille unie<br>est comme la main</h2>
+  <p>Chaque doigt compte.</p>
+ </div>
+ <div class="tissu"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+</div>
+
+</body>
+</html>
