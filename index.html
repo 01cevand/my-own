@@ -1546,6 +1546,12 @@ VUE.photos=()=>{
 function toutRendre(){rendreAccueil();rendreMembres();rendreArbre();rendreSelects();rendreLivre();rendreGardiens();rendreMystere();quiz();rendreStudio();rendreTicker()}
 document.documentElement.lang=LG;document.documentElement.dir=(LG==='ar')?'rtl':'ltr';
 appliquer();
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('./sw.js').catch(e=>console.warn('SW échec :',e));
+  });
+}
 </script>
 </body>
 </html>
