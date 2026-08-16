@@ -1,6 +1,6 @@
 // Service worker — permet à "Notre famille" de fonctionner hors-ligne
 // une fois ouverte au moins une fois avec internet.
-const CACHE = "famille-cache-v29";
+const CACHE = "famille-cache-v46";
 const FICHIERS = ["./index.html", "./manifest.json", "./icon-192.png", "./icon-512.png", "./icon-192-maskable.png", "./icon-512-maskable.png"];
 
 self.addEventListener("install", function (evt) {
